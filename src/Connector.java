@@ -15,9 +15,9 @@ public class Connector
             //load the driver
             Class.forName("com.mysql.cj.jdbc.Driver");
             //create connection
-            String user = "Saad";
-            String password = "!Adk4597";
-            String url = "jdbc:mysql://localhost:3301/student";
+            String user = "root";
+            String password = "root";
+            String url = "jdbc:mysql://localhost:3306/to-do-lists";
             con = DriverManager.getConnection(url, user, password);
             //con= DriverManager.getConnection("jdbc:mysql://localhost:3301/database","Saad","!Adk4597");
         }
