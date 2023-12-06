@@ -12,11 +12,11 @@ public class Activity
         progressBar = "";
     }
 
-    public Activity(String name, String achievement)
-    {
-        this.name = name;
-        this.achievement = achievement;
-    }
+//    public Activity(String name, String achievement)
+//    {
+//        this.name = name;
+//        this.achievement = achievement;
+//    }
 
     public Activity(String name, String description, String goal, int completedDays, String progressBar)
     {
@@ -25,6 +25,12 @@ public class Activity
         this.goal = goal;
         this.completedDays = completedDays;
         this.progressBar = progressBar;
+    }
+    
+    public Activity(String name, String description)
+    {
+        this.name = name;
+        this.description = description;
     }
 
     public String getName()

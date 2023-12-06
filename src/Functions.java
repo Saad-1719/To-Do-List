@@ -331,10 +331,10 @@ public class Functions
         String description;
         String goal;
         int completedDays = 0;
-        String progressBar = "▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯";
+       // String progressBar = "▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯";
         boolean flag;
         System.out.println(mintColorCode + "\t\t\t\t\t Add a Habit \n" + whiteColorCode);
-        Activity myActivity = new Activity("", "", "", 0, "");
+        Activity myActivity = new Activity("", "");
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
         boolean canAddHabit = Database.habitCounter(info);
         if (canAddHabit)
@@ -387,7 +387,7 @@ public class Functions
 //                    System.out.println(redColorCode + "Error: Habit name contains digits" + whiteColorCode);
 //                }
                 //retrieving habit name into array
-                Database.retrieveDataIntoArray(info);
+                Database.retrieveDataIntoLinkedList(info);
                 //comparing habit names with existing habits
                 if (Database.storeTasksName.contains(name))
                 {
@@ -449,8 +449,8 @@ public class Functions
             myActivity.setDescription(description);
            // myActivity.setGoal(goal);
             // setting default values of completed days and progress bar
-            myActivity.setCompletedDays(completedDays);
-            myActivity.setProgressBar(progressBar);
+            //myActivity.setCompletedDays(completedDays);
+            //myActivity.setProgressBar(progressBar);
             boolean isWritten = Database.writeData(myActivity, info);
             if (isWritten)
             {

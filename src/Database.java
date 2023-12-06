@@ -7,7 +7,6 @@ public class Database
     static String redColorCode = "\u001B[31m";
     // To store habit name of active user
     protected static LinkedList<String> storeTasksName = new LinkedList<>();
-
     //TO obtain id of active user
     public static int activeUserId(UserLogin info)
     {
@@ -33,7 +32,7 @@ public class Database
     }
 
     //to fetch data of active user
-    public static void retrieveDataIntoArray(UserLogin info)
+    public static void retrieveDataIntoLinkedList(UserLogin info)
     {
         try
         {
@@ -41,7 +40,7 @@ public class Database
             Connection con = Connector.createConnection();
             int userId;
             userId = activeUserId(info);
-            String query = "select * from activity where userid = '" + userId + "';";
+            String query = "select * from tasks where userID = '" + userId + "';";
             Statement smt = con.createStatement();
             ResultSet show = smt.executeQuery(query);
             storeTasksName.clear();
@@ -70,15 +69,12 @@ public class Database
             //jdbc code
             Connection con = Connector.createConnection();
             int fetchId = activeUserId(id);
-            String query = "insert into activity(name,description,goal,bar,completeddays,userid)values(?,?,?,?,?,?)";
+            String query = "insert into tasks(task_title,task_description,userID)values(?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
             //set values of parameter
             pstmt.setString(1, info.getName());
             pstmt.setString(2, info.getDescription());
-            pstmt.setString(3, info.getGoal());
-            pstmt.setString(4, info.getProgressBar());
-            pstmt.setInt(5, info.getCompletedDays());
-            pstmt.setInt(6, fetchId);
+            pstmt.setInt(3, fetchId);
             pstmt.executeUpdate();
             entrychk = true;
             con.close();
@@ -402,7 +398,7 @@ public class Database
         {
             //jdbc code
             Connection con = Connector.createConnection();
-            String query = "SELECT * FROM activity WHERE number = '" + habitId + "' AND userid = '" + userId + "';";
+            String query = "SELECT * FROM tasks WHERE task_ID = '" + habitId + "' AND userID = '" + userId + "';";
             Statement smt = con.createStatement();
             ResultSet show = smt.executeQuery(query);
             if (show.next())
@@ -429,7 +425,7 @@ public class Database
             //jdbc code
             Connection con = Connector.createConnection();
             int fetchId = activeUserId(id);
-            String count = "Select * from activity where userid =?";
+            String count = "Select * from tasks where userID =?";
             PreparedStatement pst = con.prepareStatement(count);
             pst.setInt(1, fetchId);
             ResultSet set = pst.executeQuery();

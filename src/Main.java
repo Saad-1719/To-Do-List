@@ -43,29 +43,29 @@ public class Main
                         System.out.println(mintColorCode + "Congratulations, You've made it in!" + partyEmoji + whiteColorCode);
                         // Greeting the user.
                         Functions.greetings(info);
-//                        while (true)
-//                        {
-//                            // Menu Within After Login.
-//                            System.out.println(" ");
-//                            System.out.println(mintColorCode + "\t\t\t\t\t ΛＴＬΛＳＭＩＮＤ \n" + whiteColorCode);
-//                            System.out.println("[1]: Introduce a New Habit.");
+                        while (true)
+                        {
+                            // Menu Within After Login.
+                            System.out.println(" ");
+                            System.out.println(mintColorCode + "\t\t\t\t\t ΛＴＬΛＳＭＩＮＤ \n" + whiteColorCode);
+                            System.out.println("[1]: Introduce a New Task.");
 //                            System.out.println("[2]: Showcase Current Habits.");
 //                            System.out.println("[3]: Enhance Progress.");
 //                            System.out.println("[4]: Delete a Habit.");
 //                            System.out.println("[5]: View Completed Habit History.");
 //                            System.out.println("[6]: View Deleted Habit History.");
-//                            System.out.println("[7]: View Inspiring Quote of the Day.");
-//                            System.out.println("[8]: View User Information.");
-//                            System.out.println("[9]: Learn About the Team.");
-//                            System.out.println("[10]: Logout and Disembark.");
-//                            System.out.print("Enter your choice: ");
-//                            int selection = Functions.getUserChoice(input);
-//                            System.out.println();
-//                            switch (selection)
-//                            {
-//                                case 1:
-//                                    Functions.addHabit(info);
-//                                    break;
+                            System.out.println("[7]: View Inspiring Quote of the Day.");
+                            System.out.println("[8]: View User Information.");
+                            System.out.println("[9]: Learn About the Team.");
+                            System.out.println("[10]: Logout and Disembark.");
+                            System.out.print("Enter your choice: ");
+                            int selection = Functions.getUserChoice(input);
+                            System.out.println();
+                            switch (selection)
+                            {
+                                case 1:
+                                    Functions.addTask(info);
+                                    break;
 //                                case 2:
 //                                    Functions.showHabit(info);
 //                                    break;
@@ -81,27 +81,27 @@ public class Main
 //                                case 6:
 //                                    Functions.showDeletedHabit(info);
 //                                    break;
-//                                case 7:
-//                                    Functions.quotes();
-//                                    break;
+                                case 7:
+                                    Functions.quotes();
+                                    break;
 //                                case 8:
 //                                    Functions.showUserInfo(info);
 //                                    break;
-//                                case 9:
-//                                    Functions.developerInfo();
-//                                    break;
-//                                case 10:
-//                                    System.out.println(mintColorCode + "Logged Out..." + whiteColorCode);
-//                                    break;
-//                                default:
-//                                    System.out.println(redColorCode + "Error: Invalid Menu Choice" + whiteColorCode);
-//                                    break;
-//                            }
-//                            if (selection == 10)
-//                            {
-//                                break;
-//                            }
-//                        }
+                                case 9:
+                                    Functions.developerInfo();
+                                    break;
+                                case 10:
+                                    System.out.println(mintColorCode + "Logged Out..." + whiteColorCode);
+                                    break;
+                                default:
+                                    System.out.println(redColorCode + "Error: Invalid Menu Choice" + whiteColorCode);
+                                    break;
+                            }
+                            if (selection == 10)
+                            {
+                                break;
+                            }
+                        }
                     }
                     else
                     {
