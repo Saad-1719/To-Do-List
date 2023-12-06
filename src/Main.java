@@ -49,7 +49,7 @@ public class Main
                             System.out.println(" ");
                             System.out.println(mintColorCode + "\t\t\t\t\t ΛＴＬΛＳＭＩＮＤ \n" + whiteColorCode);
                             System.out.println("[1]: Introduce a New Task.");
-//                            System.out.println("[2]: Showcase Current Habits.");
+                            System.out.println("[2]: Introduce Random Task.");
 //                            System.out.println("[3]: Enhance Progress.");
 //                            System.out.println("[4]: Delete a Habit.");
 //                            System.out.println("[5]: View Completed Habit History.");
@@ -66,9 +66,9 @@ public class Main
                                 case 1:
                                     Functions.addTask(info);
                                     break;
-//                                case 2:
-//                                    Functions.showHabit(info);
-//                                    break;
+                                case 2:
+                                    Functions.addRandomTask(info);
+                                    break;
 //                                case 3:
 //                                    Functions.updateHabit(info);
 //                                    break;

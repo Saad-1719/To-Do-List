@@ -1,8 +1,5 @@
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Functions
 {
@@ -607,7 +604,7 @@ public class Functions
     public static void showHabit(UserLogin info)
     {
         System.out.println(mintColorCode + "\t\t\t\t\t Ongoing Habits \n" + whiteColorCode);
-        Database.displayCompleteHabitInfo(info);
+        Database.displayTaskInfo(info);
     }
 
     // to delete habit from db
@@ -680,7 +677,7 @@ public class Functions
     public static void quotes()
     {
         System.out.println(mintColorCode + "\t\t\t\t\t Quote of the day \n" + whiteColorCode);
-        ArrayList<String> inspiration = new ArrayList<>();
+        LinkedList<String> inspiration = new LinkedList<>();
         inspiration.add("It's the smallest actions everyday that determine who you are ...");
         inspiration.add("All big things come from small beginnings. The seed of every habit is a single, tiny decision.");
         inspiration.add("Break bad habits, Build good habits.");
@@ -694,7 +691,161 @@ public class Functions
         String randomString = inspiration.get(randIndex);
         System.out.println(yellowColor + randomString + whiteColorCode);
     }
-
+    
+    public static  void ranomizeTask(UserLogin info)
+    {
+        LinkedList<String> tasksTitleList=new LinkedList<>();
+        int totalTasks=0;
+        String tasksTitle;
+        System.out.print("how many tasks you wanna to to randomize it?");
+        totalTasks= input.nextInt();
+        for(int i=0;i<totalTasks;i++)
+        {
+            System.out.print("Enter task's title: ");
+            tasksTitle=input.nextLine();
+            tasksTitleList.add(tasksTitle);
+        }
+        Random rand=new Random();
+        int randIndex=rand.nextInt(tasksTitleList.size());
+        String randomTask=tasksTitleList.get(randIndex);
+        System.out.println(yellowColor + randomTask + whiteColorCode);
+    }
+    
+    public static void addRandomTask(UserLogin info)
+    {
+//        LinkedList<String> tasksTitleList=new LinkedList<>();
+//        int totalTasks=0;
+//        String tasksTitle;
+//        System.out.print("how many tasks you wanna to to randomize it?");
+//        totalTasks= input.nextInt();
+//        for(int i=0;i<totalTasks;i++)
+//        {
+//            System.out.print("Enter task's title: ");
+//            tasksTitle=input.nextLine();
+//            tasksTitleList.add(tasksTitle);
+//        }
+//        Random rand=new Random();
+//        int randIndex=rand.nextInt(tasksTitleList.size());
+//        String randomTask=tasksTitleList.get(randIndex);
+//        System.out.println(yellowColor + randomTask + whiteColorCode);
+        String name;
+        String description;
+        boolean flag;
+        System.out.println(mintColorCode + "\t\t\t\t\t Add a Random Task \n" + whiteColorCode);
+        Activity myActivity = new Activity("", "");
+        System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
+        boolean canAddHabit = Database.habitCounter(info);
+        if (canAddHabit)
+        {
+            input.nextLine();
+            LinkedList<String> tasksTitleList=new LinkedList<>();
+            int totalTasks=0;
+          //  String tasksTitle = null;
+            System.out.print("how many tasks you wanna to to randomize it?");
+            totalTasks= input.nextInt();
+            input.nextLine();
+            for(int i=0;i<totalTasks;i++)
+            {
+                do
+                {
+                    flag = false;
+                    System.out.print("Task Title please: ");
+                    name = input.nextLine().toLowerCase();
+                    if (name.trim().isEmpty())
+                    {
+                        System.out.println(redColorCode + "Error: Task's Title cannot be empty." + whiteColorCode);
+                        flag = true;
+                    } else if (name.trim().length() < 3)
+                    {
+                        System.out.println(redColorCode + "Error: Task's Title must be at least 3 characters long." + whiteColorCode);
+                        flag = true;
+                    } else if (name.length() > 50)
+                    {
+                        System.out.println(redColorCode + "Error: Habit name must be less than 50 characters." + whiteColorCode);
+                        flag = true;
+                    }
+                    //retrieving habit name into array
+                    Database.retrieveDataIntoLinkedList(info);
+                    //comparing habit names with existing habits
+                    if (Database.storeTasksName.contains(name))
+                    {
+                        System.out.println(redColorCode + "Error: Task's Title already exists." + whiteColorCode);
+                        flag = true;
+                    }
+                }
+                while (flag);
+                tasksTitleList.add(name);
+            }
+            Random rand=new Random();
+            int randIndex=rand.nextInt(tasksTitleList.size());
+            String randomTask=tasksTitleList.get(randIndex);
+            System.out.println(yellowColor + randomTask + whiteColorCode);
+            //habit description
+            do
+            {
+                flag = false;
+                System.out.print("Task's description please? ");
+                description = input.nextLine();
+                if (description.trim().isEmpty())
+                {
+                    System.out.println(redColorCode + "Error: Task's description cannot be empty." + whiteColorCode);
+                    flag = true;
+                }
+                else if (description.trim().length() < 3)
+                {
+                    System.out.println(redColorCode + "Error: Task's description must be at least 3 characters long." + whiteColorCode);
+                    flag = true;
+                }
+                else if (description.length() > 200)
+                {
+                    System.out.println(redColorCode + "Error: Task's description must be less than 200 characters." + whiteColorCode);
+                    flag = true;
+                }
+            }
+            while (flag);
+            
+            //habit goal
+//            do
+//            {
+//                flag = false;
+//                System.out.print("What is your goal? ");
+//                goal = input.nextLine();
+//                if (goal.trim().isEmpty())
+//                {
+//                    System.out.println(redColorCode + "Error: Habit goal cannot be empty." + whiteColorCode);
+//                    flag = true;
+//                }
+//                else if (goal.trim().length() < 3)
+//                {
+//                    System.out.println(redColorCode + "Error: Habit goal must be at least 3 characters long." + whiteColorCode);
+//                    flag = true;
+//                }
+//                else if (goal.length() > 100)
+//                {
+//                    System.out.println(redColorCode + "Error: Habit goal must be less than 100 characters." + whiteColorCode);
+//                    flag = true;
+//                }
+//            }
+            
+            while (flag);
+            // to add habit into db
+            myActivity.setName(randomTask);
+            myActivity.setDescription(description);
+            boolean isWritten = Database.writeData(myActivity, info);
+            if (isWritten)
+            {
+                System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
+            }
+            else
+            {
+                System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
+            }
+        }
+        else
+        {
+            System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
+        }
+    }
 //    //to show history
 //    public static void showHistory(UserLogin info)
 //    {

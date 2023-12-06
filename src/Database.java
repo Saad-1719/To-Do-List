@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.LinkedList;
 public class Database
 {
@@ -69,12 +70,15 @@ public class Database
             //jdbc code
             Connection con = Connector.createConnection();
             int fetchId = activeUserId(id);
-            String query = "insert into tasks(task_title,task_description,userID)values(?,?,?)";
+            LocalDate currentDate = LocalDate.now();
+            //System.out.println("Current Date: " + currentDate);
+            String query = "insert into tasks(task_title,task_description,added_date,userID)values(?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
             //set values of parameter
             pstmt.setString(1, info.getName());
             pstmt.setString(2, info.getDescription());
-            pstmt.setInt(3, fetchId);
+            pstmt.setDate(3, Date.valueOf(currentDate));
+            pstmt.setInt(4, fetchId);
             pstmt.executeUpdate();
             entrychk = true;
             con.close();
@@ -116,7 +120,7 @@ public class Database
     }
 
     //to show habits of active user
-    public static void displayCompleteHabitInfo(UserLogin info)//change from boolean
+    public static void displayTaskInfo(UserLogin info)//change from boolean
     {
         try
         {
@@ -124,7 +128,7 @@ public class Database
             Connection con = Connector.createConnection();
             int userId;
             userId = activeUserId(info);
-            String query = "select * from activity where userid = ?";
+            String query = "select * from tasks where userID = ?";
             PreparedStatement smt = con.prepareStatement(query);
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
@@ -132,14 +136,14 @@ public class Database
             while (show.next())
             {
                 System.out.print(yellowColor);
-                int id = show.getInt(1);
-                String name = show.getString(2);
-                String description = show.getString(3);
+                int taskID = show.getInt(1);
+                String taskTitle = show.getString(2);
+                String taskDescription= show.getString(3);
                 String bar = show.getString(7);
                 String time = show.getString(5);
-                System.out.println("Habit ID: " + id);
-                System.out.println("Habit Name: " + name);
-                System.out.println("Description: " + description);
+                System.out.println("Habit ID: " + taskID);
+                System.out.println("Habit Name: " + taskTitle);
+                System.out.println("Description: " + taskDescription);
                 System.out.println("Progress Bar: " + bar);
                 System.out.println("Created At: " + time);
                 System.out.println("--------------------------------------");
