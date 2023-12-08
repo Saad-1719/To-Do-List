@@ -6,6 +6,8 @@ public class Database
     static String yellowColor = "\u001B[93m";
     static String whiteColorCode = "\u001B[90m";
     static String redColorCode = "\u001B[31m";
+    static LocalDate currentDate = LocalDate.now();
+    
     // To store habit name of active user
     protected static LinkedList<String> storeTasksName = new LinkedList<>();
     //TO obtain id of active user
@@ -62,7 +64,31 @@ public class Database
 
   //   TO WRITE DATA INTO DATABASE
     
-    public static boolean writeData(Activity info, UserLogin id)
+    public static boolean writeTaskData(Activity info, UserLogin id)
+    {
+        boolean entrychk = false;
+        try
+        {
+            //jdbc code
+            Connection con = Connector.createConnection();
+            int fetchId = activeUserId(id);
+            String query = "insert into tasks(task_title,added_date,userID)values(?,?,?)";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            //set values of parameter
+            pstmt.setString(1, info.getName());
+            pstmt.setDate(2, Date.valueOf(currentDate));
+            pstmt.setInt(3, fetchId);
+            pstmt.executeUpdate();
+            entrychk = true;
+            con.close();
+            pstmt.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return entrychk;
+    }public static boolean writeNotesData(Activity info, UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -72,7 +98,7 @@ public class Database
             int fetchId = activeUserId(id);
             LocalDate currentDate = LocalDate.now();
             //System.out.println("Current Date: " + currentDate);
-            String query = "insert into tasks(task_title,task_description,added_date,userID)values(?,?,?,?)";
+            String query = "insert into notes(notes_title,notes_description,added_date,userID)values(?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
             //set values of parameter
             pstmt.setString(1, info.getName());
@@ -99,7 +125,7 @@ public class Database
         {
             //jdbc code
             Connection con = Connector.createConnection();
-            String query = "DELETE FROM activity WHERE `number`=?";
+            String query = "DELETE FROM tasks WHERE `task_ID`=?";
             PreparedStatement pstmt = con.prepareStatement(query);
             //set values of parameter
             pstmt.setInt(1, id);
@@ -165,7 +191,7 @@ public class Database
     }
 
     // to display data for other options
-    public static boolean displayGeneralHabitInfo(UserLogin info)
+    public static boolean displayGeneralTaskInfo(UserLogin info)
     {
         boolean chk = true;
         try
@@ -174,7 +200,7 @@ public class Database
             Connection con = Connector.createConnection();
             int userId;
             userId = activeUserId(info);
-            String query = "select * from activity where userid = ?";
+            String query = "select * from tasks where userID = ?";
             PreparedStatement smt = con.prepareStatement(query);
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
@@ -183,13 +209,13 @@ public class Database
             {
                 System.out.print(yellowColor);
                 int id = show.getInt(1);
-                String name = show.getString(2);
-                String time = show.getString(5);
-                int days = show.getInt("completeddays");
-                System.out.println("Habit ID: " + id);
-                System.out.println("Habit Name: " + name);
-                System.out.println("Last updated: " + time);
-                System.out.println("Number of days completed: " + days);
+                String taskTitle = show.getString(2);
+                String addedDate = show.getString(3);
+                //int days = show.getInt("completeddays");
+                System.out.println("Task ID: " + id);
+                System.out.println("Task Title: " + taskTitle);
+                System.out.println("Date Added: " + addedDate);
+                //System.out.println("Number of days completed: " + days);
                 System.out.println("-----------------------------------------");
                 hasData = true;
                 System.out.println(whiteColorCode);
@@ -269,19 +295,19 @@ public class Database
     }
 
     // to get habit name from habit id
-    public static String habitName(int id)
+    public static String taskName(int id)
     {
         String name = null;
         try
         {
             Connection con = Connector.createConnection();
-            String query = "SELECT name FROM activity WHERE number = ?";
+            String query = "SELECT task_title FROM tasks WHERE task_ID = ?";
             PreparedStatement smt = con.prepareStatement(query);
             smt.setInt(1, id);
             ResultSet show = smt.executeQuery();
             if (show.next())
             {
-                name = show.getString("name");
+                name = show.getString("task_title");
             }
             con.close();
             smt.close();
@@ -395,7 +421,7 @@ public class Database
     }
 
     //to check habit id
-    public static boolean checkHabitId(int habitId, int userId)
+    public static boolean checkTaskId(int habitId, int userId)
     {
         boolean hasFound = false;
         try
@@ -451,7 +477,7 @@ public class Database
     }
 
     //to write data in deleted table
-    public static boolean writeDeleted(UserLogin id, Activity data)
+    public static boolean writeTaskHistory(UserLogin id, Activity data)
     {
         boolean flag = false;
         try
@@ -459,11 +485,13 @@ public class Database
             Connection con = Connector.createConnection();
             int fetchId = activeUserId(id);
             PreparedStatement pst;
-            String query = "insert into deleted(habit_name,user_id)values(?,?)";
+            String query = "insert into completed_tasks(task_title,date_added,userID)values(?,?,?)";
             pst = con.prepareStatement(query);
+            
             //set values of parameter
             pst.setString(1, data.getName());
-            pst.setInt(2, fetchId);
+            pst.setDate(2, Date.valueOf(currentDate));
+            pst.setInt(3, fetchId);
             int count = pst.executeUpdate();
             if (count > 0)
             {

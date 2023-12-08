@@ -50,9 +50,11 @@ public class Main
                             System.out.println(mintColorCode + "\t\t\t\t\t ΛＴＬΛＳＭＩＮＤ \n" + whiteColorCode);
                             System.out.println("[1]: Introduce a New Task.");
                             System.out.println("[2]: Introduce Random Task.");
-//                            System.out.println("[3]: Enhance Progress.");
-//                            System.out.println("[4]: Delete a Habit.");
-//                            System.out.println("[5]: View Completed Habit History.");
+                            System.out.println("[3]: Introduce Notes.");
+                            System.out.println("[4]: Mark a task as compelted.");
+                            System.out.println("[5]: View on going Tasks.");
+                            System.out.println("[6]: View completed Tasks.");
+                            System.out.println("[7]: View Notes.");
 //                            System.out.println("[6]: View Deleted Habit History.");
                             System.out.println("[7]: View Inspiring Quote of the Day.");
                             System.out.println("[8]: View User Information.");
@@ -69,12 +71,12 @@ public class Main
                                 case 2:
                                     Functions.addRandomTask(info);
                                     break;
-//                                case 3:
-//                                    Functions.updateHabit(info);
-//                                    break;
-//                                case 4:
-//                                    Functions.deleteHabit(info);
-//                                    break;
+                                case 3:
+                                    Functions.addNotes(info);
+                                    break;
+                                case 4:
+                                    Functions.markTaskCompleted(info);
+                                    break;
 //                                case 5:
 //                                    Functions.showHistory(info);
 //                                    break;
