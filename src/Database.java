@@ -260,35 +260,35 @@ public class Database
     }
 
     // to add data from history
-    public static boolean writeHistory(UserLogin id, Tasks data)
-    {
-        boolean flag = false;
-        try
-        {
-            Connection con = Connector.createConnection();
-            int fetchId = activeUserId(id);
-            PreparedStatement pst;
-            String query = "insert into history(name,finalImpression,userId)values(?,?,?)";
-            pst = con.prepareStatement(query);
-            //set values of parameter
-            pst.setString(1, data.getName());
-            pst.setString(2, data.getAchievement());
-            pst.setInt(3, fetchId);
-            int count = pst.executeUpdate();
-            if (count > 0)
-            {
-                flag = true;
-            }
-            con.close();
-            pst.close();
-
-        }
-        catch (Exception e)
-        {
-            throw new RuntimeException(e);
-        }
-        return flag;
-    }
+//    public static boolean writeHistory(UserLogin id, Tasks data)
+//    {
+//        boolean flag = false;
+//        try
+//        {
+//            Connection con = Connector.createConnection();
+//            int fetchId = activeUserId(id);
+//            PreparedStatement pst;
+//            String query = "insert into history(name,finalImpression,userId)values(?,?,?)";
+//            pst = con.prepareStatement(query);
+//            //set values of parameter
+//            pst.setString(1, data.getName());
+//            pst.setString(2, data.getAchievement());
+//            pst.setInt(3, fetchId);
+//            int count = pst.executeUpdate();
+//            if (count > 0)
+//            {
+//                flag = true;
+//            }
+//            con.close();
+//            pst.close();
+//
+//        }
+//        catch (Exception e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//        return flag;
+//    }
 
     // to get habit name from habit id
     public static String taskName(int id)

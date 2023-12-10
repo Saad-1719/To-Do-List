@@ -3,10 +3,7 @@ public class Notes
     private String notesName;
     private String notesDescription;
     
-    public Notes(
-            String notesName,
-            String notesDescription
-    )
+    public Notes(String notesName, String notesDescription)
     {
         this.notesName = notesName;
         this.notesDescription = notesDescription;
