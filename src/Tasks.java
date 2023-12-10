@@ -1,9 +1,9 @@
-public class Task
+public class Tasks
 {
     private String name, description, achievement, goal, progressBar;
     private int completedDays;
 
-    public Task()
+    public Tasks()
     {
         name = "";
         description = "";
@@ -18,7 +18,7 @@ public class Task
 //        this.achievement = achievement;
 //    }
 
-    public Task(String name, String description, String goal, int completedDays, String progressBar)
+    public Tasks(String name, String description, String goal, int completedDays, String progressBar)
     {
         this.name = name;
         this.description = description;
@@ -27,7 +27,7 @@ public class Task
         this.progressBar = progressBar;
     }
     
-    public Task(String name, String description)
+    public Tasks(String name, String description)
     {
         this.name = name;
         this.description = description;

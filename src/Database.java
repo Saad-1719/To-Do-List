@@ -64,7 +64,7 @@ public class Database
 
   //   TO WRITE DATA INTO DATABASE
     
-    public static boolean writeTaskData(Task info, UserLogin id)
+    public static boolean writeTaskData(Tasks info, UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -88,7 +88,7 @@ public class Database
             e.printStackTrace();
         }
         return entrychk;
-    }public static boolean writeNotesData(Task info, UserLogin id)
+    }public static boolean writeNotesData(Tasks info, UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -260,7 +260,7 @@ public class Database
     }
 
     // to add data from history
-    public static boolean writeHistory(UserLogin id, Task data)
+    public static boolean writeHistory(UserLogin id, Tasks data)
     {
         boolean flag = false;
         try
@@ -473,7 +473,7 @@ public class Database
     }
 
     //to write data in deleted table
-    public static boolean writeTaskHistory(UserLogin id, Task data)
+    public static boolean writeTaskHistory(UserLogin id, Tasks data)
     {
         boolean flag = false;
         try
