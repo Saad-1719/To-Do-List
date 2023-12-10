@@ -10,6 +10,7 @@ public class Main
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
+        LoginSignupHandler obj=new LoginSignupHandler();
         boolean isRunning = true;
         while (isRunning)
         {
@@ -51,7 +52,7 @@ public class Main
                             System.out.println("[1]: Introduce a New Task.");
                             System.out.println("[2]: Introduce Random Task.");
                             System.out.println("[3]: Introduce Notes.");
-                            System.out.println("[4]: Mark a task as compelted.");
+                            System.out.println("[4]: Mark a task as completed.");
                             System.out.println("[5]: View on going Tasks.");
                             System.out.println("[6]: View completed Tasks.");
 //                            System.out.println("[7]: View Notes.");
@@ -115,11 +116,13 @@ public class Main
                     System.out.println(" ");
                     System.out.println(mintColorCode+"< ------------------- A New World, A New Journey ------------------ >"+whiteColorCode);
                     System.out.println(" ");
-                    Functions.signup();
+//                    Functions.signup();
+                    obj.signup();
                     break;
                 case 3:
                     // Update Password.
-                    Functions.forgetPassword();
+//                    Functions.forgetPassword();
+                    obj.forgetPassword();
                     break;
                 case 4:
                     // Depart and Exit.

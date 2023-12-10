@@ -443,7 +443,7 @@ public class Database
     }
 
     //to get habit days
-    public static boolean habitCounter(UserLogin id)
+    public static boolean getTaskCount(UserLogin id)
     {
         boolean entrychk = false;
         try
