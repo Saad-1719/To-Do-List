@@ -54,11 +54,11 @@ public class Main
                             System.out.println("[4]: Mark a task as compelted.");
                             System.out.println("[5]: View on going Tasks.");
                             System.out.println("[6]: View completed Tasks.");
-                            System.out.println("[7]: View Notes.");
+//                            System.out.println("[7]: View Notes.");
 //                            System.out.println("[6]: View Deleted Habit History.");
-                            System.out.println("[7]: View Inspiring Quote of the Day.");
-                            System.out.println("[8]: View User Information.");
-                            System.out.println("[9]: Learn About the Team.");
+//                            System.out.println("[7]: View Inspiring Quote of the Day.");
+//                            System.out.println("[8]: View User Information.");
+//                            System.out.println("[9]: Learn About the Team.");
                             System.out.println("[10]: Logout and Disembark.");
                             System.out.print("Enter your choice: ");
                             int selection = Functions.getUserChoice(input);
@@ -77,12 +77,12 @@ public class Main
                                 case 4:
                                     Functions.markTaskCompleted(info);
                                     break;
-//                                case 5:
-//                                    Functions.showHistory(info);
-//                                    break;
-//                                case 6:
-//                                    Functions.showDeletedHabit(info);
-//                                    break;
+                                case 5:
+                                    Functions.showOngoingTasks(info);
+                                    break;
+                                case 6:
+                                    Functions.showCompletedTasks(info);
+                                    break;
                                 case 7:
                                     Functions.quotes();
                                     break;

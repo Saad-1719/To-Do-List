@@ -592,10 +592,15 @@ public class Functions
     }
 
     // to show habit from db
-    public static void showHabit(UserLogin info)
+    public static void showOngoingTasks(UserLogin info)
     {
-        System.out.println(mintColorCode + "\t\t\t\t\t Ongoing Habits \n" + whiteColorCode);
-        Database.displayTaskInfo(info);
+        System.out.println(mintColorCode + "\t\t\t\t\t Ongoing Tasks \n" + whiteColorCode);
+        Database.displayGeneralTaskInfo(info);
+    }
+    public static void showCompletedTasks(UserLogin info)
+    {
+        System.out.println(mintColorCode + "\t\t\t\t\t Completed Tasks \n" + whiteColorCode);
+        Database.displayCompletedTaskInfo(info);
     }
 
     // to delete habit from db

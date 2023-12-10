@@ -146,7 +146,7 @@ public class Database
     }
 
     //to show habits of active user
-    public static void displayTaskInfo(UserLogin info)//change from boolean
+    public static void displayCompletedTaskInfo(UserLogin info)//change from boolean
     {
         try
         {
@@ -154,7 +154,7 @@ public class Database
             Connection con = Connector.createConnection();
             int userId;
             userId = activeUserId(info);
-            String query = "select * from tasks where userID = ?";
+            String query = "select * from completed_tasks where userID = ?";
             PreparedStatement smt = con.prepareStatement(query);
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
@@ -164,14 +164,10 @@ public class Database
                 System.out.print(yellowColor);
                 int taskID = show.getInt(1);
                 String taskTitle = show.getString(2);
-                String taskDescription= show.getString(3);
-                String bar = show.getString(7);
-                String time = show.getString(5);
-                System.out.println("Habit ID: " + taskID);
-                System.out.println("Habit Name: " + taskTitle);
-                System.out.println("Description: " + taskDescription);
-                System.out.println("Progress Bar: " + bar);
-                System.out.println("Created At: " + time);
+                String time = show.getString(3);
+                System.out.println("Task ID: " + taskID);
+                System.out.println("Task Title: " + taskTitle);
+                System.out.println("Completion Date: " + time);
                 System.out.println("--------------------------------------");
                 System.out.print(whiteColorCode);
                 hasData = true;
