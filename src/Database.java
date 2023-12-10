@@ -88,7 +88,7 @@ public class Database
             e.printStackTrace();
         }
         return entrychk;
-    }public static boolean writeNotesData(Tasks info, UserLogin id)
+    }public static boolean writeNotesData(Notes obj, UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -101,8 +101,8 @@ public class Database
             String query = "insert into notes(notes_title,notes_description,added_date,userID)values(?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
             //set values of parameter
-            pstmt.setString(1, info.getName());
-            pstmt.setString(2, info.getDescription());
+            pstmt.setString(1, obj.getNotesName());
+            pstmt.setString(2, obj.getNotesDescription());
             pstmt.setDate(3, Date.valueOf(currentDate));
             pstmt.setInt(4, fetchId);
             pstmt.executeUpdate();

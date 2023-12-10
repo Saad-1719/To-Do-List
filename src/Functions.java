@@ -383,12 +383,13 @@ public class Functions
         String name;
         String description;
         boolean flag;
-        System.out.println(mintColorCode + "\t\t\t\t\t Add a Habit \n" + whiteColorCode);
-        Tasks myTasks = new Tasks("", "");
+        System.out.println(mintColorCode + "\t\t\t\t\t Add Notes \n" + whiteColorCode);
+        //Tasks myTasks = new Tasks("", "");
+        Notes myNotes=new Notes("","");
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
-        boolean canAddHabit = Database.habitCounter(info);
-        if (canAddHabit)
-        {
+//        boolean canAddHabit = Database.habitCounter(info);
+//        if (canAddHabit)
+//        {
             input.nextLine();
             do
             {
@@ -410,13 +411,13 @@ public class Functions
                     System.out.println(redColorCode + "Error: Notes' name must be less than 50 characters." + whiteColorCode);
                     flag = true;
                 }
-                Database.retrieveDataIntoLinkedList(info);
+                //Database.retrieveDataIntoLinkedList(info);
                 //comparing habit names with existing habits
-                if (Database.storeTasksName.contains(name))
-                {
-                    System.out.println(redColorCode + "Error: Notes' Title already exists." + whiteColorCode);
-                    flag = true;
-                }
+//                if (Database.storeTasksName.contains(name))
+//                {
+//                    System.out.println(redColorCode + "Error: Notes' Title already exists." + whiteColorCode);
+//                    flag = true;
+//                }
             }
             while (flag);
             //habit description
@@ -437,9 +438,9 @@ public class Functions
             }
             while (flag);
             // to add habit into db
-            myTasks.setName(name);
-            myTasks.setDescription(description);
-            boolean isWritten = Database.writeNotesData(myTasks, info);
+            myNotes.setNotesName(name);
+            myNotes.setNotesDescription(description);
+            boolean isWritten = Database.writeNotesData(myNotes, info);
             if (isWritten)
             {
                 System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
@@ -448,11 +449,11 @@ public class Functions
             {
                 System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
             }
-        }
-        else
-        {
-            System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
-        }
+//        }
+//        else
+//        {
+//            System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
+//        }
     }
     
     // to update existing habit
