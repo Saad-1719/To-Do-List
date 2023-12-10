@@ -324,7 +324,7 @@ public class Functions
         String name;
         boolean flag;
         System.out.println(mintColorCode + "\t\t\t\t\t Add a Task \n" + whiteColorCode);
-        Activity myActivity = new Activity("", "");
+        Task myTask = new Task("", "");
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
         boolean canAddHabit = Database.habitCounter(info);
         if (canAddHabit)
@@ -360,8 +360,8 @@ public class Functions
             }
             while (flag);
             // to add habit into db
-            myActivity.setName(name);
-            boolean isWritten = Database.writeTaskData(myActivity, info);
+            myTask.setName(name);
+            boolean isWritten = Database.writeTaskData(myTask, info);
             if (isWritten)
             {
                 System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
@@ -384,7 +384,7 @@ public class Functions
         String description;
         boolean flag;
         System.out.println(mintColorCode + "\t\t\t\t\t Add a Habit \n" + whiteColorCode);
-        Activity myActivity = new Activity("", "");
+        Task myTask = new Task("", "");
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
         boolean canAddHabit = Database.habitCounter(info);
         if (canAddHabit)
@@ -437,9 +437,9 @@ public class Functions
             }
             while (flag);
             // to add habit into db
-            myActivity.setName(name);
-            myActivity.setDescription(description);
-            boolean isWritten = Database.writeNotesData(myActivity, info);
+            myTask.setName(name);
+            myTask.setDescription(description);
+            boolean isWritten = Database.writeNotesData(myTask, info);
             if (isWritten)
             {
                 System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
@@ -545,7 +545,7 @@ public class Functions
                                             //to delete habit from general habit table
                                             Database.deleteData(habitId);
                                             //to add habit into history table
-                                            Activity data = new Activity(habitName, achievement);
+                                            Task data = new Task(habitName, achievement);
                                             boolean chk = Database.writeHistory(info, data);
                                             if (chk)
                                             {
@@ -626,7 +626,7 @@ public class Functions
                 if (hasHabitFound)
                 {
                     String habitName = Database.taskName(delId);
-                    Activity data = new Activity();
+                    Task data = new Task();
                     data.setName(habitName);
                     //to write data into a deleted habit table
                     Database.writeTaskHistory(info, data);
@@ -733,7 +733,7 @@ public class Functions
         String description;
         boolean flag;
         System.out.println(mintColorCode + "\t\t\t\t\t Add a Random Task \n" + whiteColorCode);
-        Activity myActivity = new Activity("", "");
+        Task myTask = new Task("", "");
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
         boolean canAddHabit = Database.habitCounter(info);
         if (canAddHabit)
@@ -782,8 +782,8 @@ public class Functions
             String randomTask=tasksTitleList.get(randIndex);
             System.out.println("Task Assigned to you is: "+yellowColor + randomTask + whiteColorCode);
             // to add habit into db
-            myActivity.setName(randomTask);
-            boolean isWritten = Database.writeTaskData(myActivity, info);
+            myTask.setName(randomTask);
+            boolean isWritten = Database.writeTaskData(myTask, info);
             if (isWritten)
             {
                 System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
