@@ -70,7 +70,7 @@ public class Functions
             }
             while (flag);
             // to add habit into db
-            myTasks.setName(name);
+            myTasks.setTaskTitle(name);
             boolean isWritten = Database.writeTaskData(myTasks, info);
             if (isWritten)
             {
@@ -308,6 +308,11 @@ public class Functions
         System.out.println(mintColorCode + "\t\t\t\t\t Completed Tasks \n" + whiteColorCode);
         Database.displayCompletedTaskInfo(info);
     }
+    public static void showAddedNotes(UserLogin info)
+    {
+        System.out.println(mintColorCode + "\t\t\t\t\t Completed Tasks \n" + whiteColorCode);
+        Database.displayWrittenNotes(info);
+    }
 
     // to delete habit from db
     public static void markTaskCompleted(UserLogin info)
@@ -333,7 +338,7 @@ public class Functions
                 {
                     String habitName = Database.taskName(delId);
                     Tasks data = new Tasks();
-                    data.setName(habitName);
+                    data.setTaskTitle(habitName);
                     //to write data into a deleted habit table
                     Database.writeTaskHistory(info, data);
                     // to delete habit from general habit table
@@ -482,7 +487,7 @@ public class Functions
             String randomTask=tasksTitleList.get(randIndex);
             System.out.println("Task Assigned to you is: "+yellowColor + randomTask + whiteColorCode);
             // to add habit into db
-            myTasks.setName(randomTask);
+            myTasks.setTaskTitle(randomTask);
             boolean isWritten = Database.writeTaskData(myTasks, info);
             if (isWritten)
             {

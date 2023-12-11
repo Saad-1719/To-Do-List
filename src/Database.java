@@ -1,6 +1,7 @@
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
+
 public class Database
 {
     static String yellowColor = "\u001B[93m";
@@ -10,6 +11,7 @@ public class Database
     
     // To store habit name of active user
     protected static LinkedList<String> storeTasksName = new LinkedList<>();
+    
     //TO obtain id of active user
     public static int activeUserId(UserLogin info)
     {
@@ -26,14 +28,13 @@ public class Database
             con.close();
             smt.close();
             show.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return id;
     }
-
+    
     //to fetch data of active user
     public static void retrieveDataIntoLinkedList(UserLogin info)
     {
@@ -55,16 +56,16 @@ public class Database
             con.close();
             smt.close();
             show.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
     }
-
-  //   TO WRITE DATA INTO DATABASE
     
-    public static boolean writeTaskData(Tasks info, UserLogin id)
+    //   TO WRITE DATA INTO DATABASE
+    
+    public static boolean writeTaskData(Tasks info,
+                                        UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -75,20 +76,22 @@ public class Database
             String query = "insert into tasks(task_title,added_date,userID)values(?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
             //set values of parameter
-            pstmt.setString(1, info.getName());
+            pstmt.setString(1, info.getTaskTitle());
             pstmt.setDate(2, Date.valueOf(currentDate));
             pstmt.setInt(3, fetchId);
             pstmt.executeUpdate();
             entrychk = true;
             con.close();
             pstmt.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return entrychk;
-    }public static boolean writeNotesData(Notes obj, UserLogin id)
+    }
+    
+    public static boolean writeNotesData(Notes obj,
+                                         UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -109,14 +112,13 @@ public class Database
             entrychk = true;
             con.close();
             pstmt.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return entrychk;
     }
-
+    
     //TO REMOVE DATA FROM DATABASE
     public static boolean deleteData(int id)
     {
@@ -137,55 +139,153 @@ public class Database
             }
             con.close();
             pstmt.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return flag;
     }
-
+    
     //to show habits of active user
-    public static void displayCompletedTaskInfo(UserLogin info)//change from boolean
+//    public static void displayCompletedTaskInfo(UserLogin info)//change from boolean
+//    {
+//        try
+//        {
+//            //jdbc code
+//            Connection con = Connector.createConnection();
+//            int userId;
+//            userId = activeUserId(info);
+//            String query = "select * from completed_tasks where userID = ?";
+//            PreparedStatement smt = con.prepareStatement(query);
+//            smt.setInt(1,userId);
+//            ResultSet show = smt.executeQuery();
+//            boolean hasData = false;
+//            while (show.next())
+//            {
+//                System.out.print(yellowColor);
+//                int taskID = show.getInt(1);
+//                String taskTitle = show.getString(2);
+//                String time = show.getString(3);
+//                System.out.println("Task ID: " + taskID);
+//                System.out.println("Task Title: " + taskTitle);
+//                System.out.println("Completion Date: " + time);
+//                System.out.println("--------------------------------------");
+//                System.out.print(whiteColorCode);
+//                hasData = true;
+//            }
+//            if (!hasData)
+//            {
+//                System.out.println(redColorCode + "No Data available" + whiteColorCode);
+//            }
+//            con.close();
+//            smt.close();
+//            show.close();
+//        } catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
+    public static void displayCompletedTaskInfo(UserLogin info)
     {
         try
         {
-            //jdbc code
+            // jdbc code
             Connection con = Connector.createConnection();
-            int userId;
-            userId = activeUserId(info);
+            int userId = activeUserId(info);
             String query = "select * from completed_tasks where userID = ?";
             PreparedStatement smt = con.prepareStatement(query);
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
-            boolean hasData = false;
+            
+            LinkedList<Tasks> completedTasks = new LinkedList<>();
+            
             while (show.next())
             {
-                System.out.print(yellowColor);
                 int taskID = show.getInt(1);
                 String taskTitle = show.getString(2);
                 String time = show.getString(3);
-                System.out.println("Task ID: " + taskID);
-                System.out.println("Task Title: " + taskTitle);
-                System.out.println("Completion Date: " + time);
-                System.out.println("--------------------------------------");
-                System.out.print(whiteColorCode);
-                hasData = true;
+                
+                Tasks completedTask = new Tasks(taskID, taskTitle, time);
+                completedTasks.add(completedTask);
             }
-            if (!hasData)
+            
+            if (completedTasks.isEmpty())
             {
                 System.out.println(redColorCode + "No Data available" + whiteColorCode);
             }
+            else
+            {
+                for (Tasks task : completedTasks)
+                {
+                    System.out.print(yellowColor);
+                    System.out.println("Task ID: " + task.getTaskID());
+                    System.out.println("Task Title: " + task.getTaskTitle());
+                    System.out.println("Completion Date: " + task.getCompletionDate());
+                    System.out.println("--------------------------------------");
+                    System.out.print(whiteColorCode);
+                }
+            }
+            
             con.close();
             smt.close();
             show.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
     }
-
+    
+    public static void displayWrittenNotes(UserLogin info)
+    {
+        try
+        {
+            // jdbc code
+            Connection con = Connector.createConnection();
+            int userId = activeUserId(info);
+            String query = "select * from notes where userID = ?";
+            PreparedStatement smt = con.prepareStatement(query);
+            smt.setInt(1, userId);
+            ResultSet show = smt.executeQuery();
+            
+            LinkedList<Notes> addedNotes = new LinkedList<>();
+            
+            while (show.next())
+            {
+                int notesID = show.getInt(1);
+                String notesTitle = show.getString(2);
+                String notesDescription = show.getString(3);
+                String time = show.getString(4);
+                
+                Notes myNotes = new Notes(notesID, notesTitle, notesDescription,time);
+                addedNotes.add(myNotes);
+            }
+            
+            if (addedNotes.isEmpty())
+            {
+                System.out.println(redColorCode + "No Data available" + whiteColorCode);
+            }
+            else
+            {
+                for (Notes obj : addedNotes)
+                {
+                    System.out.print(yellowColor);
+                    System.out.println("Notes ID: " + obj.getNotesID());
+                    System.out.println("Notes Title: " + obj.getNotesName());
+                    System.out.println("Notes Description: " + obj.getNotesDescription());
+                    System.out.println("Added Date: " + obj.getAddedDate());
+                    System.out.println("--------------------------------------");
+                    System.out.print(whiteColorCode);
+                }
+            }
+            
+            con.close();
+            smt.close();
+            show.close();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
     // to display data for other options
     public static boolean displayGeneralTaskInfo(UserLogin info)
     {
@@ -224,14 +324,13 @@ public class Database
             con.close();
             smt.close();
             show.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return chk;
     }
-
+    
     //TO UPDATE DATA IN DATABASE
     public static boolean updateData(int id, String bar, int completedDays)
     {
@@ -251,14 +350,13 @@ public class Database
             }
             con.close();
             pstmt.close();
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
         return flag;
     }
-
+    
     // to add data from history
 //    public static boolean writeHistory(UserLogin id, Tasks data)
 //    {
@@ -289,7 +387,7 @@ public class Database
 //        }
 //        return flag;
 //    }
-
+    
     // to get habit name from habit id
     public static String taskName(int id)
     {
@@ -308,14 +406,13 @@ public class Database
             con.close();
             smt.close();
             show.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             throw new RuntimeException(e);
         }
         return name;
     }
-
+    
     // to show data from history
     public static void displayHistory(UserLogin info)
     {
@@ -348,13 +445,12 @@ public class Database
             con.close();
             pst.close();
             show.close();
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
     }
-
+    
     //current habit days
     public static int habitDays(int id)
     {
@@ -371,18 +467,17 @@ public class Database
             con.close();
             smt.close();
             show.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return days;
     }
-
+    
     //to show user info
     public static void showUserInfo(UserLogin info)
     {
-
+        
         try
         {
             Connection con = Connector.createConnection();
@@ -407,17 +502,17 @@ public class Database
             con.close();
             smt.close();
             rst.close();
-
-        }
-        catch (SQLException e)
+            
+        } catch (SQLException e)
         {
             throw new RuntimeException(e);
         }
-
+        
     }
-
+    
     //to check habit id
-    public static boolean checkTaskId(int habitId, int userId)
+    public static boolean checkTaskId(int habitId,
+                                      int userId)
     {
         boolean hasFound = false;
         try
@@ -434,14 +529,13 @@ public class Database
             con.close();
             smt.close();
             show.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return hasFound;
     }
-
+    
     //to get habit days
     public static boolean getTaskCount(UserLogin id)
     {
@@ -464,16 +558,16 @@ public class Database
             entrychk = total < 5;
             con.close();
             pst.close();
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
         }
         return entrychk;
     }
-
+    
     //to write data in deleted table
-    public static boolean writeTaskHistory(UserLogin id, Tasks data)
+    public static boolean writeTaskHistory(UserLogin id,
+                                           Tasks data)
     {
         boolean flag = false;
         try
@@ -485,7 +579,7 @@ public class Database
             pst = con.prepareStatement(query);
             
             //set values of parameter
-            pst.setString(1, data.getName());
+            pst.setString(1, data.getTaskTitle());
             pst.setDate(2, Date.valueOf(currentDate));
             pst.setInt(3, fetchId);
             int count = pst.executeUpdate();
@@ -495,15 +589,14 @@ public class Database
             }
             con.close();
             pst.close();
-
-        }
-        catch (Exception e)
+            
+        } catch (Exception e)
         {
             throw new RuntimeException(e);
         }
         return flag;
     }
-
+    
     //to display deleted habit info
     public static void displayDeletedHabitInfo(UserLogin info)
     {
@@ -534,8 +627,7 @@ public class Database
             con.close();
             pst.close();
             show.close();
-        }
-        catch (SQLException e)
+        } catch (SQLException e)
         {
             throw new RuntimeException(e);
         }

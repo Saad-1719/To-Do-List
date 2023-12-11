@@ -55,7 +55,7 @@ public class Main
                             System.out.println("[4]: Mark a task as completed.");
                             System.out.println("[5]: View on going Tasks.");
                             System.out.println("[6]: View completed Tasks.");
-//                            System.out.println("[7]: View Notes.");
+                            System.out.println("[7]: View Notes.");
 //                            System.out.println("[6]: View Deleted Habit History.");
 //                            System.out.println("[7]: View Inspiring Quote of the Day.");
 //                            System.out.println("[8]: View User Information.");
@@ -85,7 +85,7 @@ public class Main
                                     Functions.showCompletedTasks(info);
                                     break;
                                 case 7:
-                                    Functions.quotes();
+                                    Functions.showAddedNotes(info);
                                     break;
 //                                case 8:
 //                                    Functions.showUserInfo(info);

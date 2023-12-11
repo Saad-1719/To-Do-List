@@ -1,26 +1,47 @@
-public class Tasks
-{
-    private String name;
-
+public class Tasks {
+    private String taskTitle;
+    private int taskID;
+    private String completionDate;
+    
     public Tasks()
     {
-        name = "";
+        taskTitle = "";
+        taskID = 0;
+        completionDate = "";
     }
     
-    public Tasks(String name)
+    public Tasks(int taskID,
+                 String taskTitle,String completionDate)
     {
-        this.name = name;
+        this.taskTitle = taskTitle;
+        this.taskID = taskID;
+        this.completionDate = completionDate;
     }
     
-    public String getName()
+    public Tasks(String taskTitle)
     {
-        return name;
-    }
-
-    public void setName(String name)
-    {
-        this.name = name;
+        this.taskTitle = taskTitle;
     }
     
-
+    public String getTaskTitle()
+    {
+        return taskTitle;
+    }
+    
+    public int getTaskID()
+    {
+        return taskID;
+    }
+    
+    public String getCompletionDate()
+    {
+        return completionDate;
+    }
+    
+    public void setTaskTitle(String taskTitle)
+    {
+        this.taskTitle = taskTitle;
+    }
+    
+    
 }
