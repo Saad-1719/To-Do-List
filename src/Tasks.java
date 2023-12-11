@@ -28,8 +28,9 @@ private String addedTime;
         this.taskID = taskID;
         this.completionDate = completionDate;
     }
-    public Tasks(String taskTitle, String completionDate,String addedTime)
+    public Tasks(int taskID,String taskTitle, String completionDate,String addedTime)
     {
+        this.taskID=taskID;
         this.taskTitle = taskTitle;
         this.addedTime=addedTime;
         this.completionDate = completionDate;

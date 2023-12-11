@@ -284,12 +284,12 @@ static LocalTime currentTime=LocalTime.now();
 //                System.out.println("Task Title: " + taskTitle);
 //                System.out.println("Date Added: " + addedDate);
 //                //System.out.println("Number of days completed: " + days);
-                //int taskID = show.getInt(1);
+                int taskID = show.getInt(1);
                 String taskTitle = show.getString(2);
                 String date = show.getString(3);
                 String time = show.getString(4);
 
-                Tasks ongoingTaskObj = new Tasks(taskTitle, date,time);
+                Tasks ongoingTaskObj = new Tasks(taskID,taskTitle, date,time);
                 ongoingTasks.add(ongoingTaskObj);
 //                System.out.println("-----------------------------------------");
                 hasData = true;
