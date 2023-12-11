@@ -5,7 +5,7 @@ public class Functions
 {
     static Scanner input = new Scanner(System.in);
     static LocalTime currentTime = LocalTime.now();
- 
+
     static String mintColorCode = "\u001B[38;5;85m";
     static String whiteColorCode = "\u001B[97m";
     static String redColorCode = "\u001B[31m";
@@ -39,47 +39,47 @@ public class Functions
         System.out.println(mintColorCode + "\t\t\t\t\t Add a Task \n" + whiteColorCode);
         Tasks myTasks = new Tasks();
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
-            input.nextLine();
-            do
+        input.nextLine();
+        do
+        {
+            flag = false;
+            System.out.print("Enter Task please: ");
+            name = input.nextLine().toLowerCase();
+            if (name.trim().isEmpty())
             {
-                flag = false;
-                System.out.print("Enter Task please: ");
-                name = input.nextLine().toLowerCase();
-                if (name.trim().isEmpty())
-                {
-                    System.out.println(redColorCode + "Error: Task's field cannot be empty." + whiteColorCode);
-                    flag = true;
-                }
-                else if (name.trim().length() < 3)
-                {
-                    System.out.println(redColorCode + "Error: Task's field must be at least 3 characters long." + whiteColorCode);
-                    flag = true;
-                }
-                else if (name.length() > 80)
-                {
-                    System.out.println(redColorCode + "Error: Task must be less than 80 characters." + whiteColorCode);
-                    flag = true;
-                }
-                Database.retrieveDataIntoLinkedList(info);
-                //comparing habit names with existing habits
-                if (Database.storeTasksName.contains(name))
-                {
-                    System.out.println(redColorCode + "Error: Task already exists." + whiteColorCode);
-                    flag = true;
-                }
+                System.out.println(redColorCode + "Error: Task's field cannot be empty." + whiteColorCode);
+                flag = true;
             }
-            while (flag);
-            // to add habit into db
-            myTasks.setTaskTitle(name);
-            boolean isWritten = Database.writeTaskData(myTasks, info);
-            if (isWritten)
+            else if (name.trim().length() < 3)
             {
-                System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
+                System.out.println(redColorCode + "Error: Task's field must be at least 3 characters long." + whiteColorCode);
+                flag = true;
             }
-            else
+            else if (name.length() > 80)
             {
-                System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
+                System.out.println(redColorCode + "Error: Task must be less than 80 characters." + whiteColorCode);
+                flag = true;
             }
+            Database.retrieveDataIntoLinkedList(info);
+            //comparing habit names with existing habits
+            if (Database.storeTasksName.contains(name))
+            {
+                System.out.println(redColorCode + "Error: Task already exists." + whiteColorCode);
+                flag = true;
+            }
+        }
+        while (flag);
+        // to add habit into db
+        myTasks.setTaskTitle(name);
+        boolean isWritten = Database.writeTaskData(myTasks, info);
+        if (isWritten)
+        {
+            System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
+        }
+        else
+        {
+            System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
+        }
     }
 
     //add notes to db
@@ -90,212 +90,213 @@ public class Functions
         boolean flag;
         System.out.println(mintColorCode + "\t\t\t\t\t Add Notes \n" + whiteColorCode);
         //Tasks myTasks = new Tasks("", "");
-        Notes myNotes=new Notes("","");
+        Notes myNotes = new Notes("", "");
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
-//        boolean canAddHabit = Database.habitCounter(info);
-//        if (canAddHabit)
-//        {
-            input.nextLine();
-            do
+        //        boolean canAddHabit = Database.habitCounter(info);
+        //        if (canAddHabit)
+        //        {
+        input.nextLine();
+        do
+        {
+            flag = false;
+            System.out.print("Notes Title please: ");
+            name = input.nextLine().toLowerCase();
+            if (name.trim().isEmpty())
             {
-                flag = false;
-                System.out.print("Notes Title please: ");
-                name = input.nextLine().toLowerCase();
-                if (name.trim().isEmpty())
-                {
-                    System.out.println(redColorCode + "Error: Notes' Title cannot be empty." + whiteColorCode);
-                    flag = true;
-                }
-                else if (name.trim().length() < 3)
-                {
-                    System.out.println(redColorCode + "Error: Notes' Title must be at least 3 characters long." + whiteColorCode);
-                    flag = true;
-                }
-                else if (name.length() > 50)
-                {
-                    System.out.println(redColorCode + "Error: Notes' name must be less than 50 characters." + whiteColorCode);
-                    flag = true;
-                }
-                //Database.retrieveDataIntoLinkedList(info);
-                //comparing habit names with existing habits
-//                if (Database.storeTasksName.contains(name))
-//                {
-//                    System.out.println(redColorCode + "Error: Notes' Title already exists." + whiteColorCode);
-//                    flag = true;
-//                }
+                System.out.println(redColorCode + "Error: Notes' Title cannot be empty." + whiteColorCode);
+                flag = true;
             }
-            while (flag);
-            //habit description
-            do
+            else if (name.trim().length() < 3)
             {
-                flag = false;
-                System.out.print("Notes' description please? ");
-                description = input.nextLine();
-                if (description.trim().isEmpty())
-                {
-                    System.out.println(redColorCode + "Error: Notes' description cannot be empty." + whiteColorCode);
-                    flag = true;
-                } else if (description.trim().length() < 3)
-                {
-                    System.out.println(redColorCode + "Error: Notes' description must be at least 3 characters long." + whiteColorCode);
-                    flag = true;
-                }
+                System.out.println(redColorCode + "Error: Notes' Title must be at least 3 characters long." + whiteColorCode);
+                flag = true;
             }
-            while (flag);
-            // to add habit into db
-            myNotes.setNotesName(name);
-            myNotes.setNotesDescription(description);
-            boolean isWritten = Database.writeNotesData(myNotes, info);
-            if (isWritten)
+            else if (name.length() > 50)
             {
-                System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
+                System.out.println(redColorCode + "Error: Notes' name must be less than 50 characters." + whiteColorCode);
+                flag = true;
             }
-            else
+            //Database.retrieveDataIntoLinkedList(info);
+            //comparing habit names with existing habits
+            //                if (Database.storeTasksName.contains(name))
+            //                {
+            //                    System.out.println(redColorCode + "Error: Notes' Title already exists." + whiteColorCode);
+            //                    flag = true;
+            //                }
+        }
+        while (flag);
+        //habit description
+        do
+        {
+            flag = false;
+            System.out.print("Notes' description please? ");
+            description = input.nextLine();
+            if (description.trim().isEmpty())
             {
-                System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
+                System.out.println(redColorCode + "Error: Notes' description cannot be empty." + whiteColorCode);
+                flag = true;
             }
-//        }
-//        else
-//        {
-//            System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
-//        }
+            else if (description.trim().length() < 3)
+            {
+                System.out.println(redColorCode + "Error: Notes' description must be at least 3 characters long." + whiteColorCode);
+                flag = true;
+            }
+        }
+        while (flag);
+        // to add habit into db
+        myNotes.setNotesName(name);
+        myNotes.setNotesDescription(description);
+        boolean isWritten = Database.writeNotesData(myNotes, info);
+        if (isWritten)
+        {
+            System.out.println(greenColorCode + "Completed, Data Added!" + whiteColorCode);
+        }
+        else
+        {
+            System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
+        }
+        //        }
+        //        else
+        //        {
+        //            System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
+        //        }
     }
-    
+
     // to update existing habit
-//    public static void updateHabit(UserLogin info)
-//    {
-//        System.out.println(mintColorCode + "\t\t\t\t\t Enhance Progress \n" + whiteColorCode);
-//        // to get the user id
-//        int userId = Database.activeUserId(info);
-//        // to check if the habit exists
-//        boolean isDataExist = Database.displayGeneralTaskInfo(info);
-//        if (isDataExist)
-//        {
-//            String progressBar = "▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯";
-//            int completedDays;
-//            int habitId;
-//            String achievement;
-//            System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
-//            input.nextLine();
-//            System.out.println("Which Habit would you like to update? ");
-//            System.out.print("Enter Habit's ID: ");
-//            try
-//            {
-//                habitId = input.nextInt();
-//                input.nextLine();
-//                boolean flag = false;
-//                // to check if the habit id is valid
-//                boolean isHabitExist = Database.checkTaskId(habitId, userId);
-//                if (isHabitExist)
-//                {
-//                    do
-//                    {
-//                        // fetching number of day have been completed so far
-//                        int habitDays = Database.habitDays(habitId);
-//                        System.out.print("How many days have been completed so far? ");
-//                        completedDays = input.nextInt();
-//                        if (completedDays <= habitDays)
-//                        {
-//                            System.out.println(redColorCode + "Error: You can't decline your progress days." + whiteColorCode);
-//                            flag = true;
-//                        }
-//                        else
-//                        {
-//                            try
-//                            {
-//                                if (completedDays >= 1 && completedDays <= 29)
-//                                {
-//                                    StringBuilder progressBarBuilder = new StringBuilder(progressBar);
-//                                    for (int i = 0; i < completedDays; i++)
-//                                    {
-//                                        progressBarBuilder.setCharAt(i, '▮');
-//                                    }
-//                                    progressBar = progressBarBuilder.toString();
-//                                    boolean ckh = Database.updateData(habitId, progressBar, completedDays);
-//                                    if (ckh)
-//                                    {
-//                                        System.out.println(greenColorCode + "Habit has been updated!" + whiteColorCode);
-//                                    }
-//                                    break;
-//                                }
-//                                // to check if the habit is completed
-//                                else if (completedDays == 30)
-//                                {
-//                                    flag = false;
-//                                    System.out.println(" ");
-//                                    System.out.println(mintColorCode + "Congratulations, you've successfully completed your habit!" + whiteColorCode);
-//                                    System.out.print("What are your Achievements? ");
-//                                    input.nextLine();
-//                                    achievement = input.nextLine();
-//                                    do
-//                                    {
-//                                        if (achievement.trim().isEmpty())
-//                                        {
-//                                            System.out.println(redColorCode + "Error: Habit achievement cannot be empty." + whiteColorCode);
-//                                            flag = true;
-//                                        }
-//                                        else if (achievement.trim().length() < 3)
-//                                        {
-//                                            System.out.println(redColorCode + "Error: Habit achievement must be at least 3 characters long." + whiteColorCode);
-//                                            flag = true;
-//                                        }
-//                                        else if (achievement.length() > 150)
-//                                        {
-//                                            System.out.println(redColorCode + "Error: Habit achievement must be less than 150 characters." + whiteColorCode);
-//                                            flag = true;
-//                                        }
-//                                        else
-//                                        {
-//                                            //to fetch habit name
-//                                            String habitName = Database.taskName(habitId);
-//                                            //to delete habit from general habit table
-//                                            Database.deleteData(habitId);
-//                                            //to add habit into history table
-//                                            Tasks data = new Tasks(habitName, achievement);
-//                                            boolean chk = Database.writeHistory(info, data);
-//                                            if (chk)
-//                                            {
-//                                                System.out.println(greenColorCode + "Habit has been updated!" + whiteColorCode);
-//                                            }
-//                                            else
-//                                            {
-//                                                System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
-//                                            }
-//                                        }
-//                                    }
-//                                    while (flag);
-//                                }
-//                                else
-//                                {
-//                                    System.out.println(redColorCode + "Error: Completed Days must range between 1 - 30." + whiteColorCode);
-//                                    flag = true;
-//                                }
-//                            }
-//                            catch (InputMismatchException e)
-//                            {
-//                                System.out.println(" ");
-//                                System.out.println(redColorCode + "Error: The input is out of bounds." + whiteColorCode);
-//                                input.nextLine();
-//                            }
-//                        }
-//                    }
-//                    while (flag);
-//                }
-//                else
-//                {
-//                    System.out.println(" ");
-//                    System.out.println(redColorCode + "Error: Incorrect Habit ID." + whiteColorCode);
-//                    System.out.println(" ");
-//                }
-//            }
-//            catch (InputMismatchException e)
-//            {
-//                System.out.println(" ");
-//                System.out.println(redColorCode + "Error: Input out of bounds" + whiteColorCode);
-//                input.nextLine();
-//            }
-//        }
-//    }
+    //    public static void updateHabit(UserLogin info)
+    //    {
+    //        System.out.println(mintColorCode + "\t\t\t\t\t Enhance Progress \n" + whiteColorCode);
+    //        // to get the user id
+    //        int userId = Database.activeUserId(info);
+    //        // to check if the habit exists
+    //        boolean isDataExist = Database.displayGeneralTaskInfo(info);
+    //        if (isDataExist)
+    //        {
+    //            String progressBar = "▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯▯";
+    //            int completedDays;
+    //            int habitId;
+    //            String achievement;
+    //            System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
+    //            input.nextLine();
+    //            System.out.println("Which Habit would you like to update? ");
+    //            System.out.print("Enter Habit's ID: ");
+    //            try
+    //            {
+    //                habitId = input.nextInt();
+    //                input.nextLine();
+    //                boolean flag = false;
+    //                // to check if the habit id is valid
+    //                boolean isHabitExist = Database.checkTaskId(habitId, userId);
+    //                if (isHabitExist)
+    //                {
+    //                    do
+    //                    {
+    //                        // fetching number of day have been completed so far
+    //                        int habitDays = Database.habitDays(habitId);
+    //                        System.out.print("How many days have been completed so far? ");
+    //                        completedDays = input.nextInt();
+    //                        if (completedDays <= habitDays)
+    //                        {
+    //                            System.out.println(redColorCode + "Error: You can't decline your progress days." + whiteColorCode);
+    //                            flag = true;
+    //                        }
+    //                        else
+    //                        {
+    //                            try
+    //                            {
+    //                                if (completedDays >= 1 && completedDays <= 29)
+    //                                {
+    //                                    StringBuilder progressBarBuilder = new StringBuilder(progressBar);
+    //                                    for (int i = 0; i < completedDays; i++)
+    //                                    {
+    //                                        progressBarBuilder.setCharAt(i, '▮');
+    //                                    }
+    //                                    progressBar = progressBarBuilder.toString();
+    //                                    boolean ckh = Database.updateData(habitId, progressBar, completedDays);
+    //                                    if (ckh)
+    //                                    {
+    //                                        System.out.println(greenColorCode + "Habit has been updated!" + whiteColorCode);
+    //                                    }
+    //                                    break;
+    //                                }
+    //                                // to check if the habit is completed
+    //                                else if (completedDays == 30)
+    //                                {
+    //                                    flag = false;
+    //                                    System.out.println(" ");
+    //                                    System.out.println(mintColorCode + "Congratulations, you've successfully completed your habit!" + whiteColorCode);
+    //                                    System.out.print("What are your Achievements? ");
+    //                                    input.nextLine();
+    //                                    achievement = input.nextLine();
+    //                                    do
+    //                                    {
+    //                                        if (achievement.trim().isEmpty())
+    //                                        {
+    //                                            System.out.println(redColorCode + "Error: Habit achievement cannot be empty." + whiteColorCode);
+    //                                            flag = true;
+    //                                        }
+    //                                        else if (achievement.trim().length() < 3)
+    //                                        {
+    //                                            System.out.println(redColorCode + "Error: Habit achievement must be at least 3 characters long." + whiteColorCode);
+    //                                            flag = true;
+    //                                        }
+    //                                        else if (achievement.length() > 150)
+    //                                        {
+    //                                            System.out.println(redColorCode + "Error: Habit achievement must be less than 150 characters." + whiteColorCode);
+    //                                            flag = true;
+    //                                        }
+    //                                        else
+    //                                        {
+    //                                            //to fetch habit name
+    //                                            String habitName = Database.taskName(habitId);
+    //                                            //to delete habit from general habit table
+    //                                            Database.deleteData(habitId);
+    //                                            //to add habit into history table
+    //                                            Tasks data = new Tasks(habitName, achievement);
+    //                                            boolean chk = Database.writeHistory(info, data);
+    //                                            if (chk)
+    //                                            {
+    //                                                System.out.println(greenColorCode + "Habit has been updated!" + whiteColorCode);
+    //                                            }
+    //                                            else
+    //                                            {
+    //                                                System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
+    //                                            }
+    //                                        }
+    //                                    }
+    //                                    while (flag);
+    //                                }
+    //                                else
+    //                                {
+    //                                    System.out.println(redColorCode + "Error: Completed Days must range between 1 - 30." + whiteColorCode);
+    //                                    flag = true;
+    //                                }
+    //                            }
+    //                            catch (InputMismatchException e)
+    //                            {
+    //                                System.out.println(" ");
+    //                                System.out.println(redColorCode + "Error: The input is out of bounds." + whiteColorCode);
+    //                                input.nextLine();
+    //                            }
+    //                        }
+    //                    }
+    //                    while (flag);
+    //                }
+    //                else
+    //                {
+    //                    System.out.println(" ");
+    //                    System.out.println(redColorCode + "Error: Incorrect Habit ID." + whiteColorCode);
+    //                    System.out.println(" ");
+    //                }
+    //            }
+    //            catch (InputMismatchException e)
+    //            {
+    //                System.out.println(" ");
+    //                System.out.println(redColorCode + "Error: Input out of bounds" + whiteColorCode);
+    //                input.nextLine();
+    //            }
+    //        }
+    //    }
 
     // to show habit from db
     public static void showOngoingTasks(UserLogin info)
@@ -303,11 +304,13 @@ public class Functions
         System.out.println(mintColorCode + "\t\t\t\t\t Ongoing Tasks \n" + whiteColorCode);
         Database.displayGeneralTaskInfo(info);
     }
+
     public static void showCompletedTasks(UserLogin info)
     {
         System.out.println(mintColorCode + "\t\t\t\t\t Completed Tasks \n" + whiteColorCode);
         Database.displayCompletedTaskInfo(info);
     }
+
     public static void showAddedNotes(UserLogin info)
     {
         System.out.println(mintColorCode + "\t\t\t\t\t Completed Tasks \n" + whiteColorCode);
@@ -362,7 +365,7 @@ public class Functions
             }
         }
     }
-    
+
     public static void greetings(UserLogin info)
     {
         if (currentTime.isBefore(LocalTime.NOON))
@@ -397,43 +400,43 @@ public class Functions
         String randomString = inspiration.get(randIndex);
         System.out.println(yellowColor + randomString + whiteColorCode);
     }
-    
-//    public static  void ranomizeTask(UserLogin info)
-//    {
-//        LinkedList<String> tasksTitleList=new LinkedList<>();
-//        int totalTasks=0;
-//        String tasksTitle;
-//        System.out.print("how many tasks you wanna to to randomize it?");
-//        totalTasks= input.nextInt();
-//        for(int i=0;i<totalTasks;i++)
-//        {
-//            System.out.print("Enter task's title: ");
-//            tasksTitle=input.nextLine();
-//            tasksTitleList.add(tasksTitle);
-//        }
-//        Random rand=new Random();
-//        int randIndex=rand.nextInt(tasksTitleList.size());
-//        String randomTask=tasksTitleList.get(randIndex);
-//        System.out.println("Task Assigned to you is: "+yellowColor + randomTask + whiteColorCode);
-//    }
-    
+
+    //    public static  void ranomizeTask(UserLogin info)
+    //    {
+    //        LinkedList<String> tasksTitleList=new LinkedList<>();
+    //        int totalTasks=0;
+    //        String tasksTitle;
+    //        System.out.print("how many tasks you wanna to to randomize it?");
+    //        totalTasks= input.nextInt();
+    //        for(int i=0;i<totalTasks;i++)
+    //        {
+    //            System.out.print("Enter task's title: ");
+    //            tasksTitle=input.nextLine();
+    //            tasksTitleList.add(tasksTitle);
+    //        }
+    //        Random rand=new Random();
+    //        int randIndex=rand.nextInt(tasksTitleList.size());
+    //        String randomTask=tasksTitleList.get(randIndex);
+    //        System.out.println("Task Assigned to you is: "+yellowColor + randomTask + whiteColorCode);
+    //    }
+
     public static void addRandomTask(UserLogin info)
     {
-//        LinkedList<String> tasksTitleList=new LinkedList<>();
-//        int totalTasks=0;
-//        String tasksTitle;
-//        System.out.print("how many tasks you wanna to to randomize it?");
-//        totalTasks= input.nextInt();
-//        for(int i=0;i<totalTasks;i++)
-//        {
-//            System.out.print("Enter task's title: ");
-//            tasksTitle=input.nextLine();
-//            tasksTitleList.add(tasksTitle);
-//        }
-//        Random rand=new Random();
-//        int randIndex=rand.nextInt(tasksTitleList.size());
-//        String randomTask=tasksTitleList.get(randIndex);
-//        System.out.println(yellowColor + randomTask + whiteColorCode);
+        //        LinkedList<String> tasksTitleList=new LinkedList<>();
+        //        int totalTasks=0;
+        //        String tasksTitle;
+        //        System.out.print("how many tasks you wanna to to randomize it?");
+        //        totalTasks= input.nextInt();
+        //        for(int i=0;i<totalTasks;i++)
+        //        {
+        //            System.out.print("Enter task's title: ");
+        //            tasksTitle=input.nextLine();
+        //            tasksTitleList.add(tasksTitle);
+        //        }
+        //        Random rand=new Random();
+        //        int randIndex=rand.nextInt(tasksTitleList.size());
+        //        String randomTask=tasksTitleList.get(randIndex);
+        //        System.out.println(yellowColor + randomTask + whiteColorCode);
         String name;
         String description;
         boolean flag;
@@ -444,13 +447,13 @@ public class Functions
         if (canAddTask)
         {
             input.nextLine();
-            LinkedList<String> tasksTitleList=new LinkedList<>();
-            int totalTasks=0;
-          //  String tasksTitle = null;
+            LinkedList<String> tasksTitleList = new LinkedList<>();
+            int totalTasks = 0;
+            //  String tasksTitle = null;
             System.out.print("how many tasks you wanna to to randomize it?");
-            totalTasks= input.nextInt();
+            totalTasks = input.nextInt();
             input.nextLine();
-            for(int i=0;i<totalTasks;i++)
+            for (int i = 0; i < totalTasks; i++)
             {
                 do
                 {
@@ -461,11 +464,13 @@ public class Functions
                     {
                         System.out.println(redColorCode + "Error: Task's Title cannot be empty." + whiteColorCode);
                         flag = true;
-                    } else if (name.trim().length() < 3)
+                    }
+                    else if (name.trim().length() < 3)
                     {
                         System.out.println(redColorCode + "Error: Task's Title must be at least 3 characters long." + whiteColorCode);
                         flag = true;
-                    } else if (name.length() > 50)
+                    }
+                    else if (name.length() > 50)
                     {
                         System.out.println(redColorCode + "Error: Habit name must be less than 50 characters." + whiteColorCode);
                         flag = true;
@@ -482,10 +487,10 @@ public class Functions
                 while (flag);
                 tasksTitleList.add(name);
             }
-            Random rand=new Random();
-            int randIndex=rand.nextInt(tasksTitleList.size());
-            String randomTask=tasksTitleList.get(randIndex);
-            System.out.println("Task Assigned to you is: "+yellowColor + randomTask + whiteColorCode);
+            Random rand = new Random();
+            int randIndex = rand.nextInt(tasksTitleList.size());
+            String randomTask = tasksTitleList.get(randIndex);
+            System.out.println("Task Assigned to you is: " + yellowColor + randomTask + whiteColorCode);
             // to add habit into db
             myTasks.setTaskTitle(randomTask);
             boolean isWritten = Database.writeTaskData(myTasks, info);
@@ -503,26 +508,26 @@ public class Functions
             System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
         }
     }
-//    //to show history
-//    public static void showHistory(UserLogin info)
-//    {
-//        System.out.println(mintColorCode + "\t\t\t\t\t Completed Habit History \n" + whiteColorCode);
-//        Database.displayHistory(info);
-//    }
-//
-//    //to show user info
-//    public static void showUserInfo(UserLogin info)
-//    {
-//        System.out.println(mintColorCode + "\t\t\t\t\t User's Info \n" + whiteColorCode);
-//        Database.showUserInfo(info);
-//    }
-//
-//    //to show deleted habit
-//    public static void showDeletedHabit(UserLogin info)
-//    {
-//        System.out.println(mintColorCode + "\t\t\t\t\t Deleted Habit Habit \n" + whiteColorCode);
-//        Database.displayDeletedHabitInfo(info);
-//    }
+    //    //to show history
+    //    public static void showHistory(UserLogin info)
+    //    {
+    //        System.out.println(mintColorCode + "\t\t\t\t\t Completed Habit History \n" + whiteColorCode);
+    //        Database.displayHistory(info);
+    //    }
+    //
+    //    //to show user info
+    //    public static void showUserInfo(UserLogin info)
+    //    {
+    //        System.out.println(mintColorCode + "\t\t\t\t\t User's Info \n" + whiteColorCode);
+    //        Database.showUserInfo(info);
+    //    }
+    //
+    //    //to show deleted habit
+    //    public static void showDeletedHabit(UserLogin info)
+    //    {
+    //        System.out.println(mintColorCode + "\t\t\t\t\t Deleted Habit Habit \n" + whiteColorCode);
+    //        Database.displayDeletedHabitInfo(info);
+    //    }
 
     //to show developer info
     public static void developerInfo()
