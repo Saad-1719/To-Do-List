@@ -170,9 +170,10 @@ static LocalTime currentTime=LocalTime.now();
             {
                 int taskID = show.getInt(1);
                 String taskTitle = show.getString(2);
-                String time = show.getString(3);
+                String date = show.getString(3);
+                String time = show.getString(4);
 
-                Tasks completedTaskObj = new Tasks(taskID, taskTitle, time);
+                Tasks completedTaskObj = new Tasks(taskID,taskTitle, date,time);
                 completedTasks.add(completedTaskObj);
             }
 
@@ -182,12 +183,14 @@ static LocalTime currentTime=LocalTime.now();
             }
             else
             {
+                Collections.sort(completedTasks, Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : completedTasks)
                 {
                     System.out.print(yellowColor);
-                    System.out.println("Task ID: " + task.getTaskID());
+//                    System.out.println("Task ID: " + task.getTaskID());
                     System.out.println("Task Title: " + task.getTaskTitle());
                     System.out.println("Completion Date: " + task.getCompletionDate());
+                    System.out.println("Completion Time: " + task.getAddedTime());
                     System.out.println("--------------------------------------");
                     System.out.print(whiteColorCode);
                 }
@@ -293,7 +296,7 @@ static LocalTime currentTime=LocalTime.now();
                 ongoingTasks.add(ongoingTaskObj);
 //                System.out.println("-----------------------------------------");
                 hasData = true;
-                System.out.println(whiteColorCode);
+//                System.out.println(whiteColorCode);
             }
             if (!hasData)
             {
@@ -453,13 +456,14 @@ static LocalTime currentTime=LocalTime.now();
             Connection con = Connector.createConnection();
             int fetchId = activeUserId(id);
             PreparedStatement pst;
-            String query = "insert into completed_tasks(task_title,date_added,userID)values(?,?,?)";
+            String query = "insert into completed_tasks(task_title,date_added,time_added,userID)values(?,?,?,?)";
             pst = con.prepareStatement(query);
 
             //set values of parameter
             pst.setString(1, data.getTaskTitle());
             pst.setDate(2, Date.valueOf(currentDate));
-            pst.setInt(3, fetchId);
+            pst.setString(3,String.valueOf(currentTime));
+            pst.setInt(4, fetchId);
             int count = pst.executeUpdate();
             if (count > 0)
             {
