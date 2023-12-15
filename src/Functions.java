@@ -302,7 +302,8 @@ public class Functions
     public static void showOngoingTasks(UserLogin info)
     {
         System.out.println(mintColorCode + "\t\t\t\t\t Ongoing Tasks \n" + whiteColorCode);
-        Database.displayGeneralTaskInfo(info);
+        //Database.displayGeneralTaskInfo(info);
+        viewCalendar(info);
     }
 
     public static void showCompletedTasks(UserLogin info)
@@ -546,5 +547,61 @@ public class Functions
         System.out.println("ID: 01-131222-054");
         System.out.println("Login and Signup Designer");
         System.out.print(whiteColorCode);
+    }
+
+    public static void viewCalendar(UserLogin info)
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter year: ");
+        int year = scanner.nextInt();
+
+        System.out.print("Enter month (1-12): ");
+        int month = scanner.nextInt();
+
+        if (month < 1 || month > 12) {
+            System.out.println("Invalid month. Please enter a value between 1 and 12.");
+            return;
+        }
+
+        // Create a GregorianCalendar object
+        Calendar calendar = new GregorianCalendar(year, month - 1, 1);
+
+        // Display tasks for the selected month
+        int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+        // Display tasks for the selected month
+        boolean[] hasDataForDay = new boolean[maxDay + 1];
+        Database.displayGeneralTaskInfoforCalendar(year, month, hasDataForDay,info);
+
+        // Print the calendar header
+        System.out.println("\n" + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, java.util.Locale.getDefault()) + " " + year);
+        System.out.println("Sun Mon Tue Wed Thu Fri Sat");
+
+        // Print leading spaces
+        for (int i = 0; i < startDay; i++) {
+            System.out.print("    ");
+        }
+
+        // Print the days of the month with colors based on data presence
+        for (int i = 1; i <= maxDay; i++) {
+            if (hasDataForDay[i]) {
+                System.out.print("\u001B[31m"); // Red color for days with data
+            }
+
+            System.out.printf("%3d ", i);
+
+            if (hasDataForDay[i]) {
+                System.out.print("\u001B[0m"); // Reset color after printing the day
+            }
+
+            // Move to the next line if it's the last day of the week
+            if ((startDay + i) % 7 == 0) {
+                System.out.println();
+            }
+        }
+
+        System.out.println("\n");
     }
 }

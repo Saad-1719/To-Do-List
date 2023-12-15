@@ -278,15 +278,6 @@ static LocalTime currentTime=LocalTime.now();
             boolean hasData = false;
             while (show.next())
             {
-//                System.out.print(yellowColor);
-//                int id = show.getInt(1);
-//                String taskTitle = show.getString(2);
-//                String addedDate = show.getString(3);
-//                //int days = show.getInt("completeddays");
-//                System.out.println("Task ID: " + id);
-//                System.out.println("Task Title: " + taskTitle);
-//                System.out.println("Date Added: " + addedDate);
-//                //System.out.println("Number of days completed: " + days);
                 int taskID = show.getInt(1);
                 String taskTitle = show.getString(2);
                 String date = show.getString(3);
@@ -294,9 +285,7 @@ static LocalTime currentTime=LocalTime.now();
 
                 Tasks ongoingTaskObj = new Tasks(taskID,taskTitle, date,time);
                 ongoingTasks.add(ongoingTaskObj);
-//                System.out.println("-----------------------------------------");
                 hasData = true;
-//                System.out.println(whiteColorCode);
             }
             if (!hasData)
             {
@@ -304,22 +293,11 @@ static LocalTime currentTime=LocalTime.now();
                 chk = false;
             }
             else {
-//                int totalOngoingTasks=ongoingTasks.size();
-//                for(int i=0;i<totalOngoingTasks-1;i++)
-//                {
-//                    for(int j=0;j<totalOngoingTasks-i-1;j++)
-//                    {
-//                        Tasks obj1=ongoingTasks.get(j);
-//                        Tasks obj2=ongoingTasks.get(j+1);
-//                        int compareID= obj2.getTaskID().compareTOIgnoreCase(obj1.getTaskID());
-//                    }
-//                }
                 Collections.sort(ongoingTasks, Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : ongoingTasks)
                 {
 
                     System.out.print(yellowColor);
-//                    System.out.println("Task ID: " + task.getTaskID());
                     System.out.println("Task Title: " + task.getTaskTitle());
                     System.out.println("Added Date: " + task.getCompletionDate());
                     System.out.println("Added Time: "+task.getAddedTime());
@@ -479,6 +457,33 @@ static LocalTime currentTime=LocalTime.now();
         }
         return flag;
     }
+
+    public static void displayGeneralTaskInfoforCalendar(int year, int month, boolean[] hasDataForDay, UserLogin info) {
+        try {
+            Connection con = Connector.createConnection();
+            String query = "SELECT added_date FROM tasks WHERE userID=? and YEAR(added_date) = ? AND MONTH(added_date) = ? ";
+            PreparedStatement smt = con.prepareStatement(query);
+            int getId=activeUserId(info);
+            smt.setInt(2, year);
+            smt.setInt(3, month);
+            smt.setInt(1, getId);
+
+            ResultSet resultSet = smt.executeQuery();
+
+            while (resultSet.next()) {
+                String addedDate = resultSet.getString("added_date");
+                int day = Integer.parseInt(addedDate.split("-")[2]); // Assuming date format is "YYYY-MM-DD"
+                hasDataForDay[day] = true;
+            }
+
+            con.close();
+            smt.close();
+            resultSet.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //to display deleted habit info
 //    public static void displayDeletedHabitInfo(UserLogin info)
