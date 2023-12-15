@@ -15,13 +15,20 @@ public class Main
         while (isRunning)
         {
             // Display Main Menu.
-            System.out.println(mintColorCode + "\t\t\t\t\t ＷＥＬＣＯＭＥ ＴＯ ΛＴＬΛＳＭＩＮＤ" + whiteColorCode);
+
+//            System.out.println(mintColorCode + "\t\t\t\t\t 🎩 Discover Dotify - Where Tasks Unravel with Elegance! ✨" + whiteColorCode);
+
+//            System.out.println(mintColorCode + "\t\t\t\t\t ＷＥＬＣＯＭＥ ＴＯ ΛＴＬΛＳＭＩＮＤ" + whiteColorCode);
+            System.out.println();
+                        System.out.println(mintColorCode + "\t\t\t\t Dotify"+whiteColorCode);
             System.out.println(" ");
-            System.out.println("[1]: Login and Step Into Your World.");
-            System.out.println("[2]: Join Us.");
-            System.out.println("[3]: Forgot your password.");
-            System.out.println("[4]: Depart & Exit.");
-            System.out.print("Enter Your Desired Choice: ");
+                        System.out.println("🌟Your Personal Productivity Companion! 🌟");
+            System.out.println(" ");
+            System.out.println("🌟 [1]: Embark on Your Journey - Login");
+            System.out.println("🚀 [2]: Join Our Community and Explore");
+            System.out.println("🔒 [3]: Rediscover Your Path - Forgot Password");
+            System.out.println("🏞️ [4]: Bid Farewell & Exit the Adventure");
+            System.out.print("🤔 Your journey awaits! Choose a number to proceed: ");
             // Get user choice from the main menu.
             int choice = Functions.getUserChoice(input);
             switch (choice)
@@ -48,20 +55,17 @@ public class Main
                         {
                             // Menu Within After Login.
                             System.out.println(" ");
-                            System.out.println(mintColorCode + "\t\t\t\t\t ΛＴＬΛＳＭＩＮＤ \n" + whiteColorCode);
-                            System.out.println("[1]: Introduce a New Task.");
-                            System.out.println("[2]: Introduce Random Task.");
-                            System.out.println("[3]: Introduce Notes.");
-                            System.out.println("[4]: Mark a task as completed.");
-                            System.out.println("[5]: View on going Tasks.");
-                            System.out.println("[6]: View completed Tasks.");
-                            System.out.println("[7]: View Notes.");
-//                            System.out.println("[6]: View Deleted Habit History.");
-//                            System.out.println("[7]: View Inspiring Quote of the Day.");
-//                            System.out.println("[8]: View User Information.");
-//                            System.out.println("[9]: Learn About the Team.");
-                            System.out.println("[10]: Logout and Disembark.");
-                            System.out.print("Enter your choice: ");
+                            System.out.println(mintColorCode + "\t\t\t\t\tDOTIFY\n" + whiteColorCode);
+                            System.out.println("📝 [1]: Embark on a New Task.");
+                            System.out.println("🌟 [2]: Venture into the Unknown with a Random Task.");
+                            System.out.println("📔 [3]: Chronicle Your Thoughts - Add Notes.");
+                            System.out.println("✅ [4]: Conquer and Mark a Task as Completed.");
+                            System.out.println("🔍 [5]: Explore Ongoing Tasks.");
+                            System.out.println("🎉 [6]: Celebrate Victories - View Completed Tasks.");
+                            System.out.println("🗒️ [7]: Unfold the Pages - View Notes.");
+                            System.out.println("🗒️ [8]: Unfold the Pages - Find  task.");
+                            System.out.println("🚪 [10]: Logout and Disembark from Your Odyssey.");
+                            System.out.print("🤔 Enter the number corresponding to your chosen quest: ");
                             int selection = Functions.getUserChoice(input);
                             System.out.println();
                             switch (selection)
@@ -87,9 +91,9 @@ public class Main
                                 case 7:
                                     Functions.showAddedNotes(info);
                                     break;
-//                                case 8:
-//                                    Functions.showUserInfo(info);
-//                                    break;
+                                case 8:
+                                    Functions.searchTask(info);
+                                    break;
                                 case 9:
                                     Functions.developerInfo();
                                     break;

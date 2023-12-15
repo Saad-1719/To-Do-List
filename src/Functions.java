@@ -444,9 +444,9 @@ public class Functions
         System.out.println(mintColorCode + "\t\t\t\t\t Add a Random Task \n" + whiteColorCode);
         Tasks myTasks = new Tasks("");
         System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
-        boolean canAddTask = Database.getTaskCount(info);
-        if (canAddTask)
-        {
+//        boolean canAddTask = Database.getTaskCount(info);
+//        if (canAddTask)
+//        {
             input.nextLine();
             LinkedList<String> tasksTitleList = new LinkedList<>();
             int totalTasks = 0;
@@ -503,11 +503,11 @@ public class Functions
             {
                 System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
             }
-        }
-        else
-        {
-            System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
-        }
+//        }
+//        else
+//        {
+//            System.out.println(redColorCode + "Error: You can only add 5 habits at a time." + whiteColorCode);
+//        }
     }
     //    //to show history
     //    public static void showHistory(UserLogin info)
@@ -617,5 +617,21 @@ public class Functions
 
 
         System.out.println("\n");
+    }
+
+    public static void searchTask(UserLogin info)
+    {
+        String title;
+        System.out.print("Enter task title to search it: ");
+        title=input.nextLine();
+        Database.retrieveDataIntoArray(info);
+        int index=Collections.binarySearch(Database.storeTasksNameForSearch,title);
+       if(index>=0)
+       {
+           System.out.println("task found");
+       }
+       else {
+           System.out.println("No task found");
+       }
     }
 }

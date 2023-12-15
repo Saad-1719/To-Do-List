@@ -1,6 +1,7 @@
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
@@ -14,7 +15,7 @@ public class Database
 static LocalTime currentTime=LocalTime.now();
     // To store habit name of active user
     protected static LinkedList<String> storeTasksName = new LinkedList<>();
-
+    protected static ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
     //TO obtain id of active user
     public static int activeUserId(UserLogin info)
     {
@@ -56,6 +57,33 @@ static LocalTime currentTime=LocalTime.now();
             {
                 String name = show.getString(2);
                 storeTasksName.add(name);
+            }
+            con.close();
+            smt.close();
+            show.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void retrieveDataIntoArray(UserLogin info)
+    {
+        try
+        {
+            //jdbc code
+            Connection con = Connector.createConnection();
+            int userId;
+            userId = activeUserId(info);
+            String query = "select * from tasks where userID = '" + userId + "';";
+            Statement smt = con.createStatement();
+            ResultSet show = smt.executeQuery(query);
+            storeTasksNameForSearch.clear();
+            while (show.next())
+            {
+                String name = show.getString(2);
+                storeTasksNameForSearch.add(name);
             }
             con.close();
             smt.close();
@@ -317,31 +345,31 @@ static LocalTime currentTime=LocalTime.now();
     }
 
     //TO UPDATE DATA IN DATABASE
-    public static boolean updateData(int id, String bar, int completedDays)
-    {
-        boolean flag = false;
-        try
-        {
-            Connection con = Connector.createConnection();
-            String query = "Update activity set bar=? , completeddays=? where number=?";
-            PreparedStatement pstmt = con.prepareStatement(query);
-            pstmt.setString(1, bar);
-            pstmt.setInt(2, completedDays);
-            pstmt.setInt(3, id);
-            int count = pstmt.executeUpdate();
-            if (count > 0)
-            {
-                flag = true;
-            }
-            con.close();
-            pstmt.close();
-        }
-        catch (SQLException e)
-        {
-            throw new RuntimeException(e);
-        }
-        return flag;
-    }
+//    public static boolean updateData(int id, String bar, int completedDays)
+//    {
+//        boolean flag = false;
+//        try
+//        {
+//            Connection con = Connector.createConnection();
+//            String query = "Update activity set bar=? , completeddays=? where number=?";
+//            PreparedStatement pstmt = con.prepareStatement(query);
+//            pstmt.setString(1, bar);
+//            pstmt.setInt(2, completedDays);
+//            pstmt.setInt(3, id);
+//            int count = pstmt.executeUpdate();
+//            if (count > 0)
+//            {
+//                flag = true;
+//            }
+//            con.close();
+//            pstmt.close();
+//        }
+//        catch (SQLException e)
+//        {
+//            throw new RuntimeException(e);
+//        }
+//        return flag;
+//    }
 
     // to get habit name from habit id
     public static String taskName(int id)
@@ -396,34 +424,34 @@ static LocalTime currentTime=LocalTime.now();
     }
 
     //to get habit days
-    public static boolean getTaskCount(UserLogin id)
-    {
-        boolean entrychk = false;
-        try
-        {
-            //jdbc code
-            Connection con = Connector.createConnection();
-            int fetchId = activeUserId(id);
-            String count = "Select * from tasks where userID =?";
-            PreparedStatement pst = con.prepareStatement(count);
-            pst.setInt(1, fetchId);
-            ResultSet set = pst.executeQuery();
-            int total = 0;
-            while (set.next())
-            {
-                total++;
-            }
-            //                System.out.println(redColorCode + "Error: You cannot have more than 5 habits at a time." + whiteColorCode);
-            entrychk = total < 5;
-            con.close();
-            pst.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        return entrychk;
-    }
+//    public static boolean getTaskCount(UserLogin id)
+//    {
+//        boolean entrychk = false;
+//        try
+//        {
+//            //jdbc code
+//            Connection con = Connector.createConnection();
+//            int fetchId = activeUserId(id);
+//            String count = "Select * from tasks where userID =?";
+//            PreparedStatement pst = con.prepareStatement(count);
+//            pst.setInt(1, fetchId);
+//            ResultSet set = pst.executeQuery();
+//            int total = 0;
+//            while (set.next())
+//            {
+//                total++;
+//            }
+//            //                System.out.println(redColorCode + "Error: You cannot have more than 5 habits at a time." + whiteColorCode);
+//            entrychk = total < 5;
+//            con.close();
+//            pst.close();
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//        return entrychk;
+//    }
 
     //to write data in deleted table
     public static boolean writeTaskHistory(UserLogin id, Tasks data)
