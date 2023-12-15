@@ -549,19 +549,26 @@ public class Functions
         System.out.print(whiteColorCode);
     }
 
-    public static void viewCalendar(UserLogin info)
-    {
+    public static void viewCalendar(UserLogin info) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter year: ");
         int year = scanner.nextInt();
+        boolean isCorrect=true;
+        int month=0;
+        while(isCorrect)
+        {
+            System.out.print("Enter month (1-12): ");
+            month = scanner.nextInt();
 
-        System.out.print("Enter month (1-12): ");
-        int month = scanner.nextInt();
-
-        if (month < 1 || month > 12) {
-            System.out.println("Invalid month. Please enter a value between 1 and 12.");
-            return;
+            if (month < 1 || month > 12)
+            {
+                System.out.println("Invalid month. Please enter a value between 1 and 12.");
+                isCorrect=true;
+            }
+            else {
+                isCorrect=false;
+            }
         }
 
         // Create a GregorianCalendar object
@@ -601,6 +608,13 @@ public class Functions
                 System.out.println();
             }
         }
+        System.out.print("\nEnter a day to view tasks for that date (1-31): ");
+        int day = scanner.nextInt();
+
+        // Print the tasks for the selected date
+        System.out.println("\nTasks for " + year + "-" + month + "-" + day + ":");
+        Database.printTasksForDate(year, month, day, info);
+
 
         System.out.println("\n");
     }

@@ -483,7 +483,37 @@ static LocalTime currentTime=LocalTime.now();
             e.printStackTrace();
         }
     }
+    public static void printTasksForDate(int year, int month, int day, UserLogin info) {
+        try {
+            Connection con = Connector.createConnection();
+            String query = "SELECT * FROM tasks WHERE userID=? AND YEAR(added_date) = ? AND MONTH(added_date) = ? AND DAY(added_date) = ?";
+            PreparedStatement smt = con.prepareStatement(query);
+            int getId = activeUserId(info);
+            smt.setInt(1, getId);
+            smt.setInt(2, year);
+            smt.setInt(3, month);
+            smt.setInt(4, day);
 
+            ResultSet resultSet = smt.executeQuery();
+
+            while (resultSet.next()) {
+                String taskTitle = resultSet.getString("task_title");
+                String addedDate = resultSet.getString("added_date");
+                String addedTime = resultSet.getString("added_time");
+
+                System.out.println("Task Title: " + taskTitle);
+                System.out.println("Added Date: " + addedDate);
+                System.out.println("Added Time: " + addedTime);
+                System.out.println("--------------------------------------");
+            }
+
+            con.close();
+            smt.close();
+            resultSet.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //to display deleted habit info
 //    public static void displayDeletedHabitInfo(UserLogin info)
