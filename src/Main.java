@@ -48,7 +48,7 @@ public class Main
                     System.out.println(" ");
                     if (dataFound)
                     {
-                        System.out.println(mintColorCode + "Congratulations, You've made it in!" + partyEmoji + whiteColorCode);
+                        System.out.println(mintColorCode + "🌟 Bravo! Your Quest Begins Here, Explorer!" + partyEmoji + whiteColorCode);
                         // Greeting the user.
                         Functions.greetings(info);
                         while (true)
@@ -63,7 +63,7 @@ public class Main
                             System.out.println("🔍 [5]: Explore Ongoing Tasks.");
                             System.out.println("🎉 [6]: Celebrate Victories - View Completed Tasks.");
                             System.out.println("🗒️ [7]: Unfold the Pages - View Notes.");
-                            System.out.println("🗒️ [8]: Unfold the Pages - Find  task.");
+                            System.out.println("🕵️‍♂️ [8]: Commence a Task Hunt.");
                             System.out.println("🚪 [10]: Logout and Disembark from Your Odyssey.");
                             System.out.print("🤔 Enter the number corresponding to your chosen quest: ");
                             int selection = Functions.getUserChoice(input);
@@ -98,10 +98,10 @@ public class Main
                                     Functions.developerInfo();
                                     break;
                                 case 10:
-                                    System.out.println(mintColorCode + "Logged Out..." + whiteColorCode);
+                                    System.out.println(mintColorCode + "Farewell, Explorer. You've gracefully concluded your journey for now." + whiteColorCode);
                                     break;
                                 default:
-                                    System.out.println(redColorCode + "Error: Invalid Menu Choice" + whiteColorCode);
+                                    System.out.println(redColorCode + "Oops! That doesn't seem to be a valid path on our map." + whiteColorCode);
                                     break;
                             }
                             if (selection == 10)
