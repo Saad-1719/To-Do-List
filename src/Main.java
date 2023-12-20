@@ -94,9 +94,9 @@ public class Main
                                 case 8:
                                     Functions.searchTask(info);
                                     break;
-                                case 9:
-                                    Functions.developerInfo();
-                                    break;
+//                                case 9:
+//                                    Functions.developerInfo();
+                                 //   break;
                                 case 10:
                                     System.out.println(mintColorCode + "Farewell, Explorer. You've gracefully concluded your journey for now." + whiteColorCode);
                                     break;

@@ -326,6 +326,7 @@ static LocalTime currentTime=LocalTime.now();
                 {
 
                     System.out.print(yellowColor);
+                    System.out.println("Task ID: "+task.getTaskID());
                     System.out.println("Task Title: " + task.getTaskTitle());
                     System.out.println("Added Date: " + task.getCompletionDate());
                     System.out.println("Added Time: "+task.getAddedTime());

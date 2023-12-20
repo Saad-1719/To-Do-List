@@ -608,8 +608,22 @@ public class Functions
                 System.out.println();
             }
         }
-        System.out.print("\nEnter a day to view tasks for that date (1-31): ");
-        int day = scanner.nextInt();
+        int day = 0;
+        while(isCorrect)
+        {
+            System.out.print("\nEnter a day to view tasks for that date (1-31): ");
+            day = scanner.nextInt();
+
+            if (day < 1 || day > 31)
+            {
+                System.out.println("Invalid date. Please enter a value between 1 and 31.");
+                isCorrect=true;
+            }
+            else {
+                isCorrect=false;
+            }
+        }
+
 
         // Print the tasks for the selected date
         System.out.println("\nTasks for " + year + "-" + month + "-" + day + ":");
