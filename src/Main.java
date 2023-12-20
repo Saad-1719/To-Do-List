@@ -20,11 +20,15 @@ public class Main
             System.out.println(" ");
             System.out.println("🌟Your Personal Productivity Companion! 🌟");
             System.out.println(" ");
-            System.out.println("🌟 [1]: Embark on Your Journey - Login");
-            System.out.println("🚀 [2]: Join Our Community and Explore");
-            System.out.println("🔒 [3]: Rediscover Your Path - Forgot Password");
-            System.out.println("🏞️ [4]: Bid Farewell & Exit the Adventure");
-            System.out.print("🤔 Your journey awaits! Choose a number to proceed: ");
+            // Displaying options for the user to choose from
+            System.out.println("[1]: Start Your Journey - Log in");
+            System.out.println("[2]: Join Our Community and Explore");
+            System.out.println("[3]: Forgot Your Password? Reset Here");
+            System.out.println("[4]: Say Goodbye & Exit the Program");
+
+            // Asking the user to choose an option
+            System.out.print("What would you like to do? Enter the number of your choice: ");
+
             // Get user choice from the main menu.
             int choice = Functions.getUserChoice(input);
             switch (choice)
@@ -52,17 +56,19 @@ public class Main
                             // Menu Within After Login.
                             System.out.println(" ");
                             System.out.println(mintColorCode + "\t\t\t\t\tDOTIFY\n" + whiteColorCode);
-                            System.out.println("📝 [1]: Embark on a New Task.");
-                            System.out.println("🌟 [2]: Venture into the Unknown with a Random Task.");
-                            System.out.println("📔 [3]: Chronicle Your Thoughts - Add Notes.");
-                            System.out.println("✅ [4]: Conquer and Mark a Task as Completed.");
-                            System.out.println("🔍 [5]: Explore Ongoing Tasks.");
-                            System.out.println("🎉 [6]: Celebrate Victories - View Completed Tasks.");
-                            System.out.println("🗒️ [7]: Unfold the Pages - View Notes.");
-                            System.out.println("🕵️‍♂️ [8]: Commence a Task Hunt.");
-                            System.out.println("🕵️‍♂️ [9]: delete notes.");
-                            System.out.println("🚪 [10]: Logout and Disembark from Your Odyssey.");
-                            System.out.print("🤔 Enter the number corresponding to your chosen quest: ");
+                            // Displaying options for the user to choose from in a task-related context
+                            System.out.println("📝 [1]: Start a New Task.");
+                            System.out.println("🌟 [2]: Try something new with a Random Task.");
+                            System.out.println("📔 [3]: Add Notes - Jot down your thoughts.");
+                            System.out.println("✅ [4]: Complete a Task and Mark it Done.");
+                            System.out.println("🔍 [5]: Check on Your Ongoing Tasks.");
+                            System.out.println("🎉 [6]: View Completed Tasks - Celebrate Victories.");
+                            System.out.println("🗒️ [7]: View Notes - Open your Notebook.");
+                            System.out.println("🕵️‍♂️ [8]: Search a Task - Begin a Hunt.");
+                            System.out.println("🗑️ [9]: Delete a Note - Discard It.");
+                            System.out.println("🚪 [10]: Logout and Finish Your Session.");
+                            System.out.print("🤔 Enter the number corresponding to your chosen option: ");
+
                             int selection = Functions.getUserChoice(input);
                             System.out.println();
                             switch (selection)
@@ -95,10 +101,10 @@ public class Main
                                     Functions.deleteNotes(info);
                                     break;
                                 case 10:
-                                    System.out.println(mintColorCode + "Farewell, Explorer. You've gracefully concluded your journey for now." + whiteColorCode);
+                                    System.out.println(mintColorCode+"🚪 Farewell, You've successfully logged out. Until our paths cross again!"+whiteColorCode);
                                     break;
                                 default:
-                                    System.out.println(redColorCode + "Oops! That doesn't seem to be a valid path on our map." + whiteColorCode);
+                                    System.out.println(redColorCode + "Oops! That doesn't seem to be a valid path." + whiteColorCode);
                                     break;
                             }
                             if (selection == 10)
@@ -109,13 +115,13 @@ public class Main
                     }
                     else
                     {
-                        System.out.println(redColorCode + "Credentials Clash: Authentication Aborted! \uD83D\uDE15" + whiteColorCode);
+                        System.out.println("It seems there's a clash with your credentials. \uD83D\uDE15");
                     }
                     break;
                 // Signing Up.
                 case 2:
                     System.out.println(" ");
-                    System.out.println(mintColorCode+"< ------------------- A New World, A New Journey ------------------ >"+whiteColorCode);
+                    System.out.println(mintColorCode+"🚀 Ready to start a new adventure? Sign up and join the journey now! 🌟"+whiteColorCode);
                     System.out.println(" ");
                     obj.signup();
                     break;
@@ -127,11 +133,11 @@ public class Main
                     // Depart and Exit.
                     isRunning = false;
                     System.out.println(" ");
-                    System.out.println(mintColorCode + "Application Terminated. " + whiteColorCode);
+                    System.out.println(mintColorCode + "See you soon! " + whiteColorCode);
                     exit(0);
                     break;
                 default:
-                    System.out.println(redColorCode + "Error: Invalid Menu Choice" + whiteColorCode);
+                    System.out.println(redColorCode + "Oops! That doesn't seem to be a valid path." + whiteColorCode);
                     break;
             }
         }
