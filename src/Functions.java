@@ -367,6 +367,54 @@ public class Functions
         }
     }
 
+    public static void deleteNotes(UserLogin info)
+    {
+        System.out.println(mintColorCode + "\t\t\t\t\t Delete Notes \n" + whiteColorCode);
+        // to check if the habit exists
+        boolean isDataExists = Database.displayGeneralNotesInfo(info);
+        if (isDataExists)
+        {
+            int delId;
+            // data delete
+            System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
+            input.nextLine();
+            System.out.println("Which note would you like to delete? ");
+            System.out.print("Enter Notes' ID: ");
+            try
+            {
+                delId = input.nextInt();
+                int userID = Database.activeUserId(info);
+                // to check if the habit id is valid
+                boolean hasHabitFound = Database.checkNotesId(delId, userID);
+                if (hasHabitFound)
+                {
+                    //String habitName = Database.taskName(delId);
+                    //Tasks data = new Tasks();
+                    //data.setTaskTitle(habitName);
+                    //to write data into a deleted habit table
+                    //Database.writeTaskHistory(info, data);
+                    // to delete habit from general habit table
+                    boolean ckh = Database.deleteNotes(delId);
+                    if (ckh)
+                    {
+                        System.out.println(greenColorCode + "Notes has been Deleted!" + whiteColorCode);
+                    }
+                }
+                else
+                {
+                    System.out.println(" ");
+                    System.out.println(redColorCode + "Error: Incorrect Note ID." + whiteColorCode);
+                }
+            }
+            catch (InputMismatchException e)
+            {
+                System.out.println(" ");
+                System.out.println(redColorCode + "Error: The input is out of bounds" + whiteColorCode);
+                input.nextLine();
+            }
+        }
+    }
+
     public static void greetings(UserLogin info)
     {
         if (currentTime.isBefore(LocalTime.NOON))

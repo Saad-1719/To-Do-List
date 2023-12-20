@@ -27,6 +27,12 @@ public class Notes
         this.notesName = notesName;
         this.notesDescription = notesDescription;
     }
+    public Notes(int notesID, String notesName, String notesDescription)
+    {
+        this.notesID=notesID;
+        this.notesName = notesName;
+        this.notesDescription = notesDescription;
+    }
     
     public String getNotesName()
     {

@@ -64,6 +64,7 @@ public class Main
                             System.out.println("🎉 [6]: Celebrate Victories - View Completed Tasks.");
                             System.out.println("🗒️ [7]: Unfold the Pages - View Notes.");
                             System.out.println("🕵️‍♂️ [8]: Commence a Task Hunt.");
+                            System.out.println("🕵️‍♂️ [9]: delete notes.");
                             System.out.println("🚪 [10]: Logout and Disembark from Your Odyssey.");
                             System.out.print("🤔 Enter the number corresponding to your chosen quest: ");
                             int selection = Functions.getUserChoice(input);
@@ -94,9 +95,9 @@ public class Main
                                 case 8:
                                     Functions.searchTask(info);
                                     break;
-//                                case 9:
-//                                    Functions.developerInfo();
-                                 //   break;
+                                case 9:
+                                    Functions.deleteNotes(info);
+                                    break;
                                 case 10:
                                     System.out.println(mintColorCode + "Farewell, Explorer. You've gracefully concluded your journey for now." + whiteColorCode);
                                     break;

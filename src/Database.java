@@ -15,6 +15,7 @@ public class Database
 static LocalTime currentTime=LocalTime.now();
     // To store habit name of active user
     protected static LinkedList<String> storeTasksName = new LinkedList<>();
+    protected static LinkedList<String> storeNotes = new LinkedList<>();
     protected static ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
     //TO obtain id of active user
     public static int activeUserId(UserLogin info)
@@ -268,7 +269,7 @@ static LocalTime currentTime=LocalTime.now();
                 for (Notes obj : addedNotes)
                 {
                     System.out.print(yellowColor);
-                    System.out.println("Notes ID: " + obj.getNotesID());
+                   // System.out.println("Notes ID: " + obj.getNotesID());
                     System.out.println("Notes Title: " + obj.getNotesName());
                     System.out.println("Notes Description: " + obj.getNotesDescription());
                     System.out.println("Added Date: " + obj.getAddedDate());
@@ -287,6 +288,33 @@ static LocalTime currentTime=LocalTime.now();
         }
     }
 
+
+    public static boolean deleteNotes(int id)
+    {
+        boolean flag = false;
+        try
+        {
+            //jdbc code
+            Connection con = Connector.createConnection();
+            String query = "DELETE FROM notes WHERE `notes_ID`=?";
+            PreparedStatement pstmt = con.prepareStatement(query);
+            //set values of parameter
+            pstmt.setInt(1, id);
+            //execute query
+            int deletion = pstmt.executeUpdate();
+            if (deletion > 0)
+            {
+                flag = true;
+            }
+            con.close();
+            pstmt.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return flag;
+    }
     // to display data for other options
     public static boolean displayGeneralTaskInfo(UserLogin info)
     {
@@ -330,6 +358,63 @@ static LocalTime currentTime=LocalTime.now();
                     System.out.println("Task Title: " + task.getTaskTitle());
                     System.out.println("Added Date: " + task.getCompletionDate());
                     System.out.println("Added Time: "+task.getAddedTime());
+                    System.out.println("--------------------------------------");
+                    System.out.print(whiteColorCode);
+                }
+            }
+            con.close();
+            smt.close();
+            show.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return chk;
+    }
+    public static boolean displayGeneralNotesInfo(UserLogin info)
+    {
+        boolean chk = true;
+        try
+        {
+            //jdbc code
+            Connection con = Connector.createConnection();
+            int userId;
+            userId = activeUserId(info);
+            String query = "select * from notes where userID = ?";
+            PreparedStatement smt = con.prepareStatement(query);
+            smt.setInt(1, userId);
+            ResultSet show = smt.executeQuery();
+            LinkedList<Notes> addedNotes = new LinkedList<>();
+
+            boolean hasData = false;
+            while (show.next())
+            {
+                int notesID = show.getInt(1);
+                String notesTitle = show.getString(2);
+                String description = show.getString(3);
+                //String time = show.getString(4);
+
+                Notes notesObj = new Notes(notesID,notesTitle, description);
+                addedNotes.add(notesObj);
+                hasData = true;
+            }
+            if (!hasData)
+            {
+                System.out.println(redColorCode + "No Data available" + whiteColorCode);
+                chk = false;
+            }
+            else {
+                Collections.sort(addedNotes, Comparator.comparing(Notes::getNotesID).reversed());
+                for (Notes obj : addedNotes)
+                {
+
+                    System.out.print(yellowColor);
+                    System.out.println("ID: "+obj.getNotesID());
+                    System.out.println("Notes Title: " + obj.getNotesName());
+                    System.out.println("Notes Description: " + obj.getNotesDescription());
+                    //System.out.println("Added Date: " + Notes.getCompletionDate());
+                  //  System.out.println("Added Time: "+task.getAddedTime());
                     System.out.println("--------------------------------------");
                     System.out.print(whiteColorCode);
                 }
@@ -407,6 +492,30 @@ static LocalTime currentTime=LocalTime.now();
             //jdbc code
             Connection con = Connector.createConnection();
             String query = "SELECT * FROM tasks WHERE task_ID = '" + habitId + "' AND userID = '" + userId + "';";
+            Statement smt = con.createStatement();
+            ResultSet show = smt.executeQuery(query);
+            if (show.next())
+            {
+                hasFound = true;
+            }
+            con.close();
+            smt.close();
+            show.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return hasFound;
+    }
+    public static boolean checkNotesId(int NotesId, int userId)
+    {
+        boolean hasFound = false;
+        try
+        {
+            //jdbc code
+            Connection con = Connector.createConnection();
+            String query = "SELECT * FROM notes WHERE notes_ID = '" + NotesId + "' AND userID = '" + userId + "';";
             Statement smt = con.createStatement();
             ResultSet show = smt.executeQuery(query);
             if (show.next())
