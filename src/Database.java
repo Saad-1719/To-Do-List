@@ -636,11 +636,11 @@ static LocalTime currentTime=LocalTime.now();
 
             while (resultSet.next()) {
                 String taskTitle = resultSet.getString("task_title");
-                String addedDate = resultSet.getString("added_date");
+               // String addedDate = resultSet.getString("added_date");
                 String addedTime = resultSet.getString("added_time");
 
                 System.out.println("Task Title: " + taskTitle);
-                System.out.println("Added Date: " + addedDate);
+               // System.out.println("Added Date: " + addedDate);
                 System.out.println("Added Time: " + addedTime);
                 System.out.println("--------------------------------------");
             }

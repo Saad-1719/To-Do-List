@@ -603,6 +603,7 @@ public class Functions
         System.out.print("Enter year: ");
         int year = scanner.nextInt();
         boolean isCorrect=true;
+        boolean isTrue=true;
         int month=0;
         while(isCorrect)
         {
@@ -657,7 +658,7 @@ public class Functions
             }
         }
         int day = 0;
-        while(isCorrect)
+        while(isTrue)
         {
             System.out.print("\nEnter a day to view tasks for that date (1-31): ");
             day = scanner.nextInt();
@@ -665,10 +666,10 @@ public class Functions
             if (day < 1 || day > 31)
             {
                 System.out.println("Invalid date. Please enter a value between 1 and 31.");
-                isCorrect=true;
+                isTrue=true;
             }
             else {
-                isCorrect=false;
+                isTrue=false;
             }
         }
 
