@@ -4,6 +4,7 @@ public class Notes
     private int notesID;
     private String addedDate;
     private String notesDescription;
+    private String addedTime;
     
     public Notes()
     {
@@ -11,8 +12,14 @@ public class Notes
         notesDescription="";
         notesID=0;
         addedDate ="";
+        addedTime="";
     }
-    
+
+    public String getAddedTime()
+    {
+        return addedTime;
+    }
+
     public Notes(int notesID,
                  String notesName, String notesDescription,String addedDate)
     {

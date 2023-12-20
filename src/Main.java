@@ -15,14 +15,10 @@ public class Main
         while (isRunning)
         {
             // Display Main Menu.
-
-//            System.out.println(mintColorCode + "\t\t\t\t\t 🎩 Discover Dotify - Where Tasks Unravel with Elegance! ✨" + whiteColorCode);
-
-//            System.out.println(mintColorCode + "\t\t\t\t\t ＷＥＬＣＯＭＥ ＴＯ ΛＴＬΛＳＭＩＮＤ" + whiteColorCode);
             System.out.println();
-                        System.out.println(mintColorCode + "\t\t\t\t Dotify"+whiteColorCode);
+            System.out.println(mintColorCode + "\t\t\t\t Dotify"+whiteColorCode);
             System.out.println(" ");
-                        System.out.println("🌟Your Personal Productivity Companion! 🌟");
+            System.out.println("🌟Your Personal Productivity Companion! 🌟");
             System.out.println(" ");
             System.out.println("🌟 [1]: Embark on Your Journey - Login");
             System.out.println("🚀 [2]: Join Our Community and Explore");
@@ -121,12 +117,10 @@ public class Main
                     System.out.println(" ");
                     System.out.println(mintColorCode+"< ------------------- A New World, A New Journey ------------------ >"+whiteColorCode);
                     System.out.println(" ");
-//                    Functions.signup();
                     obj.signup();
                     break;
                 case 3:
                     // Update Password.
-//                    Functions.forgetPassword();
                     obj.forgetPassword();
                     break;
                 case 4:

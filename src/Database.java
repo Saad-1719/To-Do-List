@@ -134,7 +134,6 @@ static LocalTime currentTime=LocalTime.now();
             Connection con = Connector.createConnection();
             int fetchId = activeUserId(id);
             LocalDate currentDate = LocalDate.now();
-            //System.out.println("Current Date: " + currentDate);
             String query = "insert into notes(notes_title,notes_description,added_date,userID)values(?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(query);
             //set values of parameter
@@ -192,9 +191,7 @@ static LocalTime currentTime=LocalTime.now();
             PreparedStatement smt = con.prepareStatement(query);
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
-
             LinkedList<Tasks> completedTasks = new LinkedList<>();
-
             while (show.next())
             {
                 int taskID = show.getInt(1);
@@ -216,7 +213,6 @@ static LocalTime currentTime=LocalTime.now();
                 for (Tasks task : completedTasks)
                 {
                     System.out.print(yellowColor);
-//                    System.out.println("Task ID: " + task.getTaskID());
                     System.out.println("Task Title: " + task.getTaskTitle());
                     System.out.println("Completion Date: " + task.getCompletionDate());
                     System.out.println("Completion Time: " + task.getAddedTime());
@@ -246,16 +242,13 @@ static LocalTime currentTime=LocalTime.now();
             PreparedStatement smt = con.prepareStatement(query);
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
-
             LinkedList<Notes> addedNotes = new LinkedList<>();
-
             while (show.next())
             {
                 int notesID = show.getInt(1);
                 String notesTitle = show.getString(2);
                 String notesDescription = show.getString(3);
                 String time = show.getString(4);
-
                 Notes myNotes = new Notes(notesID, notesTitle, notesDescription, time);
                 addedNotes.add(myNotes);
             }
@@ -269,10 +262,10 @@ static LocalTime currentTime=LocalTime.now();
                 for (Notes obj : addedNotes)
                 {
                     System.out.print(yellowColor);
-                   // System.out.println("Notes ID: " + obj.getNotesID());
                     System.out.println("Notes Title: " + obj.getNotesName());
                     System.out.println("Notes Description: " + obj.getNotesDescription());
                     System.out.println("Added Date: " + obj.getAddedDate());
+                    System.out.println("Added Time: "+obj.getAddedTime());
                     System.out.println("--------------------------------------");
                     System.out.print(whiteColorCode);
                 }
@@ -287,7 +280,6 @@ static LocalTime currentTime=LocalTime.now();
             e.printStackTrace();
         }
     }
-
 
     public static boolean deleteNotes(int id)
     {
@@ -393,8 +385,6 @@ static LocalTime currentTime=LocalTime.now();
                 int notesID = show.getInt(1);
                 String notesTitle = show.getString(2);
                 String description = show.getString(3);
-                //String time = show.getString(4);
-
                 Notes notesObj = new Notes(notesID,notesTitle, description);
                 addedNotes.add(notesObj);
                 hasData = true;
@@ -413,8 +403,6 @@ static LocalTime currentTime=LocalTime.now();
                     System.out.println("ID: "+obj.getNotesID());
                     System.out.println("Notes Title: " + obj.getNotesName());
                     System.out.println("Notes Description: " + obj.getNotesDescription());
-                    //System.out.println("Added Date: " + Notes.getCompletionDate());
-                  //  System.out.println("Added Time: "+task.getAddedTime());
                     System.out.println("--------------------------------------");
                     System.out.print(whiteColorCode);
                 }
@@ -430,34 +418,6 @@ static LocalTime currentTime=LocalTime.now();
         return chk;
     }
 
-    //TO UPDATE DATA IN DATABASE
-//    public static boolean updateData(int id, String bar, int completedDays)
-//    {
-//        boolean flag = false;
-//        try
-//        {
-//            Connection con = Connector.createConnection();
-//            String query = "Update activity set bar=? , completeddays=? where number=?";
-//            PreparedStatement pstmt = con.prepareStatement(query);
-//            pstmt.setString(1, bar);
-//            pstmt.setInt(2, completedDays);
-//            pstmt.setInt(3, id);
-//            int count = pstmt.executeUpdate();
-//            if (count > 0)
-//            {
-//                flag = true;
-//            }
-//            con.close();
-//            pstmt.close();
-//        }
-//        catch (SQLException e)
-//        {
-//            throw new RuntimeException(e);
-//        }
-//        return flag;
-//    }
-
-    // to get habit name from habit id
     public static String taskName(int id)
     {
         String name = null;
@@ -482,8 +442,6 @@ static LocalTime currentTime=LocalTime.now();
         }
         return name;
     }
-
-    //to check habit id
     public static boolean checkTaskId(int habitId, int userId)
     {
         boolean hasFound = false;
@@ -532,37 +490,6 @@ static LocalTime currentTime=LocalTime.now();
         }
         return hasFound;
     }
-
-    //to get habit days
-//    public static boolean getTaskCount(UserLogin id)
-//    {
-//        boolean entrychk = false;
-//        try
-//        {
-//            //jdbc code
-//            Connection con = Connector.createConnection();
-//            int fetchId = activeUserId(id);
-//            String count = "Select * from tasks where userID =?";
-//            PreparedStatement pst = con.prepareStatement(count);
-//            pst.setInt(1, fetchId);
-//            ResultSet set = pst.executeQuery();
-//            int total = 0;
-//            while (set.next())
-//            {
-//                total++;
-//            }
-//            //                System.out.println(redColorCode + "Error: You cannot have more than 5 habits at a time." + whiteColorCode);
-//            entrychk = total < 5;
-//            con.close();
-//            pst.close();
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//        return entrychk;
-//    }
-
     //to write data in deleted table
     public static boolean writeTaskHistory(UserLogin id, Tasks data)
     {
@@ -636,11 +563,8 @@ static LocalTime currentTime=LocalTime.now();
 
             while (resultSet.next()) {
                 String taskTitle = resultSet.getString("task_title");
-               // String addedDate = resultSet.getString("added_date");
                 String addedTime = resultSet.getString("added_time");
-
                 System.out.println("Task Title: " + taskTitle);
-               // System.out.println("Added Date: " + addedDate);
                 System.out.println("Added Time: " + addedTime);
                 System.out.println("--------------------------------------");
             }
@@ -652,213 +576,4 @@ static LocalTime currentTime=LocalTime.now();
             e.printStackTrace();
         }
     }
-
-    //to display deleted habit info
-//    public static void displayDeletedHabitInfo(UserLogin info)
-//    {
-//        try
-//        {
-//            Connection con = Connector.createConnection();
-//            int id = activeUserId(info);
-//            String query = "select * from deleted where user_id =?";
-//            PreparedStatement pst = con.prepareStatement(query);
-//            pst.setInt(1, id);
-//            ResultSet show = pst.executeQuery();
-//            boolean hasData = false;
-//            while (show.next())
-//            {
-//                System.out.print(yellowColor);
-//                String habitName = show.getString(2);
-//                String fTime = show.getString(3);
-//                System.out.println("Name: " + habitName);
-//                System.out.println("Deleted Time: " + fTime);
-//                System.out.println("        -----------------------------       ");
-//                System.out.print(whiteColorCode);
-//                hasData = true;
-//            }
-//            if (!hasData)
-//            {
-//                System.out.println(redColorCode + "No deleted history available." + whiteColorCode);
-//            }
-//            con.close();
-//            pst.close();
-//            show.close();
-//        }
-//        catch (SQLException e)
-//        {
-//            throw new RuntimeException(e);
-//        }
-//    }
-    //to show habits of active user
-    //    public static void displayCompletedTaskInfo(UserLogin info)//change from boolean
-    //    {
-    //        try
-    //        {
-    //            //jdbc code
-    //            Connection con = Connector.createConnection();
-    //            int userId;
-    //            userId = activeUserId(info);
-    //            String query = "select * from completed_tasks where userID = ?";
-    //            PreparedStatement smt = con.prepareStatement(query);
-    //            smt.setInt(1,userId);
-    //            ResultSet show = smt.executeQuery();
-    //            boolean hasData = false;
-    //            while (show.next())
-    //            {
-    //                System.out.print(yellowColor);
-    //                int taskID = show.getInt(1);
-    //                String taskTitle = show.getString(2);
-    //                String time = show.getString(3);
-    //                System.out.println("Task ID: " + taskID);
-    //                System.out.println("Task Title: " + taskTitle);
-    //                System.out.println("Completion Date: " + time);
-    //                System.out.println("--------------------------------------");
-    //                System.out.print(whiteColorCode);
-    //                hasData = true;
-    //            }
-    //            if (!hasData)
-    //            {
-    //                System.out.println(redColorCode + "No Data available" + whiteColorCode);
-    //            }
-    //            con.close();
-    //            smt.close();
-    //            show.close();
-    //        } catch (Exception e)
-    //        {
-    //            e.printStackTrace();
-    //        }
-    //    }
-
-    //    // to show data from history
-    //    public static void displayHistory(UserLogin info)
-    //    {
-    //        try
-    //        {
-    //            Connection con = Connector.createConnection();
-    //            int id = activeUserId(info);
-    //            String query = "select * from history where userId =?";
-    //            PreparedStatement pst = con.prepareStatement(query);
-    //            pst.setInt(1, id);
-    //            ResultSet show = pst.executeQuery();
-    //            boolean hasData = false;
-    //            while (show.next())
-    //            {
-    //                System.out.print(yellowColor);
-    //                String habitName = show.getString(2);
-    //                String impression = show.getString(3);
-    //                String fTime = show.getString(4);
-    //                System.out.println("Name: " + habitName);
-    //                System.out.println("Final Impression: " + impression);
-    //                System.out.println("Completed Time: " + fTime);
-    //                System.out.println("        -----------------------------       ");
-    //                System.out.print(whiteColorCode);
-    //                hasData = true;
-    //            }
-    //            if (!hasData)
-    //            {
-    //                System.out.println(redColorCode + "No history available." + whiteColorCode);
-    //            }
-    //            con.close();
-    //            pst.close();
-    //            show.close();
-    //        }
-    //        catch (SQLException e)
-    //        {
-    //            throw new RuntimeException(e);
-    //        }
-    //    }
-    //
-    //    //current habit days
-    //    public static int habitDays(int id)
-    //    {
-    //        int days = 0;
-    //        try
-    //        {
-    //            //jdbc code
-    //            Connection con = Connector.createConnection();
-    //            String query = "SELECT * FROM activity WHERE number = '" + id + "';";
-    //            Statement smt = con.createStatement();
-    //            ResultSet show = smt.executeQuery(query);
-    //            show.next();
-    //            days = show.getInt("completeddays");
-    //            con.close();
-    //            smt.close();
-    //            show.close();
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            e.printStackTrace();
-    //        }
-    //        return days;
-    //    }
-    //
-    //    //to show user info
-    //    public static void showUserInfo(UserLogin info)
-    //    {
-    //
-    //        try
-    //        {
-    //            Connection con = Connector.createConnection();
-    //            String query = "SELECT * FROM user WHERE username = '" + info.getUsername() + "' AND password = '" + info.getPassword() + "';";
-    //            Statement smt = con.createStatement();
-    //            ResultSet rst = smt.executeQuery(query);
-    //            while (rst.next())
-    //            {
-    //                System.out.print(yellowColor);
-    //                String username = rst.getString(2);
-    //                String FirstName = rst.getString(5);
-    //                String LastName = rst.getString(6);
-    //                String Age = rst.getString(7);
-    //                String cTime = rst.getString(4);
-    //                System.out.println("UserName: " + username);
-    //                System.out.println("First Name: " + FirstName);
-    //                System.out.println("Last Name: " + LastName);
-    //                System.out.println("Age: " + Age);
-    //                System.out.println("Created Time: " + cTime);
-    //                System.out.print(whiteColorCode);
-    //            }
-    //            con.close();
-    //            smt.close();
-    //            rst.close();
-    //
-    //        }
-    //        catch (SQLException e)
-    //        {
-    //            throw new RuntimeException(e);
-    //        }
-    //
-    //    }
-
-
-    // to add data from history
-    //    public static boolean writeHistory(UserLogin id, Tasks data)
-    //    {
-    //        boolean flag = false;
-    //        try
-    //        {
-    //            Connection con = Connector.createConnection();
-    //            int fetchId = activeUserId(id);
-    //            PreparedStatement pst;
-    //            String query = "insert into history(name,finalImpression,userId)values(?,?,?)";
-    //            pst = con.prepareStatement(query);
-    //            //set values of parameter
-    //            pst.setString(1, data.getName());
-    //            pst.setString(2, data.getAchievement());
-    //            pst.setInt(3, fetchId);
-    //            int count = pst.executeUpdate();
-    //            if (count > 0)
-    //            {
-    //                flag = true;
-    //            }
-    //            con.close();
-    //            pst.close();
-    //
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            throw new RuntimeException(e);
-    //        }
-    //        return flag;
-    //    }
-
 }
