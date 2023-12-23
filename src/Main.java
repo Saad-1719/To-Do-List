@@ -4,15 +4,10 @@ import static java.lang.System.exit;
 public class Main
 {
     static String brightPurple = "\u001B[38;5;207m";
-    static String brightLemon = "\u001B[38;5;154m";
-    static String brightYellow = "\u001B[38;5;226m";
     static String brightRed = "\u001B[38;5;196m";
-    static String brightGreen = "\u001B[38;5;82m";
-    static String brightPeach = "\u001B[38;5;9m";
     static String brightOrange = "\u001B[38;5;208m";
     static String pureWhite = "\u001B[97m";
     static String partyEmoji = "\uD83C\uDF89"; //🎉
-
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);

@@ -11,7 +11,6 @@ public class Database
 {
     static String brightYellow = "\u001B[38;5;226m";
     static String pureWhite = "\u001B[90m";
-    // static String brightRed = "\u001B[38;5;196m";
     static String brightPeach = "\u001B[38;5;9m";
     static LocalDate currentDate = LocalDate.now();
     static LocalTime currentTime = LocalTime.now();
@@ -90,7 +89,6 @@ public class Database
             while (show.next())
             {
                 String name = show.getString(2);
-               // System.out.println(name);
                 storeTasksNameForSearch.add(name);
             }
             con.close();
