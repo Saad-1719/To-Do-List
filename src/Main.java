@@ -21,7 +21,7 @@ public class Main
             System.out.println("🌟Your Personal Productivity Companion! 🌟");
             System.out.println(" ");
             // Displaying options for the user to choose from
-            System.out.println("[1]: Start Your Journey - Log in");
+            System.out.println("[1]: Log in - Start Your Journey");
             System.out.println("[2]: Join Our Community and Explore");
             System.out.println("[3]: Forgot Your Password? Reset Here");
             System.out.println("[4]: Say Goodbye & Exit the Program");
@@ -66,7 +66,7 @@ public class Main
                             System.out.println("🗒️ [7]: View Notes - Open your Notebook.");
                             System.out.println("🕵️‍♂️ [8]: Search a Task - Begin a Hunt.");
                             System.out.println("🗑️ [9]: Delete a Note - Discard It.");
-                            System.out.println("🚪 [10]: Logout and Finish Your Session.");
+                            System.out.println("🚪 [10]: Logout.");
                             System.out.print("🤔 Enter the number corresponding to your chosen option: ");
 
                             int selection = Functions.getUserChoice(input);

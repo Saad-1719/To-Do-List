@@ -5,7 +5,6 @@ public class Functions
 {
     static Scanner input = new Scanner(System.in);
     static LocalTime currentTime = LocalTime.now();
-
     static String mintColorCode = "\u001B[38;5;85m";
     static String whiteColorCode = "\u001B[97m";
     static String redColorCode = "\u001B[31m";
@@ -42,7 +41,7 @@ public class Functions
         do
         {
             flag = false;
-            System.out.print("Enter Task please: ");
+            System.out.print("Enter Task: ");
             name = input.nextLine().toLowerCase();
             if (name.trim().isEmpty())
             {
@@ -94,21 +93,21 @@ public class Functions
         do
         {
             flag = false;
-            System.out.print("Notes Title please: ");
+            System.out.print("Title: ");
             name = input.nextLine().toLowerCase();
             if (name.trim().isEmpty())
             {
-                System.out.println(redColorCode + "Error: Notes' Title cannot be empty." + whiteColorCode);
+                System.out.println(redColorCode + "Error: Note's Title cannot be empty." + whiteColorCode);
                 flag = true;
             }
             else if (name.trim().length() < 3)
             {
-                System.out.println(redColorCode + "Error: Notes' Title must be at least 3 characters long." + whiteColorCode);
+                System.out.println(redColorCode + "Error: Note's Title must be at least 3 characters long." + whiteColorCode);
                 flag = true;
             }
             else if (name.length() > 50)
             {
-                System.out.println(redColorCode + "Error: Notes' name must be less than 50 characters." + whiteColorCode);
+                System.out.println(redColorCode + "Error: Note's title must be less than 50 characters." + whiteColorCode);
                 flag = true;
             }
         }
@@ -117,16 +116,16 @@ public class Functions
         do
         {
             flag = false;
-            System.out.print("Notes' description please? ");
+            System.out.print("Description: ");
             description = input.nextLine();
             if (description.trim().isEmpty())
             {
-                System.out.println(redColorCode + "Error: Notes' description cannot be empty." + whiteColorCode);
+                System.out.println(redColorCode + "Error: Note's description cannot be empty." + whiteColorCode);
                 flag = true;
             }
             else if (description.trim().length() < 3)
             {
-                System.out.println(redColorCode + "Error: Notes' description must be at least 3 characters long." + whiteColorCode);
+                System.out.println(redColorCode + "Error: Note's description must be at least 3 characters long." + whiteColorCode);
                 flag = true;
             }
         }
@@ -158,7 +157,7 @@ public class Functions
 
     public static void showAddedNotes(UserLogin info)
     {
-        System.out.println(mintColorCode + "\t\t\t\t\t Completed Tasks \n" + whiteColorCode);
+        System.out.println(mintColorCode + "\t\t\t\t\t Notes \n" + whiteColorCode);
         Database.displayWrittenNotes(info);
     }
 
@@ -166,7 +165,7 @@ public class Functions
     public static void markTaskCompleted(UserLogin info)
     {
         System.out.println(mintColorCode + "\t\t\t\t\t Mark Task Complete \n" + whiteColorCode);
-        // to check if the habit exists
+        // to check if the task exists
         boolean isDataExists = Database.displayGeneralTaskInfo(info);
         if (isDataExists)
         {
@@ -187,13 +186,13 @@ public class Functions
                     String habitName = Database.taskName(delId);
                     Tasks data = new Tasks();
                     data.setTaskTitle(habitName);
-                    //to write data into a deleted habit table
+                    //to write data into a task history table
                     Database.writeTaskHistory(info, data);
-                    // to delete habit from general habit table
+                    // to delete task from ongoing task table
                     boolean ckh = Database.deleteData(delId);
                     if (ckh)
                     {
-                        System.out.println(greenColorCode + "task has been marked compelted!" + whiteColorCode);
+                        System.out.println(greenColorCode + "task has been marked completed!" + whiteColorCode);
                     }
                 }
                 else
@@ -214,7 +213,7 @@ public class Functions
     public static void deleteNotes(UserLogin info)
     {
         System.out.println(mintColorCode + "\t\t\t\t\t Delete Notes \n" + whiteColorCode);
-        // to check if the habit exists
+        // to check if notes exists
         boolean isDataExists = Database.displayGeneralNotesInfo(info);
         if (isDataExists)
         {
@@ -222,19 +221,19 @@ public class Functions
             System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
             input.nextLine();
             System.out.println("Which note would you like to delete? ");
-            System.out.print("Enter Notes' ID: ");
+            System.out.print("Enter Note ID: ");
             try
             {
                 delId = input.nextInt();
                 int userID = Database.activeUserId(info);
-                // to check if the habit id is valid
+                // to check if the note id is valid
                 boolean hasHabitFound = Database.checkNotesId(delId, userID);
                 if (hasHabitFound)
                 {
                     boolean ckh = Database.deleteNotes(delId);
                     if (ckh)
                     {
-                        System.out.println(greenColorCode + "Notes has been Deleted!" + whiteColorCode);
+                        System.out.println(greenColorCode + "Note has been Deleted!" + whiteColorCode);
                     }
                 }
                 else
@@ -279,15 +278,15 @@ public class Functions
             input.nextLine();
             LinkedList<String> tasksTitleList = new LinkedList<>();
             int totalTasks = 0;
-            System.out.print("how many tasks you wanna to to randomize it?");
+            System.out.print("how many tasks you wanna to to randomize it? ");
             totalTasks = input.nextInt();
             input.nextLine();
-            for (int i = 0; i < totalTasks; i++)
+            for (int i = 0; i < totalTasks;)
             {
                 do
                 {
                     flag = false;
-                    System.out.print("Task Title please: ");
+                    System.out.print("Task " + (i+1) +" : ");
                     name = input.nextLine().toLowerCase();
                     if (name.trim().isEmpty())
                     {
@@ -297,11 +296,6 @@ public class Functions
                     else if (name.trim().length() < 3)
                     {
                         System.out.println(redColorCode + "Error: Task's Title must be at least 3 characters long." + whiteColorCode);
-                        flag = true;
-                    }
-                    else if (name.length() > 50)
-                    {
-                        System.out.println(redColorCode + "Error: Habit name must be less than 50 characters." + whiteColorCode);
                         flag = true;
                     }
                     //retrieving habit name into array
@@ -315,11 +309,12 @@ public class Functions
                 }
                 while (flag);
                 tasksTitleList.add(name);
+                i++;
             }
             Random rand = new Random();
             int randIndex = rand.nextInt(tasksTitleList.size());
             String randomTask = tasksTitleList.get(randIndex);
-            System.out.println("Task Assigned to you is: " + yellowColor + randomTask + whiteColorCode);
+            System.out.println("Today's target is: " + yellowColor + randomTask + whiteColorCode);
             // to add habit into db
             myTasks.setTaskTitle(randomTask);
             boolean isWritten = Database.writeTaskData(myTasks, info);
@@ -412,7 +407,7 @@ public class Functions
 
 
         // Print the tasks for the selected date
-        System.out.println("\nTasks for " + year + "-" + month + "-" + day + ":");
+        System.out.println(yellowColor+"\nTasks for " + year + "-" + month + "-" + day + ":");
         Database.printTasksForDate(year, month, day, info);
 
 
@@ -422,7 +417,7 @@ public class Functions
     public static void searchTask(UserLogin info)
     {
         String title;
-        System.out.print("Enter task title to search it: ");
+        System.out.print("Enter task to search it: ");
         title=input.nextLine();
         Database.retrieveDataIntoArray(info);
         int index=Collections.binarySearch(Database.storeTasksNameForSearch,title);

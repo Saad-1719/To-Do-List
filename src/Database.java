@@ -1,6 +1,7 @@
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,7 +13,12 @@ public class Database
     static String whiteColorCode = "\u001B[90m";
     static String redColorCode = "\u001B[31m";
     static LocalDate currentDate = LocalDate.now();
-static LocalTime currentTime=LocalTime.now();
+    static LocalTime currentTime=LocalTime.now();
+    // Create a formatter for seconds precision
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    // Format and print the current time with seconds precision
+    static String formattedTime = currentTime.format(formatter);
     // To store habit name of active user
     protected static LinkedList<String> storeTasksName = new LinkedList<>();
     protected static LinkedList<String> storeNotes = new LinkedList<>();
@@ -111,7 +117,7 @@ static LocalTime currentTime=LocalTime.now();
             //set values of parameter
             pstmt.setString(1, info.getTaskTitle());
             pstmt.setDate(2, Date.valueOf(currentDate));
-            pstmt.setString(3, String.valueOf(currentTime));
+            pstmt.setString(3, String.valueOf(formattedTime));
             pstmt.setInt(4, fetchId);
             pstmt.executeUpdate();
             entrychk = true;
@@ -213,7 +219,7 @@ static LocalTime currentTime=LocalTime.now();
                 for (Tasks task : completedTasks)
                 {
                     System.out.print(yellowColor);
-                    System.out.println("Task Title: " + task.getTaskTitle());
+                    System.out.println("Title: " + task.getTaskTitle());
                     System.out.println("Completion Date: " + task.getCompletionDate());
                     System.out.println("Completion Time: " + task.getAddedTime());
                     System.out.println("--------------------------------------");
@@ -262,8 +268,8 @@ static LocalTime currentTime=LocalTime.now();
                 for (Notes obj : addedNotes)
                 {
                     System.out.print(yellowColor);
-                    System.out.println("Notes Title: " + obj.getNotesName());
-                    System.out.println("Notes Description: " + obj.getNotesDescription());
+                    System.out.println("Title: " + obj.getNotesName());
+                    System.out.println("Description: " + obj.getNotesDescription());
                     System.out.println("Added Date: " + obj.getAddedDate());
                     System.out.println("Added Time: "+obj.getAddedTime());
                     System.out.println("--------------------------------------");
@@ -346,8 +352,8 @@ static LocalTime currentTime=LocalTime.now();
                 {
 
                     System.out.print(yellowColor);
-                    System.out.println("Task ID: "+task.getTaskID());
-                    System.out.println("Task Title: " + task.getTaskTitle());
+                    System.out.println("ID: "+task.getTaskID());
+                    System.out.println("Title: " + task.getTaskTitle());
                     System.out.println("Added Date: " + task.getCompletionDate());
                     System.out.println("Added Time: "+task.getAddedTime());
                     System.out.println("--------------------------------------");
@@ -401,8 +407,8 @@ static LocalTime currentTime=LocalTime.now();
 
                     System.out.print(yellowColor);
                     System.out.println("ID: "+obj.getNotesID());
-                    System.out.println("Notes Title: " + obj.getNotesName());
-                    System.out.println("Notes Description: " + obj.getNotesDescription());
+                    System.out.println("Title: " + obj.getNotesName());
+                    System.out.println("Description: " + obj.getNotesDescription());
                     System.out.println("--------------------------------------");
                     System.out.print(whiteColorCode);
                 }
@@ -505,7 +511,7 @@ static LocalTime currentTime=LocalTime.now();
             //set values of parameter
             pst.setString(1, data.getTaskTitle());
             pst.setDate(2, Date.valueOf(currentDate));
-            pst.setString(3,String.valueOf(currentTime));
+            pst.setString(3,String.valueOf(formattedTime));
             pst.setInt(4, fetchId);
             int count = pst.executeUpdate();
             if (count > 0)
@@ -564,9 +570,11 @@ static LocalTime currentTime=LocalTime.now();
             while (resultSet.next()) {
                 String taskTitle = resultSet.getString("task_title");
                 String addedTime = resultSet.getString("added_time");
-                System.out.println("Task Title: " + taskTitle);
+                System.out.print(yellowColor);
+                System.out.println("Title: " + taskTitle);
                 System.out.println("Added Time: " + addedTime);
                 System.out.println("--------------------------------------");
+                System.out.print(whiteColorCode);
             }
 
             con.close();
