@@ -17,11 +17,6 @@ private String addedTime;
         return addedTime;
     }
 
-    public void setAddedTime(String addedTime)
-    {
-        this.addedTime = addedTime;
-    }
-
     public Tasks(int taskID, String taskTitle, String completionDate)
     {
         this.taskTitle = taskTitle;

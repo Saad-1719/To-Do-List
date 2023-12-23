@@ -9,20 +9,20 @@ import java.util.LinkedList;
 
 public class Database
 {
-    static String yellowColor = "\u001B[93m";
-    static String whiteColorCode = "\u001B[90m";
-    static String redColorCode = "\u001B[31m";
+    static String brightYellow = "\u001B[38;5;226m";
+    static String pureWhite = "\u001B[90m";
+    // static String brightRed = "\u001B[38;5;196m";
+    static String brightPeach = "\u001B[38;5;9m";
     static LocalDate currentDate = LocalDate.now();
-    static LocalTime currentTime=LocalTime.now();
+    static LocalTime currentTime = LocalTime.now();
     // Create a formatter for seconds precision
     static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
     // Format and print the current time with seconds precision
     static String formattedTime = currentTime.format(formatter);
-    // To store habit name of active user
     protected static LinkedList<String> storeTasksName = new LinkedList<>();
     protected static LinkedList<String> storeNotes = new LinkedList<>();
     protected static ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
+
     //TO obtain id of active user
     public static int activeUserId(UserLogin info)
     {
@@ -90,6 +90,7 @@ public class Database
             while (show.next())
             {
                 String name = show.getString(2);
+               // System.out.println(name);
                 storeTasksNameForSearch.add(name);
             }
             con.close();
@@ -103,8 +104,7 @@ public class Database
     }
 
     //   TO WRITE DATA INTO DATABASE
-
-    public static boolean writeTaskData(Tasks info, UserLogin id)
+    public static boolean addTaskIntoDatabase(Tasks info, UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -131,7 +131,7 @@ public class Database
         return entrychk;
     }
 
-    public static boolean writeNotesData(Notes obj, UserLogin id)
+    public static boolean addNoteIntoDatabase(Notes obj, UserLogin id)
     {
         boolean entrychk = false;
         try
@@ -160,7 +160,7 @@ public class Database
     }
 
     //TO REMOVE DATA FROM DATABASE
-    public static boolean deleteData(int id)
+    public static boolean deleteTask(int id)
     {
         boolean flag = false;
         try
@@ -186,7 +186,8 @@ public class Database
         }
         return flag;
     }
-    public static void displayCompletedTaskInfo(UserLogin info)
+
+    public static void displayAccomplishedTasks(UserLogin info)
     {
         try
         {
@@ -205,25 +206,25 @@ public class Database
                 String date = show.getString(3);
                 String time = show.getString(4);
 
-                Tasks completedTaskObj = new Tasks(taskID,taskTitle, date,time);
+                Tasks completedTaskObj = new Tasks(taskID, taskTitle, date, time);
                 completedTasks.add(completedTaskObj);
             }
 
             if (completedTasks.isEmpty())
             {
-                System.out.println(redColorCode + "No Data available" + whiteColorCode);
+                System.out.println(brightPeach + "You didn't mark any task complete" + pureWhite);
             }
             else
             {
                 Collections.sort(completedTasks, Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : completedTasks)
                 {
-                    System.out.print(yellowColor);
+                    System.out.print(brightYellow);
                     System.out.println("Title: " + task.getTaskTitle());
                     System.out.println("Completion Date: " + task.getCompletionDate());
                     System.out.println("Completion Time: " + task.getAddedTime());
-                    System.out.println("--------------------------------------");
-                    System.out.print(whiteColorCode);
+                    System.out.println("< --------------------------------------------------------- >");
+                    System.out.print(pureWhite);
                 }
             }
 
@@ -261,19 +262,18 @@ public class Database
 
             if (addedNotes.isEmpty())
             {
-                System.out.println(redColorCode + "No Data available" + whiteColorCode);
+                System.out.println(brightPeach + "You didn't add any note" + pureWhite);
             }
             else
             {
                 for (Notes obj : addedNotes)
                 {
-                    System.out.print(yellowColor);
+                    System.out.print(brightYellow);
                     System.out.println("Title: " + obj.getNotesName());
                     System.out.println("Description: " + obj.getNotesDescription());
                     System.out.println("Added Date: " + obj.getAddedDate());
-                    System.out.println("Added Time: "+obj.getAddedTime());
-                    System.out.println("--------------------------------------");
-                    System.out.print(whiteColorCode);
+                    System.out.println("< --------------------------------------------------------- >");
+                    System.out.print(pureWhite);
                 }
             }
 
@@ -313,8 +313,9 @@ public class Database
         }
         return flag;
     }
+
     // to display data for other options
-    public static boolean displayGeneralTaskInfo(UserLogin info)
+    public static boolean displayTasks(UserLogin info)
     {
         boolean chk = true;
         try
@@ -337,27 +338,28 @@ public class Database
                 String date = show.getString(3);
                 String time = show.getString(4);
 
-                Tasks ongoingTaskObj = new Tasks(taskID,taskTitle, date,time);
+                Tasks ongoingTaskObj = new Tasks(taskID, taskTitle, date, time);
                 ongoingTasks.add(ongoingTaskObj);
                 hasData = true;
             }
             if (!hasData)
             {
-                System.out.println(redColorCode + "No Data available" + whiteColorCode);
+                System.out.println(brightPeach + "No Data available" + pureWhite);
                 chk = false;
             }
-            else {
+            else
+            {
                 Collections.sort(ongoingTasks, Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : ongoingTasks)
                 {
 
-                    System.out.print(yellowColor);
-                    System.out.println("ID: "+task.getTaskID());
+                    System.out.print(brightYellow);
+                    System.out.println("ID: " + task.getTaskID());
                     System.out.println("Title: " + task.getTaskTitle());
                     System.out.println("Added Date: " + task.getCompletionDate());
-                    System.out.println("Added Time: "+task.getAddedTime());
-                    System.out.println("--------------------------------------");
-                    System.out.print(whiteColorCode);
+                    System.out.println("Added Time: " + task.getAddedTime());
+                    System.out.println("< --------------------------------------------------------- >");
+                    System.out.print(pureWhite);
                 }
             }
             con.close();
@@ -370,7 +372,50 @@ public class Database
         }
         return chk;
     }
-    public static boolean displayGeneralNotesInfo(UserLogin info)
+    public static boolean isTaskExists(UserLogin info)
+    {
+        boolean chk = true;
+        try
+        {
+            //jdbc code
+            Connection con = Connector.createConnection();
+            int userId;
+            userId = activeUserId(info);
+            String query = "select * from tasks where userID = ?";
+            PreparedStatement smt = con.prepareStatement(query);
+            smt.setInt(1, userId);
+            ResultSet show = smt.executeQuery();
+            LinkedList<Tasks> ongoingTasks = new LinkedList<>();
+
+            boolean hasData = false;
+            while (show.next())
+            {
+                int taskID = show.getInt(1);
+                String taskTitle = show.getString(2);
+                String date = show.getString(3);
+                String time = show.getString(4);
+
+                Tasks ongoingTaskObj = new Tasks(taskID, taskTitle, date, time);
+                ongoingTasks.add(ongoingTaskObj);
+                hasData = true;
+            }
+            if (!hasData)
+            {
+                System.out.println(brightPeach + "You haven't any accomplishment till now :/" + pureWhite);
+                chk = false;
+            }
+            con.close();
+            smt.close();
+            show.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return chk;
+    }
+
+    public static boolean displayNotes(UserLogin info)
     {
         boolean chk = true;
         try
@@ -391,26 +436,27 @@ public class Database
                 int notesID = show.getInt(1);
                 String notesTitle = show.getString(2);
                 String description = show.getString(3);
-                Notes notesObj = new Notes(notesID,notesTitle, description);
+                Notes notesObj = new Notes(notesID, notesTitle, description);
                 addedNotes.add(notesObj);
                 hasData = true;
             }
             if (!hasData)
             {
-                System.out.println(redColorCode + "No Data available" + whiteColorCode);
+                System.out.println(brightPeach + "No Data available" + pureWhite);
                 chk = false;
             }
-            else {
+            else
+            {
                 Collections.sort(addedNotes, Comparator.comparing(Notes::getNotesID).reversed());
                 for (Notes obj : addedNotes)
                 {
 
-                    System.out.print(yellowColor);
-                    System.out.println("ID: "+obj.getNotesID());
+                    System.out.print(brightYellow);
+                    System.out.println("ID: " + obj.getNotesID());
                     System.out.println("Title: " + obj.getNotesName());
                     System.out.println("Description: " + obj.getNotesDescription());
-                    System.out.println("--------------------------------------");
-                    System.out.print(whiteColorCode);
+                    System.out.println("< --------------------------------------------------------- >");
+                    System.out.print(pureWhite);
                 }
             }
             con.close();
@@ -448,6 +494,7 @@ public class Database
         }
         return name;
     }
+
     public static boolean checkTaskId(int habitId, int userId)
     {
         boolean hasFound = false;
@@ -472,6 +519,7 @@ public class Database
         }
         return hasFound;
     }
+
     public static boolean checkNotesId(int NotesId, int userId)
     {
         boolean hasFound = false;
@@ -496,8 +544,9 @@ public class Database
         }
         return hasFound;
     }
+
     //to write data in deleted table
-    public static boolean writeTaskHistory(UserLogin id, Tasks data)
+    public static void writeAccomplishedTasks(UserLogin id, Tasks data)
     {
         boolean flag = false;
         try
@@ -511,7 +560,7 @@ public class Database
             //set values of parameter
             pst.setString(1, data.getTaskTitle());
             pst.setDate(2, Date.valueOf(currentDate));
-            pst.setString(3,String.valueOf(formattedTime));
+            pst.setString(3, String.valueOf(formattedTime));
             pst.setInt(4, fetchId);
             int count = pst.executeUpdate();
             if (count > 0)
@@ -526,22 +575,24 @@ public class Database
         {
             throw new RuntimeException(e);
         }
-        return flag;
     }
 
-    public static void displayGeneralTaskInfoforCalendar(int year, int month, boolean[] hasDataForDay, UserLogin info) {
-        try {
+    public static void divideTasksAccordingToDates(int year, int month, boolean[] hasDataForDay, UserLogin info)
+    {
+        try
+        {
             Connection con = Connector.createConnection();
             String query = "SELECT added_date FROM tasks WHERE userID=? and YEAR(added_date) = ? AND MONTH(added_date) = ? ";
             PreparedStatement smt = con.prepareStatement(query);
-            int getId=activeUserId(info);
+            int getId = activeUserId(info);
             smt.setInt(2, year);
             smt.setInt(3, month);
             smt.setInt(1, getId);
 
             ResultSet resultSet = smt.executeQuery();
 
-            while (resultSet.next()) {
+            while (resultSet.next())
+            {
                 String addedDate = resultSet.getString("added_date");
                 int day = Integer.parseInt(addedDate.split("-")[2]); // Assuming date format is "YYYY-MM-DD"
                 hasDataForDay[day] = true;
@@ -550,12 +601,17 @@ public class Database
             con.close();
             smt.close();
             resultSet.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
-    public static void printTasksForDate(int year, int month, int day, UserLogin info) {
-        try {
+
+    public static void printTasksForDate(int year, int month, int day, UserLogin info)
+    {
+        try
+        {
             Connection con = Connector.createConnection();
             String query = "SELECT * FROM tasks WHERE userID=? AND YEAR(added_date) = ? AND MONTH(added_date) = ? AND DAY(added_date) = ?";
             PreparedStatement smt = con.prepareStatement(query);
@@ -567,20 +623,23 @@ public class Database
 
             ResultSet resultSet = smt.executeQuery();
 
-            while (resultSet.next()) {
+            while (resultSet.next())
+            {
                 String taskTitle = resultSet.getString("task_title");
                 String addedTime = resultSet.getString("added_time");
-                System.out.print(yellowColor);
+                System.out.print(brightYellow);
                 System.out.println("Title: " + taskTitle);
                 System.out.println("Added Time: " + addedTime);
-                System.out.println("--------------------------------------");
-                System.out.print(whiteColorCode);
+                System.out.println("< --------------------------------------------------------- >");
+                System.out.print(pureWhite);
             }
 
             con.close();
             smt.close();
             resultSet.close();
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
     }
