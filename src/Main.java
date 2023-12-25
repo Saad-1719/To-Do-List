@@ -5,21 +5,22 @@ public class Main
 {
     static String brightPurple = "\u001B[38;5;207m";
     static String brightRed = "\u001B[38;5;196m";
-    static String brightOrange = "\u001B[38;5;208m";
+    static String brightOrange = "\u001B[38;5;45m";
     static String pureWhite = "\u001B[97m";
     static String partyEmoji = "\uD83C\uDF89"; //🎉
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
         LoginSignupHandler obj = new LoginSignupHandler();
-        boolean isRunning = true;
-        while (isRunning)
+        while (true)
         {
             // Display Main Menu.
             System.out.println();
-            System.out.println(brightOrange + "\t\t\t\t\t Ta-Done " + pureWhite);
+    //        System.out.println(brightOrange + "\t\t\t\t\t \uD83C\uDD83\uD83C\uDD70-\uD83C\uDD73\uD83C\uDD7E\uD83C\uDD7D\uD83C\uDD74 " + pureWhite);
+            System.out.println(brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE " + pureWhite);
+            //System.out.println(brightOrange + "\t\t\t\t\t  " + pureWhite);
             System.out.println(" ");
-            System.out.println(brightPurple + "\t\t\t  🌟From to-do to ta-da!🌟" + pureWhite);
+            System.out.println(brightPurple + "\t\t\t  🌟 ᖴᖇOᗰ TO-ᗪO TO Tᗩ-ᗪᗩ!🌟" + pureWhite);
             System.out.println(" ");
             // Displaying options for the user to choose from
             System.out.println("[1]: Log in");
@@ -56,7 +57,7 @@ public class Main
                         {
                             // Menu Within After Login.
                             System.out.println(" ");
-                            System.out.println(brightOrange + "\t\t\t\t\t Ta-Done\n" + pureWhite);
+                            System.out.println(brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE \n" + pureWhite);
                             // Displaying options for the user to choose from in a task-related context
                             System.out.println("📝 [1]: Start a New Task.");
                             System.out.println("🌟 [2]: Try something new with a Random Task.");
@@ -132,7 +133,6 @@ public class Main
                     break;
                 case 4:
                     // Depart and Exit.
-                    isRunning = false;
                     System.out.println(" ");
                     System.out.println(brightPurple + "See you soon! " + pureWhite);
                     exit(0);
@@ -142,6 +142,6 @@ public class Main
                     break;
             }
         }
-        input.close();
+        //input.close();
     }
 }
