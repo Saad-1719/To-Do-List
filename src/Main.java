@@ -3,11 +3,11 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 public class Main
 {
-    static String brightPurple = "\u001B[38;5;207m";
-    static String brightRed = "\u001B[38;5;196m";
-    static String brightOrange = "\u001B[38;5;45m";
-    static String pureWhite = "\u001B[97m";
-    static String partyEmoji = "\uD83C\uDF89"; //🎉
+    static final String brightPurple = "\u001B[38;5;207m";
+    static final String brightRed = "\u001B[38;5;196m";
+    static final String brightOrange = "\u001B[38;5;45m";
+    static final String pureWhite = "\u001B[97m";
+    static final String partyEmoji = "\uD83C\uDF89"; //🎉
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);

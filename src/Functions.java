@@ -3,14 +3,14 @@ import java.util.*;
 
 public class Functions
 {
-    static Scanner input = new Scanner(System.in);
-    static LocalTime currentTime = LocalTime.now();
-    static String brightPurple = "\u001B[38;5;207m";
-    static String pureWhite = "\u001B[97m";
-    static String brightRed = "\u001B[38;5;196m";
-    static String brightGreen = "\u001B[38;5;82m";
-    static String brightYellow = "\u001B[38;5;226m";
-    static String brightPeach = "\u001B[38;5;9m";
+    static final Scanner input = new Scanner(System.in);
+    static final LocalTime currentTime = LocalTime.now();
+    static final String brightPurple = "\u001B[38;5;207m";
+    static final String pureWhite = "\u001B[97m";
+    static final String brightRed = "\u001B[38;5;196m";
+    static final String brightGreen = "\u001B[38;5;82m";
+    static final String brightYellow = "\u001B[38;5;226m";
+    static final String brightPeach = "\u001B[38;5;9m";
 
     // User Choice for both main loops.
     public static int getUserChoice(Scanner input)
@@ -278,6 +278,7 @@ public class Functions
         }
     }
 
+    @SuppressWarnings("DuplicatedCode")
     public static void addRandomTask(UserLogin info)
     {
         String name;
@@ -290,7 +291,7 @@ public class Functions
         {
             input.nextLine();
             LinkedList<String> tasksTitleList = new LinkedList<>();
-            int totalTasks = 0;
+            int totalTasks;
 
             System.out.print("How many tasks you wanna randomize? ");
             totalTasks = input.nextInt();
@@ -357,6 +358,7 @@ public class Functions
         }
     }
 
+    @SuppressWarnings("MagicConstant")
     public static void viewCalendar(UserLogin info)
     {
         Scanner scanner = new Scanner(System.in);
@@ -462,8 +464,10 @@ public class Functions
 
     public static void searchTask(UserLogin info)
     {
-        System.out.println(brightPurple + "\t\t\t\t\t Search a Task \n" + pureWhite);
 
+        System.out.println(brightPurple + "\t\t\t\t\t Search a Task \n" + pureWhite);
+        System.out.println(brightPeach + "Hit Enter if nothing appears" + pureWhite);
+input.nextLine();
         String title;
         System.out.print("Task: ");
         title = input.nextLine();

@@ -60,6 +60,6 @@ public class SignUpIntoDB
             e.printStackTrace();
             System.out.println("An error occurred :" + e.getMessage());
         }
-        return flag;
+        return true;
     }
 }

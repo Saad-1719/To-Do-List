@@ -22,11 +22,11 @@ public class LoginSignupHandler {
         this.lastName = lastName;
         this.age = age;
     }
-     Scanner input = new Scanner(System.in);
-     String brightPurple = "\u001B[38;5;207m";
-     String pureWhite = "\u001B[97m";
-     String brightRed = "\u001B[38;5;196m";
-     String brightGreen = "\u001B[38;5;82m";
+     final Scanner input = new Scanner(System.in);
+     final String brightPurple = "\u001B[38;5;207m";
+     final String pureWhite = "\u001B[97m";
+     final String brightRed = "\u001B[38;5;196m";
+     final String brightGreen = "\u001B[38;5;82m";
     public void createUserName()
     {
         input.nextLine();
@@ -241,8 +241,8 @@ public class LoginSignupHandler {
     {
         try
         {
-            System.out.print(brightPurple + "\t\t\t\t\t Forget Password \n" + pureWhite);
-            System.out.print(brightPurple + "\t\t\t\t\t We'll help you recover \n" + pureWhite);
+            System.out.print(brightPurple + "\n\t\t\t\t\t Forget Password \n" + pureWhite);
+            System.out.print(brightPurple + "\t\t\t\t We'll help you recover \n" + pureWhite);
             System.out.println(" ");
             System.out.println(brightRed + "Hit Enter to nothing appears" + pureWhite);
             input.nextLine();
@@ -289,6 +289,7 @@ public class LoginSignupHandler {
         boolean isMatched = password.matchInfo(username, firstName, lastName, age);
         if (isMatched)
         {
+            System.out.println(" ");
             System.out.println(brightGreen + "Your memory is commendable :)" + pureWhite);
             System.out.println(brightGreen + "Credentials have been matched!" + pureWhite);
             System.out.println(" ");
@@ -299,18 +300,18 @@ public class LoginSignupHandler {
             boolean isUpdated = password.updatePassword(username, createPassword, firstName, lastName, age);
             if (isUpdated)
             {
-                System.out.println(brightGreen + "Congratulations, Password has been updated!" + Main.partyEmoji+ pureWhite);
+                System.out.println("\n"+brightGreen + "Congratulations, Password has been updated!" + Main.partyEmoji+ pureWhite);
                 System.out.println(" ");
             }
             else
             {
-                System.out.println(brightRed + "Error: Password has not been updated." + pureWhite);
+                System.out.println("\n"+brightRed + "Error: Password has not been updated." + pureWhite);
                 System.out.println(" ");
             }
         }
         else
         {
-            System.out.println(brightRed + "Error: There's a clash with your credentials :(" + pureWhite);
+            System.out.println("\n"+brightRed + "Error: There's a clash with your credentials :(" + pureWhite);
             System.out.println(" ");
         }
     }

@@ -1,6 +1,6 @@
 public class UserLogin
 {
-    protected String username;
+    protected final String username;
     protected String password;
 
     public UserLogin(String username, String password)

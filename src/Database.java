@@ -7,20 +7,21 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 
+@SuppressWarnings({"ALL", "DuplicatedCode"})
 public class Database
 {
-    static String brightYellow = "\u001B[38;5;226m";
-    static String pureWhite = "\u001B[90m";
-    static String brightPeach = "\u001B[38;5;9m";
-    static LocalDate currentDate = LocalDate.now();
-    static LocalTime currentTime = LocalTime.now();
+    static final String brightYellow = "\u001B[38;5;226m";
+    static final String pureWhite = "\u001B[90m";
+    static final String brightPeach = "\u001B[38;5;9m";
+    static final LocalDate currentDate = LocalDate.now();
+    static final LocalTime currentTime = LocalTime.now();
     // Create a formatter for seconds precision
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     // Format and print the current time with seconds precision
-    static String formattedTime = currentTime.format(formatter);
-    protected static LinkedList<String> storeTasksName = new LinkedList<>();
+    static final String formattedTime = currentTime.format(formatter);
+    protected static final LinkedList<String> storeTasksName = new LinkedList<>();
     protected static LinkedList<String> storeNotes = new LinkedList<>();
-    protected static ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
+    protected static final ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
 
     //TO obtain id of active user
     public static int activeUserId(UserLogin info)
@@ -214,7 +215,7 @@ public class Database
             }
             else
             {
-                Collections.sort(completedTasks, Comparator.comparing(Tasks::getTaskID).reversed());
+                completedTasks.sort(Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : completedTasks)
                 {
                     System.out.print(brightYellow);
@@ -347,7 +348,7 @@ public class Database
             }
             else
             {
-                Collections.sort(ongoingTasks, Comparator.comparing(Tasks::getTaskID).reversed());
+                ongoingTasks.sort(Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : ongoingTasks)
                 {
 
@@ -445,7 +446,7 @@ public class Database
             }
             else
             {
-                Collections.sort(addedNotes, Comparator.comparing(Notes::getNotesID).reversed());
+                addedNotes.sort(Comparator.comparing(Notes::getNotesID).reversed());
                 for (Notes obj : addedNotes)
                 {
 
@@ -563,7 +564,6 @@ public class Database
             int count = pst.executeUpdate();
             if (count > 0)
             {
-                flag = true;
             }
             con.close();
             pst.close();
