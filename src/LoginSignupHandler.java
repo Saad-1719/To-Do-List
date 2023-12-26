@@ -23,11 +23,10 @@ public class LoginSignupHandler {
         this.age = age;
     }
      Scanner input = new Scanner(System.in);
-     String mintColorCode = "\u001B[38;5;85m";
-     String whiteColorCode = "\u001B[97m";
-     String redColorCode = "\u001B[31m";
-     String greenColorCode = "\u001B[92m";
-     String yellowColor = "\u001B[93m";
+     String brightPurple = "\u001B[38;5;207m";
+     String pureWhite = "\u001B[97m";
+     String brightRed = "\u001B[38;5;196m";
+     String brightGreen = "\u001B[38;5;82m";
     public void createUserName()
     {
         input.nextLine();
@@ -37,17 +36,17 @@ public class LoginSignupHandler {
             username = input.nextLine().toLowerCase();
             if (username.length() < 5)
             {
-                System.out.println(redColorCode + "Error: Username must be atleast 5 characters long." + whiteColorCode);
+                System.out.println(brightRed + "Error: Username must be atleast 5 characters long." + pureWhite);
                 continue;
             }
             else if (username.contains(" "))
             {
-                System.out.println(redColorCode + "Error: Username cannot contain spaces." + whiteColorCode);
+                System.out.println(brightRed + "Error: Username cannot contain spaces." + pureWhite);
                 continue;
             }
             else if (username.length() > 20)
             {
-                System.out.println(redColorCode + "Error: Username must be less than 20 characters." + whiteColorCode);
+                System.out.println(brightRed + "Error: Username must be less than 20 characters." + pureWhite);
                 continue;
             }
             // to check if username has letters
@@ -61,18 +60,18 @@ public class LoginSignupHandler {
             }
             if (!hasLetters)
             {
-                System.out.println(redColorCode + "Error: Username does not contain letters and digits." + whiteColorCode);
+                System.out.println(brightRed + "Error: Username does not contain letters and digits." + pureWhite);
                 continue;
             }
             UserSignup info = new UserSignup(username);
             boolean isAvailable = SignUpIntoDB.userCheck(info);
             if (!isAvailable)
             {
-                System.out.println(redColorCode + "Error: Username Unavailable." + whiteColorCode);
+                System.out.println(brightRed + "Error: That doesn't seem to be a unique username." + pureWhite);
             }
             else
             {
-                System.out.println(greenColorCode + "Username Added!" + whiteColorCode);
+                System.out.println(brightGreen + "Username Added!" + pureWhite);
                 break;
             }
         }
@@ -87,15 +86,15 @@ public class LoginSignupHandler {
             createPassword = input.nextLine();
             if (createPassword.length() < 5)
             {
-                System.out.println(redColorCode + "Error: Password must be a minimum of 5 characters." + whiteColorCode);
+                System.out.println(brightRed + "Error: Password must be a minimum of 5 characters." + pureWhite);
             }
             else if (createPassword.length() > 10)
             {
-                System.out.println(redColorCode + "Error: Password must be a maximum of 10 characters." + whiteColorCode);
+                System.out.println(brightRed + "Error: Password must be a maximum of 10 characters." + pureWhite);
             }
             else if (createPassword.contains(" "))
             {
-                System.out.println(redColorCode + "Error: Password cannot contain spaces." + whiteColorCode);
+                System.out.println(brightRed + "Error: Password cannot contain spaces." + pureWhite);
             }
             else
             {
@@ -108,11 +107,11 @@ public class LoginSignupHandler {
                 }
                 else
                 {
-                    System.out.println(redColorCode + "Error: Password has not been confirmed." + whiteColorCode);
+                    System.out.println(brightRed + "Error: Password has not been confirmed." + pureWhite);
                 }
             }
         }
-        System.out.println(greenColorCode + "Password Added!" + whiteColorCode);
+        System.out.println(brightGreen + "Hurrah, Password Added!!!" + pureWhite);
     }
     // Creating New First Name.
     public void introduceFirstName()
@@ -124,24 +123,24 @@ public class LoginSignupHandler {
             firstName = input.nextLine().trim().toLowerCase();
             if (firstName.length() < 3)
             {
-                System.out.println(redColorCode + "Error: First Name must be atleast 3 characters long." + whiteColorCode);
+                System.out.println(brightRed + "Error: First Name must be atleast 3 characters long." + pureWhite);
             }
             else if (firstName.length() > 30)
             {
-                System.out.println(redColorCode + "Error: First Name must be less than 30 characters." + whiteColorCode);
+                System.out.println(brightRed + "Error: First Name must be less than 30 characters." + pureWhite);
             }
             else if (firstName.matches(".*[^a-zA-Z0-9\\s].*"))
             {
-                System.out.println(redColorCode + "Error: First name contains special characters." + whiteColorCode);
+                System.out.println(brightRed + "Error: First name contains special characters." + pureWhite);
             }
             else if (firstName.matches(".*\\d+.*"))
             {
-                System.out.println(redColorCode + "Error: First name contains digits." + whiteColorCode);
+                System.out.println(brightRed + "Error: First name contains digits." + pureWhite);
             }
             else
             {
                 flag = false;
-                System.out.println(greenColorCode + "First Name Added!" + whiteColorCode);
+                System.out.println(brightGreen + "Nice First Name ;)" + pureWhite);
             }
         }
     }
@@ -156,24 +155,24 @@ public class LoginSignupHandler {
             lastName = input.nextLine().trim().toLowerCase();
             if (lastName.length() < 3)
             {
-                System.out.println(redColorCode + "Error: Last Name must be atleast 3 characters long." + whiteColorCode);
+                System.out.println(brightRed + "Error: Last Name must be atleast 3 characters long." + pureWhite);
             }
             else if (lastName.length() > 30)
             {
-                System.out.println(redColorCode + "Error: Last Name must be less than 30 characters." + whiteColorCode);
+                System.out.println(brightRed + "Error: Last Name must be less than 30 characters." + pureWhite);
             }
             else if (lastName.matches(".*[^a-zA-Z0-9\\s].*"))
             {
-                System.out.println(redColorCode + "Error: Last name contains special characters." + whiteColorCode);
+                System.out.println(brightRed + "Error: Last name contains special characters." + pureWhite);
             }
             else if (lastName.matches(".*\\d+.*"))
             {
-                System.out.println(redColorCode + "Error: Last name contains digits." + whiteColorCode);
+                System.out.println(brightRed + "Error: Last name contains digits." + pureWhite);
             }
             else
             {
                 flag = false;
-                System.out.println(greenColorCode + "Last Name Added!" + whiteColorCode);
+                System.out.println(brightGreen + "Charming Last Name!" + pureWhite);
             }
         }
     }
@@ -191,17 +190,17 @@ public class LoginSignupHandler {
                 input.nextLine();
                 if (age < 5 || age > 100)
                 {
-                    System.out.println(redColorCode + "Error: A valid age must be entered." + whiteColorCode);
+                    System.out.println(brightRed + "Error: A valid age must be entered." + pureWhite);
                 }
                 else
                 {
                     flag = false;
-                    System.out.println(greenColorCode + "Age Added!" + whiteColorCode);
+                    System.out.println(brightGreen + "Age Added!" + pureWhite);
                 }
             }
             catch (InputMismatchException e)
             {
-                System.out.println(redColorCode + "Error: The input is out of bounds." + whiteColorCode);
+                System.out.println(brightRed + "Oops! That doesn't seem to be a valid path." + pureWhite);
                 input.nextLine();
             }
         }
@@ -210,7 +209,7 @@ public class LoginSignupHandler {
     //signup function to add new user
     public void signup()
     {
-        System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
+        System.out.println(brightRed + "Hit Enter if nothing appears" + pureWhite);
         //function to create username
         createUserName();
         //function to introduce password
@@ -228,12 +227,12 @@ public class LoginSignupHandler {
         if (isSignUp)
         {
             System.out.println(" ");
-            System.out.println(greenColorCode + "Completed, Thank you for Signing up! :)" + whiteColorCode);
+            System.out.println(brightGreen + "Completed, Thank you for Signing up! :)" + pureWhite);
             Main.main(new String[]{});
         }
         else
         {
-            System.out.println(redColorCode + "Error: Something went wrong :(" + whiteColorCode);
+            System.out.println(brightRed + "Error: Something went wrong :(" + pureWhite);
         }
     }
     
@@ -242,10 +241,10 @@ public class LoginSignupHandler {
     {
         try
         {
-            System.out.print(mintColorCode + "\t\t\t\t\t Forget Password \n" + whiteColorCode);
-            System.out.print(mintColorCode + "\t\t\t\t\t We'll help you recover \n" + whiteColorCode);
+            System.out.print(brightPurple + "\t\t\t\t\t Forget Password \n" + pureWhite);
+            System.out.print(brightPurple + "\t\t\t\t\t We'll help you recover \n" + pureWhite);
             System.out.println(" ");
-            System.out.println(redColorCode + "Press Enter to continue if no input option appears" + whiteColorCode);
+            System.out.println(brightRed + "Hit Enter to nothing appears" + pureWhite);
             input.nextLine();
             do
             {
@@ -253,7 +252,7 @@ public class LoginSignupHandler {
                 username = input.nextLine().toLowerCase();
                 if (username.isEmpty())
                 {
-                    System.out.println(redColorCode + "Error: Input Field mustn't be empty." + whiteColorCode);
+                    System.out.println(brightRed + "Error: Input Field mustn't be empty." + pureWhite);
                 }
             }
             while (username.isEmpty());
@@ -263,7 +262,7 @@ public class LoginSignupHandler {
                 firstName = input.nextLine().toLowerCase();
                 if (firstName.isEmpty())
                 {
-                    System.out.println(redColorCode + "Error: Input Field mustn't be empty." + whiteColorCode);
+                    System.out.println(brightRed + "Error: Input Field mustn't be empty." + pureWhite);
                 }
             }
             while (firstName.isEmpty());
@@ -273,7 +272,7 @@ public class LoginSignupHandler {
                 lastName = input.nextLine().toLowerCase();
                 if (lastName.isEmpty())
                 {
-                    System.out.println(redColorCode + "Error: Input Field mustn't be empty." + whiteColorCode);
+                    System.out.println(brightRed + "Error: Input Field mustn't be empty." + pureWhite);
                 }
             }
             while (lastName.isEmpty());
@@ -282,7 +281,7 @@ public class LoginSignupHandler {
         }
         catch (Exception e)
         {
-            System.out.println(redColorCode + "Error: The input is out of bounds." + whiteColorCode);
+            System.out.println(brightRed + "Oops! That doesn't seem to be a valid path." + pureWhite);
             input.nextLine();
             return;
         }
@@ -290,7 +289,8 @@ public class LoginSignupHandler {
         boolean isMatched = password.matchInfo(username, firstName, lastName, age);
         if (isMatched)
         {
-            System.out.println(greenColorCode + "Credentials have been matched!" + whiteColorCode);
+            System.out.println(brightGreen + "Your memory is commendable :)" + pureWhite);
+            System.out.println(brightGreen + "Credentials have been matched!" + pureWhite);
             System.out.println(" ");
             input.nextLine();
             // Update Old Password.
@@ -299,18 +299,18 @@ public class LoginSignupHandler {
             boolean isUpdated = password.updatePassword(username, createPassword, firstName, lastName, age);
             if (isUpdated)
             {
-                System.out.println(greenColorCode + "Completed, Password has been updated!" + whiteColorCode);
+                System.out.println(brightGreen + "Congratulations, Password has been updated!" + Main.partyEmoji+ pureWhite);
                 System.out.println(" ");
             }
             else
             {
-                System.out.println(redColorCode + "Error: Password has not been updated." + whiteColorCode);
+                System.out.println(brightRed + "Error: Password has not been updated." + pureWhite);
                 System.out.println(" ");
             }
         }
         else
         {
-            System.out.println(redColorCode + "Error: Credentials have not been matched." + whiteColorCode);
+            System.out.println(brightRed + "Error: There's a clash with your credentials :(" + pureWhite);
             System.out.println(" ");
         }
     }
