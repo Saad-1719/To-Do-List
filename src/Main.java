@@ -3,11 +3,6 @@ import java.util.Scanner;
 import static java.lang.System.exit;
 public class Main
 {
-    static final String brightPurple = "\u001B[38;5;207m";
-    static final String brightRed = "\u001B[38;5;196m";
-    static final String brightOrange = "\u001B[38;5;45m";
-    static final String pureWhite = "\u001B[97m";
-    static final String partyEmoji = "\uD83C\uDF89"; //🎉
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
@@ -16,11 +11,9 @@ public class Main
         {
             // Display Main Menu.
             System.out.println();
-    //        System.out.println(brightOrange + "\t\t\t\t\t \uD83C\uDD83\uD83C\uDD70-\uD83C\uDD73\uD83C\uDD7E\uD83C\uDD7D\uD83C\uDD74 " + pureWhite);
-            System.out.println(brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE " + pureWhite);
-            //System.out.println(brightOrange + "\t\t\t\t\t  " + pureWhite);
+            System.out.println(colorCodes.brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE " + colorCodes.pureWhite);
             System.out.println(" ");
-            System.out.println(brightPurple + "\t\t\t  🌟 ᖴᖇOᗰ TO-ᗪO TO Tᗩ-ᗪᗩ!🌟" + pureWhite);
+            System.out.println(colorCodes.brightPurple + "\t\t\t  🌟 ᖴᖇOᗰ TO-ᗪO TO Tᗩ-ᗪᗩ!🌟" + colorCodes.pureWhite);
             System.out.println(" ");
             // Displaying options for the user to choose from
             System.out.println("[1]: Log in");
@@ -38,7 +31,7 @@ public class Main
                 // Logging In.
                 case 1:
                     System.out.println(" ");
-                    System.out.println(brightPurple + "< ------------------- Start Your Journey ------------------ >" + pureWhite);
+                    System.out.println(colorCodes.brightPurple + "< ------------------- Start Your Journey ------------------ >" + colorCodes.pureWhite);
                     System.out.println(" ");
                     System.out.print("Enter Username: ");
                     String username = input.nextLine().toLowerCase();
@@ -50,14 +43,14 @@ public class Main
                     System.out.println(" ");
                     if (dataFound)
                     {
-                        System.out.println(brightPurple + "🌟 Bravo! Your Journey Begins Here" + partyEmoji + pureWhite);
+                        System.out.println(colorCodes.brightPurple + "🌟 Bravo! Your Journey Begins Here" + colorCodes.partyEmoji + colorCodes.pureWhite);
                         // Greeting the user.
                         Functions.greetings(info);
                         while (true)
                         {
                             // Menu Within After Login.
                             System.out.println(" ");
-                            System.out.println(brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE \n" + pureWhite);
+                            System.out.println(colorCodes.brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE \n" + colorCodes.pureWhite);
                             // Displaying options for the user to choose from in a task-related context
                             System.out.println("📝 [1]: Start a New Task.");
                             System.out.println("🌟 [2]: Try something new with a Random Task.");
@@ -103,10 +96,10 @@ public class Main
                                     Functions.searchTask(info);
                                     break;
                                 case 10:
-                                    System.out.println(brightPurple + "🚪 Farewell, You've successfully logged out. Until our paths cross again!" + pureWhite);
+                                    System.out.println(colorCodes.brightPurple + "🚪 Farewell, You've successfully logged out. Until our paths cross again!" + colorCodes.pureWhite);
                                     break;
                                 default:
-                                    System.out.println(brightRed + "Oops! That doesn't seem to be a valid path." + pureWhite);
+                                    System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid path." + colorCodes.pureWhite);
                                     break;
                             }
                             if (selection == 10)
@@ -117,13 +110,13 @@ public class Main
                     }
                     else
                     {
-                        System.out.println(brightRed + "It seems there's a clash with your credentials. \uD83D\uDE15" + pureWhite);
+                        System.out.println(colorCodes.brightRed + "It seems there's a clash with your credentials. \uD83D\uDE15" + colorCodes.pureWhite);
                     }
                     break;
                 // Signing Up.
                 case 2:
                     System.out.println(" ");
-                    System.out.println(brightPurple + "🚀 Ready to start a new adventure? Sign up and join the journey now! 🌟" + pureWhite);
+                    System.out.println(colorCodes.brightPurple + "🚀 Ready to start a new adventure? Sign up and join the journey now! 🌟" + colorCodes.pureWhite);
                     System.out.println(" ");
                     obj.signup();
                     break;
@@ -134,11 +127,11 @@ public class Main
                 case 4:
                     // Depart and Exit.
                     System.out.println(" ");
-                    System.out.println(brightPurple + "See you soon! " + pureWhite);
+                    System.out.println(colorCodes.brightPurple + "See you soon! " + colorCodes.pureWhite);
                     exit(0);
                     break;
                 default:
-                    System.out.println(brightRed + "Oops! That doesn't seem to be a valid input." + pureWhite);
+                    System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
                     break;
             }
         }

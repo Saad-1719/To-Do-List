@@ -300,7 +300,7 @@ public class LoginSignupHandler {
             boolean isUpdated = password.updatePassword(username, createPassword, firstName, lastName, age);
             if (isUpdated)
             {
-                System.out.println("\n"+brightGreen + "Congratulations, Password has been updated!" + Main.partyEmoji+ pureWhite);
+                System.out.println("\n"+brightGreen + "Congratulations, Password has been updated!" + colorCodes.partyEmoji+ pureWhite);
                 System.out.println(" ");
             }
             else

@@ -10,9 +10,7 @@ import java.util.LinkedList;
 @SuppressWarnings({"ALL", "DuplicatedCode"})
 public class Database
 {
-    static final String brightYellow = "\u001B[38;5;226m";
-    static final String pureWhite = "\u001B[90m";
-    static final String brightPeach = "\u001B[38;5;9m";
+
     static final LocalDate currentDate = LocalDate.now();
     static final LocalTime currentTime = LocalTime.now();
     // Create a formatter for seconds precision
@@ -211,19 +209,19 @@ public class Database
 
             if (completedTasks.isEmpty())
             {
-                System.out.println(brightPeach + "You didn't mark any task complete" + pureWhite);
+                System.out.println(colorCodes.brightPeach + "You didn't mark any task complete" + colorCodes.pureWhite);
             }
             else
             {
                 completedTasks.sort(Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : completedTasks)
                 {
-                    System.out.print(brightYellow);
+                    System.out.print(colorCodes.brightYellow);
                     System.out.println("Title: " + task.getTaskTitle());
                     System.out.println("Completion Date: " + task.getCompletionDate());
                     System.out.println("Completion Time: " + task.getAddedTime());
                     System.out.println("< --------------------------------------------------------- >");
-                    System.out.print(pureWhite);
+                    System.out.print(colorCodes.pureWhite);
                 }
             }
 
@@ -261,18 +259,18 @@ public class Database
 
             if (addedNotes.isEmpty())
             {
-                System.out.println(brightPeach + "You didn't add any note" + pureWhite);
+                System.out.println(colorCodes.brightPeach + "You didn't add any note" + colorCodes.pureWhite);
             }
             else
             {
                 for (Notes obj : addedNotes)
                 {
-                    System.out.print(brightYellow);
+                    System.out.print(colorCodes.brightYellow);
                     System.out.println("Title: " + obj.getNotesName());
                     System.out.println("Description: " + obj.getNotesDescription());
                     System.out.println("Added Date: " + obj.getAddedDate());
                     System.out.println("< --------------------------------------------------------- >");
-                    System.out.print(pureWhite);
+                    System.out.print(colorCodes.pureWhite);
                 }
             }
 
@@ -343,7 +341,7 @@ public class Database
             }
             if (!hasData)
             {
-                System.out.println(brightPeach + "No Data available" + pureWhite);
+                System.out.println(colorCodes.brightPeach + "No Data available" + colorCodes.pureWhite);
                 chk = false;
             }
             else
@@ -352,13 +350,13 @@ public class Database
                 for (Tasks task : ongoingTasks)
                 {
 
-                    System.out.print(brightYellow);
+                    System.out.print(colorCodes.brightYellow);
                     System.out.println("ID: " + task.getTaskID());
                     System.out.println("Title: " + task.getTaskTitle());
                     System.out.println("Added Date: " + task.getCompletionDate());
                     System.out.println("Added Time: " + task.getAddedTime());
                     System.out.println("< --------------------------------------------------------- >");
-                    System.out.print(pureWhite);
+                    System.out.print(colorCodes.pureWhite);
                 }
             }
             con.close();
@@ -400,7 +398,7 @@ public class Database
             }
             if (!hasData)
             {
-                System.out.println(brightPeach + "You haven't any accomplishment till now :/" + pureWhite);
+                System.out.println(colorCodes.brightPeach + "You haven't any accomplishment till now :/" + colorCodes.pureWhite);
                 chk = false;
             }
             con.close();
@@ -441,7 +439,7 @@ public class Database
             }
             if (!hasData)
             {
-                System.out.println(brightPeach + "No Data available" + pureWhite);
+                System.out.println(colorCodes.brightPeach + "No Data available" + colorCodes.pureWhite);
                 chk = false;
             }
             else
@@ -450,12 +448,12 @@ public class Database
                 for (Notes obj : addedNotes)
                 {
 
-                    System.out.print(brightYellow);
+                    System.out.print(colorCodes.brightYellow);
                     System.out.println("ID: " + obj.getNotesID());
                     System.out.println("Title: " + obj.getNotesName());
                     System.out.println("Description: " + obj.getNotesDescription());
                     System.out.println("< --------------------------------------------------------- >");
-                    System.out.print(pureWhite);
+                    System.out.print(colorCodes.pureWhite);
                 }
             }
             con.close();
@@ -625,11 +623,11 @@ public class Database
             {
                 String taskTitle = resultSet.getString("task_title");
                 String addedTime = resultSet.getString("added_time");
-                System.out.print(brightYellow);
+                System.out.print(colorCodes.brightYellow);
                 System.out.println("Title: " + taskTitle);
                 System.out.println("Added Time: " + addedTime);
                 System.out.println("< --------------------------------------------------------- >");
-                System.out.print(pureWhite);
+                System.out.print(colorCodes.pureWhite);
             }
 
             con.close();

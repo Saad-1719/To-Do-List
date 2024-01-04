@@ -5,12 +5,6 @@ public class Functions
 {
     static final Scanner input = new Scanner(System.in);
     static final LocalTime currentTime = LocalTime.now();
-    static final String brightPurple = "\u001B[38;5;207m";
-    static final String pureWhite = "\u001B[97m";
-    static final String brightRed = "\u001B[38;5;196m";
-    static final String brightGreen = "\u001B[38;5;82m";
-    static final String brightYellow = "\u001B[38;5;226m";
-    static final String brightPeach = "\u001B[38;5;9m";
 
     // User Choice for both main loops.
     public static int getUserChoice(Scanner input)
@@ -24,7 +18,7 @@ public class Functions
         catch (InputMismatchException e)
         {
             System.out.println(" ");
-            System.out.println(brightRed + "Error: The input is out of bounds." + pureWhite);
+            System.out.println(colorCodes.brightRed + "Error: The input is out of bounds." + colorCodes.pureWhite);
             input.nextLine();
         }
         return choice;
@@ -35,9 +29,9 @@ public class Functions
     {
         String name;
         boolean flag;
-        System.out.println(brightPurple + "\t\t\t\t\t Add a Task \n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Add a Task \n" + colorCodes.pureWhite);
         Tasks myTasks = new Tasks();
-        System.out.println(brightPeach + "Hit Enter if nothing appears" + pureWhite);
+        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
         input.nextLine();
         do
         {
@@ -46,24 +40,24 @@ public class Functions
             name = input.nextLine().toLowerCase();
             if (name.trim().isEmpty())
             {
-                System.out.println(brightRed + "Error: Task's field cannot be empty." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Task's field cannot be empty." + colorCodes.pureWhite);
                 flag = true;
             }
             else if (name.trim().length() < 3)
             {
-                System.out.println(brightRed + "Error: Task's field must be at least 3 characters long." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Task's field must be at least 3 characters long." + colorCodes.pureWhite);
                 flag = true;
             }
             else if (name.length() > 80)
             {
-                System.out.println(brightRed + "Error: Task must be less than 80 characters." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Task must be less than 80 characters." + colorCodes.pureWhite);
                 flag = true;
             }
             Database.retrieveDataIntoLinkedList(info);
             //comparing task names with existing ongoing tasks
             if (Database.storeTasksName.contains(name))
             {
-                System.out.println(brightRed + "Error: Task already exists." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Task already exists." + colorCodes.pureWhite);
                 flag = true;
             }
         }
@@ -74,11 +68,11 @@ public class Functions
         if (isWritten)
         {
             System.out.println(" ");
-            System.out.println(brightGreen + "Hurrah!! new task, new challenge" + pureWhite);
+            System.out.println(colorCodes.brightGreen + "Hurrah!! new task, new challenge" + colorCodes.pureWhite);
         }
         else
         {
-            System.out.println(brightRed + "Error: Something went wrong :(" + pureWhite);
+            System.out.println(colorCodes.brightRed + "Error: Something went wrong :(" + colorCodes.pureWhite);
         }
     }
 
@@ -88,9 +82,9 @@ public class Functions
         String name;
         String description;
         boolean flag;
-        System.out.println(brightPurple + "\t\t\t\t\t Add Notes \n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Add Notes \n" + colorCodes.pureWhite);
         Notes myNotes = new Notes("", "");
-        System.out.println(brightPeach + "Hit Enter if nothing appears" + pureWhite);
+        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
         input.nextLine();
         do
         {
@@ -99,17 +93,17 @@ public class Functions
             name = input.nextLine().toLowerCase();
             if (name.trim().isEmpty())
             {
-                System.out.println(brightRed + "Error: Note's Title cannot be empty." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Note's Title cannot be empty." + colorCodes.pureWhite);
                 flag = true;
             }
             else if (name.trim().length() < 3)
             {
-                System.out.println(brightRed + "Error: Note's Title must be at least 3 characters long." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Note's Title must be at least 3 characters long." + colorCodes.pureWhite);
                 flag = true;
             }
             else if (name.length() > 50)
             {
-                System.out.println(brightRed + "Error: Note's title must be less than 50 characters." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Note's title must be less than 50 characters." + colorCodes.pureWhite);
                 flag = true;
             }
         }
@@ -122,12 +116,12 @@ public class Functions
             description = input.nextLine();
             if (description.trim().isEmpty())
             {
-                System.out.println(brightRed + "Error: Note's description cannot be empty." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Note's description cannot be empty." + colorCodes.pureWhite);
                 flag = true;
             }
             else if (description.trim().length() < 3)
             {
-                System.out.println(brightRed + "Error: Note's description must be at least 3 characters long." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Note's description must be at least 3 characters long." + colorCodes.pureWhite);
                 flag = true;
             }
         }
@@ -138,18 +132,18 @@ public class Functions
         if (isWritten)
         {
             System.out.println(" ");
-            System.out.println(brightGreen + "Bravo!! Memory ++ " + pureWhite);
+            System.out.println(colorCodes.brightGreen + "Bravo!! Memory ++ " + colorCodes.pureWhite);
         }
         else
         {
-            System.out.println(brightRed + "Error: Something went wrong :(" + pureWhite);
+            System.out.println(colorCodes.brightRed + "Error: Something went wrong :(" + colorCodes.pureWhite);
         }
     }
 
     // to show habit from db
     public static void showOngoingTasks(UserLogin info)
     {
-        System.out.println(brightPurple + "\t\t\t\t\t Ongoing Tasks \n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Ongoing Tasks \n" + colorCodes.pureWhite);
         boolean isData=Database.isTaskExists(info);
         if(isData)
         {
@@ -159,20 +153,20 @@ public class Functions
 
     public static void showCompletedTasks(UserLogin info)
     {
-        System.out.println(brightPurple + "\t\t\t\t\t Accomplished Tasks \n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Accomplished Tasks \n" + colorCodes.pureWhite);
         Database.displayAccomplishedTasks(info);
     }
 
     public static void showAddedNotes(UserLogin info)
     {
-        System.out.println(brightPurple + "\t\t\t\t\t Notes \n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Notes \n" + colorCodes.pureWhite);
         Database.displayWrittenNotes(info);
     }
 
     // to mark a task completed
     public static void markTaskCompleted(UserLogin info)
     {
-        System.out.println(brightPurple + "\t\t\t\t\t Conquer a Task \n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Conquer a Task \n" + colorCodes.pureWhite);
         // to check if the task exists
         boolean isDataExists = Database.displayTasks(info);
         if (isDataExists)
@@ -180,7 +174,7 @@ public class Functions
             int delId;
             // data delete
             System.out.println(" ");
-            System.out.println(brightPeach + "Hit Enter if nothing appears" + pureWhite);
+            System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
            // input.nextLine();
             System.out.println("Which task would you like to delete? ");
             System.out.print("Task's ID: ");
@@ -202,19 +196,19 @@ public class Functions
                     if (ckh)
                     {
                         System.out.println(" ");
-                        System.out.println(brightGreen + "Task Conquered, Mission Accomplished!!" + pureWhite);
+                        System.out.println(colorCodes.brightGreen + "Task Conquered, Mission Accomplished!!" + colorCodes.pureWhite);
                     }
                 }
                 else
                 {
                     System.out.println(" ");
-                    System.out.println(brightRed + "Error: Incorrect task ID." + pureWhite);
+                    System.out.println(colorCodes.brightRed + "Error: Incorrect task ID." + colorCodes.pureWhite);
                 }
             }
             catch (InputMismatchException e)
             {
                 System.out.println(" ");
-                System.out.println(brightRed + "Oops! That doesn't seem to be a valid input." + pureWhite);
+                System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
                 input.nextLine();
             }
         }
@@ -222,13 +216,13 @@ public class Functions
 
     public static void deleteNotes(UserLogin info)
     {
-        System.out.println(brightPurple + "\t\t\t\t\t Delete Notes \n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Delete Notes \n" + colorCodes.pureWhite);
         // to check if notes exists
         boolean isDataExists = Database.displayNotes(info);
         if (isDataExists)
         {
             int delId;
-            System.out.println(brightPeach + "Hit Enter if nothing appears" + pureWhite);
+            System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
             input.nextLine();
             System.out.println("Which note would you like to delete? ");
             System.out.print("Note ID: ");
@@ -244,19 +238,19 @@ public class Functions
                     if (ckh)
                     {
                         System.out.println(" ");
-                        System.out.println(brightGreen + "Note Successfully Erased!" + pureWhite);
+                        System.out.println(colorCodes.brightGreen + "Note Successfully Erased!" + colorCodes.pureWhite);
                     }
                 }
                 else
                 {
                     System.out.println(" ");
-                    System.out.println(brightRed + "Error: Incorrect Note ID." + pureWhite);
+                    System.out.println(colorCodes.brightRed + "Error: Incorrect Note ID." + colorCodes.pureWhite);
                 }
             }
             catch (InputMismatchException e)
             {
                 System.out.println(" ");
-                System.out.println(brightRed + "Error: The input is out of bounds" + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: The input is out of bounds" + colorCodes.pureWhite);
                 input.nextLine();
             }
         }
@@ -283,9 +277,9 @@ public class Functions
     {
         String name;
         boolean flag;
-        System.out.println(brightPurple + "\t\t\t\t\t Random Task Hunt\n" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Random Task Hunt\n" + colorCodes.pureWhite);
         Tasks myTasks = new Tasks("");
-        System.out.println(brightPeach + "Hit Enter if nothing appears" + pureWhite);
+        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
 
         try
         {
@@ -307,12 +301,12 @@ public class Functions
 
                     if (name.trim().isEmpty())
                     {
-                        System.out.println(brightRed + "Error: Task's cannot be empty." + pureWhite);
+                        System.out.println(colorCodes.brightRed + "Error: Task's cannot be empty." + colorCodes.pureWhite);
                         flag = true;
                     }
                     else if (name.trim().length() < 3)
                     {
-                        System.out.println(brightRed + "Error: Task's must be at least 3 characters long." + pureWhite);
+                        System.out.println(colorCodes.brightRed + "Error: Task's must be at least 3 characters long." + colorCodes.pureWhite);
                         flag = true;
                     }
 
@@ -322,7 +316,7 @@ public class Functions
                     // Comparison between task names
                     if (Database.storeTasksName.contains(name))
                     {
-                        System.out.println(brightRed + "Error: Task's already exists." + pureWhite);
+                        System.out.println(colorCodes.brightRed + "Error: Task's already exists." + colorCodes.pureWhite);
                         flag = true;
                     }
                 }
@@ -335,7 +329,7 @@ public class Functions
             int randIndex = rand.nextInt(tasksTitleList.size());
             String randomTask = tasksTitleList.get(randIndex);
             System.out.println(" ");
-            System.out.println("Today's target is: " + brightYellow + randomTask + pureWhite);
+            System.out.println("Today's target is: " + colorCodes.brightYellow + randomTask + colorCodes.pureWhite);
             // To add tasks into the database
             myTasks.setTaskTitle(randomTask);
             boolean isWritten = Database.addTaskIntoDatabase(myTasks, info);
@@ -343,17 +337,17 @@ public class Functions
             if (isWritten)
             {
                 System.out.println(" ");
-                System.out.println(brightGreen + "Hurrah!! new task, new challenge" + pureWhite);
+                System.out.println(colorCodes.brightGreen + "Hurrah!! new task, new challenge" + colorCodes.pureWhite);
             }
             else
             {
-                System.out.println(brightRed + "Error: Something went wrong :(" + pureWhite);
+                System.out.println(colorCodes.brightRed + "Error: Something went wrong :(" + colorCodes.pureWhite);
             }
         }
         catch (Exception e)
         {
             System.out.println(" ");
-            System.out.println(brightRed + "Oops! That doesn't seem to be a valid input." + pureWhite);
+            System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
             //e.printStackTrace(); // Print the exception details for debugging purposes
         }
     }
@@ -378,7 +372,7 @@ public class Functions
 
                 if (month < 1 || month > 12)
                 {
-                    System.out.println(brightRed + "Invalid month. Please enter a value between 1 and 12." + pureWhite);
+                    System.out.println(colorCodes.brightRed + "Invalid month. Please enter a value between 1 and 12." + colorCodes.pureWhite);
                 }
                 else
                 {
@@ -398,8 +392,8 @@ public class Functions
             Database.divideTasksAccordingToDates(year, month, hasDataForDay, info);
 
             // Print the calendar header
-            System.out.println(brightYellow+ "\n" + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, java.util.Locale.getDefault()) + " " + year+pureWhite+"\n");
-            System.out.println(brightYellow+"Sun Mon Tue Wed Thu Fri Sat"+pureWhite);
+            System.out.println(colorCodes.brightYellow+ "\n" + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, java.util.Locale.getDefault()) + " " + year+colorCodes.pureWhite+"\n");
+            System.out.println(colorCodes.brightYellow+"Sun Mon Tue Wed Thu Fri Sat"+colorCodes.pureWhite);
             System.out.print("\u001B[38;5;221m");
             // Print leading spaces
             for (int i = 0; i < startDay; i++)
@@ -428,7 +422,7 @@ public class Functions
                     System.out.println();
                 }
             }
-            System.out.println(pureWhite);
+            System.out.println(colorCodes.pureWhite);
             int day = 0;
             System.out.println(" ");
             while (isTrue)
@@ -439,7 +433,7 @@ public class Functions
                 if (day < 1 || day > 31)
                 {
                     System.out.println(" ");
-                    System.out.println(brightRed + "Error: Invalid date. Please enter a value between 1 and 31." + pureWhite);
+                    System.out.println(colorCodes.brightRed + "Error: Invalid date. Please enter a value between 1 and 31." + colorCodes.pureWhite);
                 }
                 else
                 {
@@ -448,7 +442,7 @@ public class Functions
             }
 
             // Print the tasks for the selected date
-            System.out.println(brightYellow + "\nTasks for " + day + "-" + month + "-" + year);
+            System.out.println(colorCodes.brightYellow + "\nTasks for " + day + "-" + month + "-" + year);
             System.out.println(" ");
             Database.printTasksForDate(year, month, day, info);
 
@@ -457,7 +451,7 @@ public class Functions
         catch (Exception e)
         {
             System.out.println();
-            System.out.println(brightRed + "Oops! That doesn't seem to be a valid input." + pureWhite);
+            System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
            // e.printStackTrace(); // Print the exception details for debugging purposes
         }
     }
@@ -465,8 +459,8 @@ public class Functions
     public static void searchTask(UserLogin info)
     {
 
-        System.out.println(brightPurple + "\t\t\t\t\t Search a Task \n" + pureWhite);
-        System.out.println(brightPeach + "Hit Enter if nothing appears" + pureWhite);
+        System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Search a Task \n" + colorCodes.pureWhite);
+        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
 input.nextLine();
         String title;
         System.out.print("Task: ");
@@ -477,12 +471,12 @@ input.nextLine();
         if (index >= 0)
         {
             System.out.println(" ");
-            System.out.println(brightGreen + "Task Found" + pureWhite);
+            System.out.println(colorCodes.brightGreen + "Task Found" + colorCodes.pureWhite);
         }
         else
         {
             System.out.println(" ");
-            System.out.println(brightPeach+"No Task Found"+pureWhite);
+            System.out.println(colorCodes.brightPeach+"No Task Found"+colorCodes.pureWhite);
         }
     }
 }
