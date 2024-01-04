@@ -20,4 +20,3 @@ Random Task: Embrace variety with a randomly generated task suggestion.
 Notes Section: Jot down thoughts and ideas for future reference.
 Search Function: Easily locate specific tasks with the search functionality.
 Logout: Conclude your session securely whenever needed.
-Join me on this journey with the versatile to-do list app! 🚀 Let's transform tasks into accomplishments and make each day a step toward success. Feel free to connect to explore more about the development process or discuss exciting opportunities.
