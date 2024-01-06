@@ -272,7 +272,6 @@ public class Functions
         }
     }
 
-    @SuppressWarnings("DuplicatedCode")
     public static void addRandomTask(UserLogin info)
     {
         String name;
@@ -394,7 +393,7 @@ public class Functions
             // Print the calendar header
             System.out.println(colorCodes.brightYellow+ "\n" + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, java.util.Locale.getDefault()) + " " + year+colorCodes.pureWhite+"\n");
             System.out.println(colorCodes.brightYellow+"Sun Mon Tue Wed Thu Fri Sat"+colorCodes.pureWhite);
-            System.out.print("\u001B[38;5;221m");
+            System.out.print("\u001B[38;5;152m");
             // Print leading spaces
             for (int i = 0; i < startDay; i++)
             {
@@ -413,7 +412,7 @@ public class Functions
 
                 if (hasDataForDay[i])
                 {
-                    System.out.print("\u001B[38;5;221m");
+                    System.out.print("\u001B[38;5;152m");
                 }
 
                 // Move to the next line if it's the last day of the week
@@ -461,13 +460,14 @@ public class Functions
 
         System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Search a Task \n" + colorCodes.pureWhite);
         System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
-input.nextLine();
+        input.nextLine();
         String title;
         System.out.print("Task: ");
         title = input.nextLine();
         Database.retrieveDataIntoArray(info);
         Collections.sort(Database.storeTasksNameForSearch);
-        int index = Collections.binarySearch(Database.storeTasksNameForSearch, title);
+        //int index = Collections.binarySearch(Database.storeTasksNameForSearch, title);
+        int index = binarySearchClass.binarySearchonArray(Database.storeTasksNameForSearch, title);
         if (index >= 0)
         {
             System.out.println(" ");
@@ -476,7 +476,22 @@ input.nextLine();
         else
         {
             System.out.println(" ");
-            System.out.println(colorCodes.brightPeach+"No Task Found"+colorCodes.pureWhite);
+            System.out.println(colorCodes.cGreen +"No Task Found"+colorCodes.pureWhite);
+        }
+    }
+
+    public static void addPause()
+    {
+
+        System.out.println(colorCodes.brightOrange +"\nPress Enter to Continue ..."+colorCodes.pureWhite);
+        input.nextLine();
+        addSpaces();
+    }
+    public static void addSpaces()
+    {
+        for(int i=0;i<40;i++)
+        {
+            System.out.println(" ");
         }
     }
 }
