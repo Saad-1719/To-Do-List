@@ -11,7 +11,7 @@ public class Main
         {
             // Display Main Menu.
             System.out.println();
-            System.out.println(colorCodes.brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE " + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightBlue + "\t\t\t\t\t Tᗩ-ᗪOᑎE " + colorCodes.pureWhite);
             System.out.println(" ");
             System.out.println(colorCodes.brightPurple + "\t\t\t  🌟 ᖴᖇOᗰ TO-ᗪO TO Tᗩ-ᗪᗩ!🌟" + colorCodes.pureWhite);
             System.out.println(" ");
@@ -46,11 +46,12 @@ public class Main
                         System.out.println(colorCodes.brightPurple + "🌟 Bravo! Your Journey Begins Here" + colorCodes.partyEmoji + colorCodes.pureWhite);
                         // Greeting the user.
                         Functions.greetings(info);
+                        Functions.addPause();
                         while (true)
                         {
                             // Menu Within After Login.
                             System.out.println(" ");
-                            System.out.println(colorCodes.brightOrange + "\t\t\t\t\t Tᗩ-ᗪOᑎE \n" + colorCodes.pureWhite);
+                            System.out.println(colorCodes.brightBlue + "\t\t\t\t\t Tᗩ-ᗪOᑎE \n" + colorCodes.pureWhite);
                             // Displaying options for the user to choose from in a task-related context
                             System.out.println("📝 [1]: Start a New Task.");
                             System.out.println("🌟 [2]: Try something new with a Random Task.");
@@ -69,37 +70,59 @@ public class Main
                             switch (selection)
                             {
                                 case 1:
+                                    Functions.addSpaces();
                                     Functions.addTask(info);
+                                    Functions.addPause();
                                     break;
                                 case 2:
+                                    Functions.addSpaces();
                                     Functions.addRandomTask(info);
+                                    Functions.addPause();
                                     break;
                                 case 3:
+                                    Functions.addSpaces();
                                     Functions.addNotes(info);
+                                    Functions.addPause();
                                     break;
                                 case 4:
+                                    Functions.addSpaces();
                                     Functions.markTaskCompleted(info);
+                                    Functions.addPause();
                                     break;
                                 case 5:
+                                    Functions.addSpaces();
                                     Functions.showOngoingTasks(info);
+                                    Functions.addPause();
                                     break;
                                 case 6:
+                                    Functions.addSpaces();
                                     Functions.showAddedNotes(info);
+                                    Functions.addPause();
                                     break;
                                 case 7:
+                                    Functions.addSpaces();
                                     Functions.showCompletedTasks(info);
+                                    Functions.addPause();
                                     break;
                                 case 8:
+                                    Functions.addSpaces();
                                     Functions.deleteNotes(info);
+                                    Functions.addPause();
                                     break;
                                 case 9:
+                                    Functions.addSpaces();
                                     Functions.searchTask(info);
+                                    Functions.addPause();
                                     break;
                                 case 10:
+                                    Functions.addSpaces();
                                     System.out.println(colorCodes.brightPurple + "🚪 Farewell, You've successfully logged out. Until our paths cross again!" + colorCodes.pureWhite);
+                                    Functions.addPause();
                                     break;
                                 default:
+                                    Functions.addSpaces();
                                     System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid path." + colorCodes.pureWhite);
+                                    Functions.addPause();
                                     break;
                             }
                             if (selection == 10)
@@ -115,13 +138,17 @@ public class Main
                     break;
                 // Signing Up.
                 case 2:
-                    System.out.println(" ");
+                    Functions.addSpaces();
+                    System.out.println(colorCodes.brightBlue + "\t\t\t\t\t Tᗩ-ᗪOᑎE \n" + colorCodes.pureWhite);
+                   // System.out.println(" ");
                     System.out.println(colorCodes.brightPurple + "🚀 Ready to start a new adventure? Sign up and join the journey now! 🌟" + colorCodes.pureWhite);
                     System.out.println(" ");
                     obj.signup();
                     break;
                 case 3:
                     // Update Password.
+                    Functions.addSpaces();
+                    System.out.println(colorCodes.brightBlue + "\t\t\t\t\t Tᗩ-ᗪOᑎE \n" + colorCodes.pureWhite);
                     obj.forgetPassword();
                     break;
                 case 4:
@@ -132,6 +159,7 @@ public class Main
                     break;
                 default:
                     System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
+                    Functions.addPause();
                     break;
             }
         }
