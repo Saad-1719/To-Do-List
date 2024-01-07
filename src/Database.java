@@ -3,11 +3,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 
-@SuppressWarnings({"ALL", "DuplicatedCode"})
 public class Database
 {
 
@@ -18,7 +16,7 @@ public class Database
     // Format and print the current time with seconds precision
     static final String formattedTime = currentTime.format(formatter);
     protected static final LinkedList<String> storeTasksName = new LinkedList<>();
-    protected static LinkedList<String> storeNotes = new LinkedList<>();
+    //protected static LinkedList<String> addedNotes = new LinkedList<>();
     protected static final ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
 
     //TO obtain id of active user
@@ -209,11 +207,12 @@ public class Database
 
             if (completedTasks.isEmpty())
             {
-                System.out.println(colorCodes.brightPeach + "You didn't mark any task complete" + colorCodes.pureWhite);
+                System.out.println(colorCodes.cGreen + "You didn't mark any task complete" + colorCodes.pureWhite);
             }
             else
             {
-                completedTasks.sort(Comparator.comparing(Tasks::getTaskID).reversed());
+
+                //completedTasks.sort(Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : completedTasks)
                 {
                     System.out.print(colorCodes.brightYellow);
@@ -247,6 +246,7 @@ public class Database
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
             LinkedList<Notes> addedNotes = new LinkedList<>();
+            addedNotes.clear();
             while (show.next())
             {
                 int notesID = show.getInt(1);
@@ -259,7 +259,7 @@ public class Database
 
             if (addedNotes.isEmpty())
             {
-                System.out.println(colorCodes.brightPeach + "You didn't add any note" + colorCodes.pureWhite);
+                System.out.println(colorCodes.cGreen + "You didn't add any note" + colorCodes.pureWhite);
             }
             else
             {
@@ -341,7 +341,7 @@ public class Database
             }
             if (!hasData)
             {
-                System.out.println(colorCodes.brightPeach + "No Data available" + colorCodes.pureWhite);
+                System.out.println(colorCodes.cGreen + "No Data available" + colorCodes.pureWhite);
                 chk = false;
             }
             else
@@ -398,7 +398,7 @@ public class Database
             }
             if (!hasData)
             {
-                System.out.println(colorCodes.brightPeach + "You haven't any accomplishment till now :/" + colorCodes.pureWhite);
+                System.out.println(colorCodes.cGreen + "You haven't any accomplishment till now :/" + colorCodes.pureWhite);
                 chk = false;
             }
             con.close();
@@ -439,7 +439,7 @@ public class Database
             }
             if (!hasData)
             {
-                System.out.println(colorCodes.brightPeach + "No Data available" + colorCodes.pureWhite);
+                System.out.println(colorCodes.cGreen + "No Data available" + colorCodes.pureWhite);
                 chk = false;
             }
             else
@@ -608,6 +608,7 @@ public class Database
     {
         try
         {
+            int counter=0;
             Connection con = Connector.createConnection();
             String query = "SELECT * FROM tasks WHERE userID=? AND YEAR(added_date) = ? AND MONTH(added_date) = ? AND DAY(added_date) = ?";
             PreparedStatement smt = con.prepareStatement(query);
@@ -627,7 +628,13 @@ public class Database
                 System.out.println("Title: " + taskTitle);
                 System.out.println("Added Time: " + addedTime);
                 System.out.println("< --------------------------------------------------------- >");
+                counter++;
                 System.out.print(colorCodes.pureWhite);
+            }
+            if(counter==0)
+            {
+                System.out.println(colorCodes.cGreen + "Task-free zone detected! Take a break and recharge! ⚡🌟" + colorCodes.pureWhite);
+                // Displayed when no ongoing task is registered against a date
             }
 
             con.close();

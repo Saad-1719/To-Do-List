@@ -8,7 +8,6 @@ public class UserLogin
         this.username = username;
         this.password = password;
     }
-
     public UserLogin(String username)
     {
         this.username=username;
