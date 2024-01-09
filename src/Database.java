@@ -16,7 +16,6 @@ public class Database
     // Format and print the current time with seconds precision
     static final String formattedTime = currentTime.format(formatter);
     protected static final LinkedList<String> storeTasksName = new LinkedList<>();
-    //protected static LinkedList<String> addedNotes = new LinkedList<>();
     protected static final ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
 
     //TO obtain id of active user
@@ -43,7 +42,6 @@ public class Database
         return id;
     }
 
-    //to fetch data of active user
     public static void retrieveDataIntoLinkedList(UserLogin info)
     {
         try
@@ -633,8 +631,8 @@ public class Database
             }
             if(counter==0)
             {
-                System.out.println(colorCodes.cGreen + "Task-free zone detected! Take a break and recharge! ⚡🌟" + colorCodes.pureWhite);
                 // Displayed when no ongoing task is registered against a date
+                System.out.println(colorCodes.cGreen + "Task-free zone detected! Take a break and recharge! ⚡🌟" + colorCodes.pureWhite);
             }
 
             con.close();

@@ -23,7 +23,6 @@ public class binarySearchClass
                 low = mid + 1;
             }
         }
-
         return -1; // Key not found
     }
 }

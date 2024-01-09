@@ -1,11 +1,9 @@
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 public class Connector
 {
     static Connection con;
-
     public static Connection createConnection()
     {
         try

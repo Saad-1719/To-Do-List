@@ -18,20 +18,18 @@ public class Functions
         catch (InputMismatchException e)
         {
             System.out.println(" ");
-            System.out.println(colorCodes.brightRed + "Error: The input is out of bounds." + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid path. 😕" + colorCodes.pureWhite);
             input.nextLine();
         }
         return choice;
     }
-    // to add new user
-
     public static void addTask(UserLogin info)
     {
         String name;
         boolean flag;
         System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Add a Task \n" + colorCodes.pureWhite);
         Tasks myTasks = new Tasks();
-        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
+        System.out.println(colorCodes.brightPeach + "If nothing pops up, just hit Enter! ⌨️" + colorCodes.pureWhite);
         input.nextLine();
         do
         {
@@ -68,7 +66,7 @@ public class Functions
         if (isWritten)
         {
             System.out.println(" ");
-            System.out.println(colorCodes.brightGreen + "Hurrah!! new task, new challenge" + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightGreen + "Hurrah!! New task, New Challenge 🚀" + colorCodes.pureWhite);
         }
         else
         {
@@ -84,7 +82,7 @@ public class Functions
         boolean flag;
         System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Add Notes \n" + colorCodes.pureWhite);
         Notes myNotes = new Notes("", "");
-        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
+        System.out.println(colorCodes.brightPeach + "If nothing pops up, just hit Enter! ⌨️" + colorCodes.pureWhite);
         input.nextLine();
         do
         {
@@ -132,7 +130,7 @@ public class Functions
         if (isWritten)
         {
             System.out.println(" ");
-            System.out.println(colorCodes.brightGreen + "Bravo!! Memory ++ " + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightGreen + "Bravo!! Memory ++ 🧠" + colorCodes.pureWhite);
         }
         else
         {
@@ -174,7 +172,7 @@ public class Functions
             int delId;
             // data delete
             System.out.println(" ");
-            System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightPeach + "If nothing pops up, just hit Enter! ⌨️" + colorCodes.pureWhite);
            // input.nextLine();
             System.out.println("Which task would you like to delete? ");
             System.out.print("Task's ID: ");
@@ -196,7 +194,7 @@ public class Functions
                     if (ckh)
                     {
                         System.out.println(" ");
-                        System.out.println(colorCodes.brightGreen + "Task Conquered, Mission Accomplished!!" + colorCodes.pureWhite);
+                        System.out.println(colorCodes.brightGreen + "Task Conquered, Mission Accomplished!! 🏆" + colorCodes.pureWhite);
                     }
                 }
                 else
@@ -208,7 +206,7 @@ public class Functions
             catch (InputMismatchException e)
             {
                 System.out.println(" ");
-                System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
+                System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid path. 😕" + colorCodes.pureWhite);
                 input.nextLine();
             }
         }
@@ -222,7 +220,7 @@ public class Functions
         if (isDataExists)
         {
             int delId;
-            System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightPeach + "If nothing pops up, just hit Enter! ⌨️" + colorCodes.pureWhite);
             input.nextLine();
             System.out.println("Which note would you like to delete? ");
             System.out.print("Note ID: ");
@@ -238,7 +236,7 @@ public class Functions
                     if (ckh)
                     {
                         System.out.println(" ");
-                        System.out.println(colorCodes.brightGreen + "Note Successfully Erased!" + colorCodes.pureWhite);
+                        System.out.println(colorCodes.brightGreen + "Memory freed up!! Note Erased. 🗑️" + colorCodes.pureWhite);
                     }
                 }
                 else
@@ -250,7 +248,7 @@ public class Functions
             catch (InputMismatchException e)
             {
                 System.out.println(" ");
-                System.out.println(colorCodes.brightRed + "Error: The input is out of bounds" + colorCodes.pureWhite);
+                System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid path. 😕" + colorCodes.pureWhite);
                 input.nextLine();
             }
         }
@@ -278,7 +276,7 @@ public class Functions
         boolean flag;
         System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Random Task Hunt\n" + colorCodes.pureWhite);
         Tasks myTasks = new Tasks("");
-        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
+        System.out.println(colorCodes.brightPeach + "If nothing pops up, just hit Enter! ⌨️" + colorCodes.pureWhite);
 
         try
         {
@@ -286,7 +284,7 @@ public class Functions
             LinkedList<String> tasksTitleList = new LinkedList<>();
             int totalTasks;
 
-            System.out.print("How many tasks you wanna randomize? ");
+            System.out.print("How many tasks do you wanna randomize? ");
             totalTasks = input.nextInt();
             input.nextLine();
 
@@ -336,7 +334,7 @@ public class Functions
             if (isWritten)
             {
                 System.out.println(" ");
-                System.out.println(colorCodes.brightGreen + "Hurrah!! new task, new challenge" + colorCodes.pureWhite);
+                System.out.println(colorCodes.brightGreen + "Hurrah!! New task, New Challenge 🚀" + colorCodes.pureWhite);
             }
             else
             {
@@ -346,7 +344,7 @@ public class Functions
         catch (Exception e)
         {
             System.out.println(" ");
-            System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid path. 😕" + colorCodes.pureWhite);
             //e.printStackTrace(); // Print the exception details for debugging purposes
         }
     }
@@ -354,12 +352,10 @@ public class Functions
     @SuppressWarnings("MagicConstant")
     public static void viewCalendar(UserLogin info)
     {
-        Scanner scanner = new Scanner(System.in);
-
         try
         {
             System.out.print("Year: ");
-            int year = scanner.nextInt();
+            int year = input.nextInt();
             boolean isCorrect = true;
             boolean isTrue = true;
             int month = 0;
@@ -367,29 +363,25 @@ public class Functions
             while (isCorrect)
             {
                 System.out.print("Month (1-12): ");
-                month = scanner.nextInt();
+                month = input.nextInt();
 
                 if (month < 1 || month > 12)
                 {
-                    System.out.println(colorCodes.brightRed + "Invalid month. Please enter a value between 1 and 12." + colorCodes.pureWhite);
+                    System.out.println(colorCodes.brightRed + "Error: Invalid month. Please enter a value between 1 and 12." + colorCodes.pureWhite);
                 }
                 else
                 {
                     isCorrect = false;
                 }
             }
-
             // Create a GregorianCalendar object
             Calendar calendar = new GregorianCalendar(year, month - 1, 1);
-
             // Display tasks for the selected month
             int startDay = calendar.get(Calendar.DAY_OF_WEEK) - 1;
             int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-
             // Display tasks for the selected month
             boolean[] hasDataForDay = new boolean[maxDay + 1];
             Database.divideTasksAccordingToDates(year, month, hasDataForDay, info);
-
             // Print the calendar header
             System.out.println(colorCodes.brightYellow+ "\n" + calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, java.util.Locale.getDefault()) + " " + year+colorCodes.pureWhite+"\n");
             System.out.println(colorCodes.brightYellow+"Sun Mon Tue Wed Thu Fri Sat"+colorCodes.pureWhite);
@@ -399,7 +391,6 @@ public class Functions
             {
                 System.out.print("    ");
             }
-
             // Print the days of the month with colors based on data presence
             for (int i = 1; i <= maxDay; i++)
             {
@@ -407,14 +398,12 @@ public class Functions
                 {
                     System.out.print("\u001B[38;5;200m"); // color for days with data
                 }
-
                 System.out.printf("%3d ", i);
 
                 if (hasDataForDay[i])
                 {
                     System.out.print("\u001B[38;5;152m");
                 }
-
                 // Move to the next line if it's the last day of the week
                 if ((startDay + i) % 7 == 0)
                 {
@@ -427,8 +416,7 @@ public class Functions
             while (isTrue)
             {
                 System.out.print("Enter a day to view tasks for that date (1-31): ");
-                day = scanner.nextInt();
-
+                day = input.nextInt();
                 if (day < 1 || day > 31)
                 {
                     System.out.println(" ");
@@ -439,19 +427,15 @@ public class Functions
                     isTrue = false;
                 }
             }
-
             // Print the tasks for the selected date
             System.out.println(colorCodes.brightYellow + "\nTasks for " + day + "-" + month + "-" + year);
             System.out.println(" ");
             Database.printTasksForDate(year, month, day, info);
-
-//            System.out.println("\n");
         }
         catch (Exception e)
         {
             System.out.println();
-            System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid input." + colorCodes.pureWhite);
-           // e.printStackTrace(); // Print the exception details for debugging purposes
+            System.out.println(colorCodes.brightRed + "Oops! That doesn't seem to be a valid path. 😕" + colorCodes.pureWhite);
         }
     }
 
@@ -459,31 +443,30 @@ public class Functions
     {
 
         System.out.println(colorCodes.brightPurple + "\t\t\t\t\t Search a Task \n" + colorCodes.pureWhite);
-        System.out.println(colorCodes.brightPeach + "Hit Enter if nothing appears" + colorCodes.pureWhite);
+        System.out.println(colorCodes.brightPeach + "If nothing pops up, just hit Enter! ⌨️" + colorCodes.pureWhite);
         input.nextLine();
         String title;
         System.out.print("Task: ");
         title = input.nextLine();
         Database.retrieveDataIntoArray(info);
         Collections.sort(Database.storeTasksNameForSearch);
-        //int index = Collections.binarySearch(Database.storeTasksNameForSearch, title);
         int index = binarySearchClass.binarySearchonArray(Database.storeTasksNameForSearch, title);
         if (index >= 0)
         {
             System.out.println(" ");
-            System.out.println(colorCodes.brightGreen + "Task Found" + colorCodes.pureWhite);
+            System.out.println(colorCodes.brightGreen + "Hey, look what I stumbled upon! Found a task. 😄" + colorCodes.pureWhite);
         }
         else
         {
             System.out.println(" ");
-            System.out.println(colorCodes.cGreen +"No Task Found"+colorCodes.pureWhite);
+            System.out.println(colorCodes.cGreen + "No worries! No task found this time. Keep it up! 😊" + colorCodes.pureWhite);
         }
     }
 
     public static void addPause()
     {
 
-        System.out.println(colorCodes.brightOrange +"\nPress Enter to Continue ..."+colorCodes.pureWhite);
+        System.out.println(colorCodes.brightOrange + "\nPress Enter to Continue ... ⏭️" + colorCodes.pureWhite);
         input.nextLine();
         addSpaces();
     }
