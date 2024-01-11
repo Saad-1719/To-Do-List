@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.LinkedList;
 
@@ -15,7 +16,7 @@ public class Database
     static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
     // Format and print the current time with seconds precision
     static final String formattedTime = currentTime.format(formatter);
-    protected static final LinkedList<String> storeTasksName = new LinkedList<>();
+    protected static final LinkedList<String> storeTasksNameToCompare = new LinkedList<>();
     protected static final ArrayList<String> storeTasksNameForSearch = new ArrayList<>();
 
     //TO obtain id of active user
@@ -26,9 +27,14 @@ public class Database
         {
             //jdbc code
             Connection con = Connector.createConnection();
-            String query = "SELECT * FROM user WHERE username = '" + info.getUsername() + "' AND password = '" + info.getPassword() + "';";
-            Statement smt = con.createStatement();
-            ResultSet show = smt.executeQuery(query);
+//            String query = "SELECT * FROM user WHERE username = '" + info.getUsername() + "' AND password = '" + info.getPassword() + "';";
+//            Statement smt = con.createStatement();
+//            ResultSet show = smt.executeQuery(query);
+            String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+            PreparedStatement smt = con.prepareStatement(query);
+            smt.setString(1, info.getUsername());
+            smt.setString(2, info.getPassword());
+            ResultSet show = smt.executeQuery();
             show.next();
             id = show.getInt(1);
             con.close();
@@ -42,34 +48,34 @@ public class Database
         return id;
     }
 
-    public static void retrieveDataIntoLinkedList(UserLogin info)
-    {
-        try
-        {
-            //jdbc code
-            Connection con = Connector.createConnection();
-            int userId;
-            userId = activeUserId(info);
-            String query = "select * from tasks where userID = '" + userId + "';";
-            Statement smt = con.createStatement();
-            ResultSet show = smt.executeQuery(query);
-            storeTasksName.clear();
-            while (show.next())
-            {
-                String name = show.getString(2);
-                storeTasksName.add(name);
-            }
-            con.close();
-            smt.close();
-            show.close();
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
+//    public static void retrieveDataIntoLinkedList(UserLogin info)
+//    {
+//        try
+//        {
+//            //jdbc code
+//            Connection con = Connector.createConnection();
+//            int userId;
+//            userId = activeUserId(info);
+//            String query = "select * from tasks where userID = '" + userId + "';";
+//            Statement smt = con.createStatement();
+//            ResultSet show = smt.executeQuery(query);
+//            storeTasksName.clear();
+//            while (show.next())
+//            {
+//                String name = show.getString(2);
+//                storeTasksName.add(name);
+//            }
+//            con.close();
+//            smt.close();
+//            show.close();
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 
-    public static void retrieveDataIntoArray(UserLogin info)
+    public static void retrieveDataIntoCollection(UserLogin info, Collection<String> collection)
     {
         try
         {
@@ -80,11 +86,11 @@ public class Database
             String query = "select * from tasks where userID = '" + userId + "';";
             Statement smt = con.createStatement();
             ResultSet show = smt.executeQuery(query);
-            storeTasksNameForSearch.clear();
+            collection.clear();
             while (show.next())
             {
                 String name = show.getString(2);
-                storeTasksNameForSearch.add(name);
+                collection.add(name);
             }
             con.close();
             smt.close();
@@ -210,7 +216,7 @@ public class Database
             else
             {
 
-                //completedTasks.sort(Comparator.comparing(Tasks::getTaskID).reversed());
+                completedTasks.sort(Comparator.comparing(Tasks::getTaskID).reversed());
                 for (Tasks task : completedTasks)
                 {
                     System.out.print(colorCodes.brightYellow);
@@ -244,7 +250,7 @@ public class Database
             smt.setInt(1, userId);
             ResultSet show = smt.executeQuery();
             LinkedList<Notes> addedNotes = new LinkedList<>();
-            addedNotes.clear();
+           // addedNotes.clear();
             while (show.next())
             {
                 int notesID = show.getInt(1);
@@ -560,6 +566,7 @@ public class Database
             int count = pst.executeUpdate();
             if (count > 0)
             {
+                flag=true;
             }
             con.close();
             pst.close();

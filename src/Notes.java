@@ -15,10 +15,10 @@ public class Notes
         addedTime = "";
     }
 
-    public String getAddedTime()
-    {
-        return addedTime;
-    }
+//    public String getAddedTime()
+//    {
+//        return addedTime;
+//    }
 
     public Notes(int notesID, String notesName, String notesDescription, String addedDate)
     {

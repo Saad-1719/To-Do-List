@@ -1,6 +1,5 @@
 //import java.io.Console;
 import java.util.Scanner;
-
 import static java.lang.System.exit;
 public class Main
 {
@@ -42,6 +41,7 @@ public class Main
                     String password = input.nextLine();
 
                     //password masking code, but not supported in intellij
+
 //                    Console console = System.console();
 //                    if (console == null)
 //                    {
@@ -58,7 +58,8 @@ public class Main
 //                    }
 //                    System.out.println();
 //                    String maskedPassword = new String(password);
-                    // Checking Username & Password From Database.
+                    // Checking Username & Password From Database.1
+
                     UserLogin info = new UserLogin(username, password);
                     boolean dataFound = LoginCheckFromDB.checkLogin(info);
                     System.out.println(" ");

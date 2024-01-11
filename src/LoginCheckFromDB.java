@@ -23,6 +23,7 @@ public class LoginCheckFromDB
             {
                 flag = true;
             }
+            con.close();
         }
         catch (SQLException e)
         {

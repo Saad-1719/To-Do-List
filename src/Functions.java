@@ -51,9 +51,9 @@ public class Functions
                 System.out.println(colorCodes.brightRed + "Error: Task must be less than 80 characters." + colorCodes.pureWhite);
                 flag = true;
             }
-            Database.retrieveDataIntoLinkedList(info);
+            Database.retrieveDataIntoCollection(info,Database.storeTasksNameToCompare);
             //comparing task names with existing ongoing tasks
-            if (Database.storeTasksName.contains(name))
+            if (Database.storeTasksNameToCompare.contains(name))
             {
                 System.out.println(colorCodes.brightRed + "Error: Task already exists." + colorCodes.pureWhite);
                 flag = true;
@@ -288,12 +288,12 @@ public class Functions
             totalTasks = input.nextInt();
             input.nextLine();
 
-            for (int i = 0; i < totalTasks; )
+            for (int c = 0; c < totalTasks; )
             {
                 do
                 {
                     flag = false;
-                    System.out.print("Task " + (i + 1) + " : ");
+                    System.out.print("Task " + (c + 1) + " : ");
                     name = input.nextLine().toLowerCase();
 
                     if (name.trim().isEmpty())
@@ -308,10 +308,10 @@ public class Functions
                     }
 
                     // Retrieving task name into array
-                    Database.retrieveDataIntoLinkedList(info);
+                    Database.retrieveDataIntoCollection(info,Database.storeTasksNameToCompare);
 
                     // Comparison between task names
-                    if (Database.storeTasksName.contains(name))
+                    if (Database.storeTasksNameToCompare.contains(name))
                     {
                         System.out.println(colorCodes.brightRed + "Error: Task's already exists." + colorCodes.pureWhite);
                         flag = true;
@@ -320,7 +320,7 @@ public class Functions
                 while (flag);
 
                 tasksTitleList.add(name);
-                i++;
+                c++;
             }
             Random rand = new Random();
             int randIndex = rand.nextInt(tasksTitleList.size());
@@ -448,7 +448,7 @@ public class Functions
         String title;
         System.out.print("Task: ");
         title = input.nextLine();
-        Database.retrieveDataIntoArray(info);
+        Database.retrieveDataIntoCollection(info,Database.storeTasksNameForSearch);
         Collections.sort(Database.storeTasksNameForSearch);
         int index = binarySearchClass.binarySearchonArray(Database.storeTasksNameForSearch, title);
         if (index >= 0)
@@ -463,18 +463,18 @@ public class Functions
         }
     }
 
-    public static void addPause()
-    {
-
-        System.out.println(colorCodes.brightOrange + "\nPress Enter to Continue ... ⏭️" + colorCodes.pureWhite);
-        input.nextLine();
-        addSpaces();
-    }
-    public static void addSpaces()
-    {
-        for(int i=0;i<40;i++)
-        {
-            System.out.println(" ");
-        }
-    }
+//    public static void addPause()
+//    {
+//
+//        System.out.println(colorCodes.brightOrange + "\nPress Enter to Continue ... ⏭️" + colorCodes.pureWhite);
+//        input.nextLine();
+//        addSpaces();
+//    }
+//    public static void addSpaces()
+//    {
+//        for(int i=0;i<40;i++)
+//        {
+//            System.out.println(" ");
+//        }
+//    }
 }

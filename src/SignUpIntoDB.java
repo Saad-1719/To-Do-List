@@ -22,6 +22,7 @@ public class SignUpIntoDB
             pstmt.setInt(5, info.getAge());
             pstmt.executeUpdate();
             flag = true;
+            con.close();
         }
         catch (Exception e)
         {
@@ -33,7 +34,7 @@ public class SignUpIntoDB
     //TO CHECK IF THERE ARE MORE THAN ONE USER WITH SAME USERNAME
     public static boolean userCheck(UserSignup info)
     {
-        boolean flag = true;
+        //boolean flag = true;
         boolean chk = true;
         try
         {
@@ -52,7 +53,7 @@ public class SignUpIntoDB
                 chk = false;
             }
             con.close();
-            flag = false;
+           // flag = false;
             return chk;
         }
         catch (Exception e)

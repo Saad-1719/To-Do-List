@@ -22,6 +22,7 @@ public class password
             {
                 flag = true;
             }
+            con.close();
         }
         catch (SQLException e)
         {
@@ -49,6 +50,7 @@ public class password
             {
                 flag = true;
             }
+            con.close();
         }
         catch (SQLException e)
         {
